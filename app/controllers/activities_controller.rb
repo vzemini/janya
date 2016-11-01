@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@ class ActivitiesController < ApplicationController
       @author = User.active.find(params[:user_id])
     end
 
-    @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project,
+    @activity = Janya::Activity::Fetcher.new(User.current, :project => @project,
                                                              :with_subprojects => @with_subprojects,
                                                              :author => @author)
     pref = User.current.pref

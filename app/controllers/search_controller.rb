@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -54,7 +54,7 @@ class SearchController < ApplicationController
         @project
       end
 
-    @object_types = Redmine::Search.available_search_types.dup
+    @object_types = Janya::Search.available_search_types.dup
     if projects_to_search.is_a? Project
       # don't search projects
       @object_types.delete('projects')
@@ -65,7 +65,7 @@ class SearchController < ApplicationController
     @scope = @object_types.select {|t| params[t]}
     @scope = @object_types if @scope.empty?
 
-    fetcher = Redmine::Search::Fetcher.new(
+    fetcher = Janya::Search::Fetcher.new(
       @question, User.current, @scope, projects_to_search,
       :all_words => @all_words, :titles_only => @titles_only, :attachments => @search_attachments, :open_issues => @open_issues,
       :cache => params[:page].present?, :params => params

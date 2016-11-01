@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -36,7 +36,7 @@ class RepositoriesController < ApplicationController
   before_action :authorize
   accept_rss_auth :revisions
 
-  rescue_from Redmine::Scm::Adapters::CommandFailed, :with => :show_error_command_failed
+  rescue_from Janya::Scm::Adapters::CommandFailed, :with => :show_error_command_failed
 
   def new
     @repository.is_default = @project.repository.nil?
@@ -143,7 +143,7 @@ class RepositoriesController < ApplicationController
     if is_raw
       # Force the download
       send_opt = { :filename => filename_for_content_disposition(@path.split('/').last) }
-      send_type = Redmine::MimeType.of(@path)
+      send_type = Janya::MimeType.of(@path)
       send_opt[:type] = send_type.to_s if send_type
       send_opt[:disposition] = disposition(@path)
       send_data @repository.cat(@path, @rev), send_opt
@@ -169,7 +169,7 @@ class RepositoriesController < ApplicationController
     # UTF-16 contains "\x00".
     # It is very strict that file contains less than 30% of ascii symbols
     # in non Western Europe.
-    return true if Redmine::MimeType.is_type?('text', path)
+    return true if Janya::MimeType.is_type?('text', path)
     # Ruby 1.8.6 has a bug of integer divisions.
     # http://apidock.com/ruby/v1_8_6_287/String/is_binary_data%3F
     return false if ent.is_binary_data?
@@ -281,7 +281,7 @@ class RepositoriesController < ApplicationController
   private
 
   def build_new_repository_from_params
-    scm = params[:repository_scm] || (Redmine::Scm::Base.all & Setting.enabled_scm).first
+    scm = params[:repository_scm] || (Janya::Scm::Base.all & Setting.enabled_scm).first
     unless @repository = Repository.factory(scm)
       render_404
       return
@@ -335,7 +335,7 @@ class RepositoriesController < ApplicationController
     render_error :message => l(:error_scm_not_found), :status => 404
   end
 
-  # Handler for Redmine::Scm::Adapters::CommandFailed exception
+  # Handler for Janya::Scm::Adapters::CommandFailed exception
   def show_error_command_failed(exception)
     render_error l(:error_scm_command_failed, exception.message)
   end
@@ -430,7 +430,7 @@ class RepositoriesController < ApplicationController
   end
 
   def disposition(path)
-    if Redmine::MimeType.is_type?('image', @path) || Redmine::MimeType.of(@path) == "application/pdf"
+    if Janya::MimeType.is_type?('image', @path) || Janya::MimeType.of(@path) == "application/pdf"
       'inline'
     else
       'attachment'

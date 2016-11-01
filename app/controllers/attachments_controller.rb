@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -92,7 +92,7 @@ class AttachmentsController < ApplicationController
 
     @attachment = Attachment.new(:file => request.raw_post)
     @attachment.author = User.current
-    @attachment.filename = params[:filename].presence || Redmine::Utils.random_hex(16)
+    @attachment.filename = params[:filename].presence || Janya::Utils.random_hex(16)
     @attachment.content_type = params[:content_type].presence
     saved = @attachment.save
 
@@ -213,7 +213,7 @@ class AttachmentsController < ApplicationController
   def detect_content_type(attachment)
     content_type = attachment.content_type
     if content_type.blank? || content_type == "application/octet-stream"
-      content_type = Redmine::MimeType.of(attachment.filename)
+      content_type = Janya::MimeType.of(attachment.filename)
     end
     content_type.to_s
   end

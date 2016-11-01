@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -40,7 +40,7 @@ class WikiController < ApplicationController
   helper :attachments
   include AttachmentsHelper
   helper :watchers
-  include Redmine::Export::PDF
+  include Janya::Export::PDF
 
   # List of pages, sorted alphabetically and by parent (hierarchy)
   def index
@@ -114,7 +114,7 @@ class WikiController < ApplicationController
     @editable = editable?
     @sections_editable = @editable && User.current.allowed_to?(:edit_wiki_pages, @page.project) &&
       @content.current_version? &&
-      Redmine::WikiFormatting.supports_section_edit?
+      Janya::WikiFormatting.supports_section_edit?
 
     respond_to do |format|
       format.html
@@ -141,9 +141,9 @@ class WikiController < ApplicationController
     @content.version = @page.content.version if @page.content
 
     @text = @content.text
-    if params[:section].present? && Redmine::WikiFormatting.supports_section_edit?
+    if params[:section].present? && Janya::WikiFormatting.supports_section_edit?
       @section = params[:section].to_i
-      @text, @section_hash = Redmine::WikiFormatting.formatter.new(@text).get_section(@section)
+      @text, @section_hash = Janya::WikiFormatting.formatter.new(@text).get_section(@section)
       render_404 if @text.blank?
     end
   end
@@ -163,10 +163,10 @@ class WikiController < ApplicationController
 
     @content.comments = content_params[:comments]
     @text = content_params[:text]
-    if params[:section].present? && Redmine::WikiFormatting.supports_section_edit?
+    if params[:section].present? && Janya::WikiFormatting.supports_section_edit?
       @section = params[:section].to_i
       @section_hash = params[:section_hash]
-      @content.text = Redmine::WikiFormatting.formatter.new(@content.text).update_section(@section, @text, @section_hash)
+      @content.text = Janya::WikiFormatting.formatter.new(@content.text).update_section(@section, @text, @section_hash)
     else
       @content.version = content_params[:version] if content_params[:version]
       @content.text = @text
@@ -198,7 +198,7 @@ class WikiController < ApplicationController
       end
     end
 
-  rescue ActiveRecord::StaleObjectError, Redmine::WikiFormatting::StaleSectionError
+  rescue ActiveRecord::StaleObjectError, Janya::WikiFormatting::StaleSectionError
     # Optimistic locking exception
     respond_to do |format|
       format.html {
@@ -377,7 +377,7 @@ private
 
   # Returns the default content of a new wiki page
   def initial_page_content(page)
-    helper = Redmine::WikiFormatting.helper_for(Setting.text_formatting)
+    helper = Janya::WikiFormatting.helper_for(Setting.text_formatting)
     extend helper unless self.instance_of?(helper)
     helper.instance_method(:initial_page_content).bind(self).call(page)
   end

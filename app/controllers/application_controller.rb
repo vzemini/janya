@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -21,9 +21,9 @@ require 'cgi'
 class Unauthorized < Exception; end
 
 class ApplicationController < ActionController::Base
-  include Redmine::I18n
-  include Redmine::Pagination
-  include Redmine::Hook::Helper
+  include Janya::I18n
+  include Janya::Pagination
+  include Janya::Hook::Helper
   include RoutesHelper
   helper :routes
 
@@ -56,11 +56,11 @@ class ApplicationController < ActionController::Base
   rescue_from ::Unauthorized, :with => :deny_access
   rescue_from ::ActionView::MissingTemplate, :with => :missing_template
 
-  include Redmine::Search::Controller
-  include Redmine::MenuManager::MenuController
-  helper Redmine::MenuManager::MenuHelper
+  include Janya::Search::Controller
+  include Janya::MenuManager::MenuController
+  helper Janya::MenuManager::MenuHelper
 
-  include Redmine::SudoMode::Controller
+  include Janya::SudoMode::Controller
 
   def session_expiration
     if session[:user_id] && Rails.application.config.redmine_verify_sessions != false
@@ -129,7 +129,7 @@ class ApplicationController < ActionController::Base
           logger.info("  User switched by: #{user.login} (id=#{user.id})") if logger
           user = su
         else
-          render_error :message => 'Invalid X-Redmine-Switch-User header', :status => 412
+          render_error :message => 'Invalid X-Janya-Switch-User header', :status => 412
         end
       end
     end
@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
   end
 
   def autologin_cookie_name
-    Redmine::Configuration['autologin_cookie_name'].presence || 'autologin'
+    Janya::Configuration['autologin_cookie_name'].presence || 'autologin'
   end
 
   def try_to_autologin
@@ -228,9 +228,9 @@ class ApplicationController < ActionController::Base
         format.any(:atom, :pdf, :csv) {
           redirect_to signin_path(:back_url => url)
         }
-        format.xml  { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"' }
-        format.js   { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"' }
-        format.json { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"' }
+        format.xml  { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Janya API"' }
+        format.js   { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Janya API"' }
+        format.json { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Janya API"' }
         format.any  { head :unauthorized }
       end
       return false
@@ -624,14 +624,14 @@ class ApplicationController < ActionController::Base
   def api_key_from_request
     if params[:key].present?
       params[:key].to_s
-    elsif request.headers["X-Redmine-API-Key"].present?
-      request.headers["X-Redmine-API-Key"].to_s
+    elsif request.headers["X-Janya-API-Key"].present?
+      request.headers["X-Janya-API-Key"].to_s
     end
   end
 
   # Returns the API 'switch user' value if present
   def api_switch_user_from_request
-    request.headers["X-Redmine-Switch-User"].to_s.presence
+    request.headers["X-Janya-Switch-User"].to_s.presence
   end
 
   # Renders a warning flash if obj has unsaved attachments
@@ -644,7 +644,7 @@ class ApplicationController < ActionController::Base
     logger.error "Query::StatementInvalid: #{exception.message}" if logger
     session.delete(:query)
     sort_clear if respond_to?(:sort_clear)
-    render_error "An error occurred while executing the query and has been logged. Please report this error to your Redmine administrator."
+    render_error "An error occurred while executing the query and has been logged. Please report this error to your Janya administrator."
   end
 
   # Renders a 200 response for successfull updates or deletions via the API

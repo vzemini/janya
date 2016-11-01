@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -377,7 +377,7 @@ class IssuesController < ApplicationController
     end
   end
 
-  # Overrides Redmine::MenuManager::MenuController::ClassMethods for
+  # Overrides Janya::MenuManager::MenuController::ClassMethods for
   # when the "New issue" tab is enabled
   def current_menu_item
     if Setting.new_item_menu_tab == '1' && [:new, :create].include?(action_name.to_sym) 

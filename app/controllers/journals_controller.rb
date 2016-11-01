@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -60,7 +60,7 @@ class JournalsController < ApplicationController
         raise ::Unauthorized
       end
     end
-    @diff = Redmine::Helpers::Diff.new(@detail.value, @detail.old_value)
+    @diff = Janya::Helpers::Diff.new(@detail.value, @detail.old_value)
   end
 
   def new

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html {
-        events = Redmine::Activity::Fetcher.new(User.current, :author => @user).events(nil, nil, :limit => 10)
+        events = Janya::Activity::Fetcher.new(User.current, :author => @user).events(nil, nil, :limit => 10)
         @events_by_day = events.group_by(&:event_date)
         render :layout => 'base'
       }
