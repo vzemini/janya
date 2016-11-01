@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ class Mailer < ActionMailer::Base
   helper :issues
   helper :custom_fields
 
-  include Redmine::I18n
+  include Janya::I18n
   include Roadie::Rails::Automatic
 
   def self.default_url_options
@@ -41,10 +41,10 @@ class Mailer < ActionMailer::Base
 
   # Builds a mail for notifying to_users and cc_users about a new issue
   def issue_add(issue, to_users, cc_users)
-    redmine_headers 'Project' => issue.project.identifier,
+    janya_headers 'Project' => issue.project.identifier,
                     'Issue-Id' => issue.id,
                     'Issue-Author' => issue.author.login
-    redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
+    janya_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
     message_id issue
     references issue
     @author = issue.author
@@ -68,10 +68,10 @@ class Mailer < ActionMailer::Base
   # Builds a mail for notifying to_users and cc_users about an issue update
   def issue_edit(journal, to_users, cc_users)
     issue = journal.journalized
-    redmine_headers 'Project' => issue.project.identifier,
+    janya_headers 'Project' => issue.project.identifier,
                     'Issue-Id' => issue.id,
                     'Issue-Author' => issue.author.login
-    redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
+    janya_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
     message_id journal
     references issue
     @author = journal.user
@@ -117,7 +117,7 @@ class Mailer < ActionMailer::Base
   #   document_added(document) => Mail::Message object
   #   Mailer.document_added(document).deliver => sends an email to the document's project recipients
   def document_added(document)
-    redmine_headers 'Project' => document.project.identifier
+    janya_headers 'Project' => document.project.identifier
     @author = User.current
     @document = document
     @document_url = url_for(:controller => 'documents', :action => 'show', :id => document)
@@ -149,7 +149,7 @@ class Mailer < ActionMailer::Base
       added_to = "#{l(:label_document)}: #{container.title}"
       recipients = container.notified_users
     end
-    redmine_headers 'Project' => container.project.identifier
+    janya_headers 'Project' => container.project.identifier
     @attachments = attachments
     @added_to = added_to
     @added_to_url = added_to_url
@@ -163,7 +163,7 @@ class Mailer < ActionMailer::Base
   #   news_added(news) => Mail::Message object
   #   Mailer.news_added(news).deliver => sends an email to the news' project recipients
   def news_added(news)
-    redmine_headers 'Project' => news.project.identifier
+    janya_headers 'Project' => news.project.identifier
     @author = news.author
     message_id news
     references news
@@ -181,7 +181,7 @@ class Mailer < ActionMailer::Base
   #   Mailer.news_comment_added(comment) => sends an email to the news' project recipients
   def news_comment_added(comment)
     news = comment.commented
-    redmine_headers 'Project' => news.project.identifier
+    janya_headers 'Project' => news.project.identifier
     @author = comment.author
     message_id comment
     references news
@@ -199,7 +199,7 @@ class Mailer < ActionMailer::Base
   #   message_posted(message) => Mail::Message object
   #   Mailer.message_posted(message).deliver => sends an email to the recipients
   def message_posted(message)
-    redmine_headers 'Project' => message.project.identifier,
+    janya_headers 'Project' => message.project.identifier,
                     'Topic-Id' => (message.parent_id || message.id)
     @author = message.author
     message_id message
@@ -219,7 +219,7 @@ class Mailer < ActionMailer::Base
   #   wiki_content_added(wiki_content) => Mail::Message object
   #   Mailer.wiki_content_added(wiki_content).deliver => sends an email to the project's recipients
   def wiki_content_added(wiki_content)
-    redmine_headers 'Project' => wiki_content.project.identifier,
+    janya_headers 'Project' => wiki_content.project.identifier,
                     'Wiki-Page-Id' => wiki_content.page.id
     @author = wiki_content.author
     message_id wiki_content
@@ -240,7 +240,7 @@ class Mailer < ActionMailer::Base
   #   wiki_content_updated(wiki_content) => Mail::Message object
   #   Mailer.wiki_content_updated(wiki_content).deliver => sends an email to the project's recipients
   def wiki_content_updated(wiki_content)
-    redmine_headers 'Project' => wiki_content.project.identifier,
+    janya_headers 'Project' => wiki_content.project.identifier,
                     'Wiki-Page-Id' => wiki_content.page.id
     @author = wiki_content.author
     message_id wiki_content
@@ -333,7 +333,7 @@ class Mailer < ActionMailer::Base
   end
 
   def security_notification(recipients, options={})
-    redmine_headers 'Sender' => User.current.login
+    janya_headers 'Sender' => User.current.login
     @user = Array(recipients).detect{|r| r.is_a? User }
     set_language_if_valid(@user.try :language)
     @message = l(options[:message],
@@ -347,7 +347,7 @@ class Mailer < ActionMailer::Base
   end
 
   def settings_updated(recipients, changes)
-    redmine_headers 'Sender' => User.current.login
+    janya_headers 'Sender' => User.current.login
     @changes = changes
     @url = url_for(controller: 'settings', action: 'index')
     mail :to => recipients,
@@ -366,7 +366,7 @@ class Mailer < ActionMailer::Base
     set_language_if_valid(user.language)
     @url = url_for(:controller => 'welcome')
     mail :to => user.mail,
-      :subject => 'Redmine test'
+      :subject => 'Janya test'
   end
 
   # Sends reminders to issue assignees
@@ -433,9 +433,9 @@ class Mailer < ActionMailer::Base
   end
 
   def mail(headers={}, &block)
-    headers.reverse_merge! 'X-Mailer' => 'Redmine',
-            'X-Redmine-Host' => Setting.host_name,
-            'X-Redmine-Site' => Setting.app_title,
+    headers.reverse_merge! 'X-Mailer' => 'Janya',
+            'X-Janya-Host' => Setting.host_name,
+            'X-Janya-Site' => Setting.app_title,
             'X-Auto-Response-Suppress' => 'All',
             'Auto-Submitted' => 'auto-generated',
             'From' => Setting.mail_from,
@@ -458,7 +458,7 @@ class Mailer < ActionMailer::Base
     end
 
     if @author && @author.logged?
-      redmine_headers 'Sender' => @author.login
+      janya_headers 'Sender' => @author.login
     end
 
     # Blind carbon copy recipients
@@ -539,23 +539,23 @@ class Mailer < ActionMailer::Base
 
   private
 
-  # Appends a Redmine header field (name is prepended with 'X-Redmine-')
-  def redmine_headers(h)
-    h.each { |k,v| headers["X-Redmine-#{k}"] = v.to_s }
+  # Appends a Janya header field (name is prepended with 'X-Janya-')
+  def janya_headers(h)
+    h.each { |k,v| headers["X-Janya-#{k}"] = v.to_s }
   end
 
   def self.token_for(object, rand=true)
     timestamp = object.send(object.respond_to?(:created_on) ? :created_on : :updated_on)
     hash = [
-      "redmine",
+      "janya",
       "#{object.class.name.demodulize.underscore}-#{object.id}",
       timestamp.strftime("%Y%m%d%H%M%S")
     ]
     if rand
-      hash << Redmine::Utils.random_hex(8)
+      hash << Janya::Utils.random_hex(8)
     end
     host = Setting.mail_from.to_s.strip.gsub(%r{^.*@|>}, '')
-    host = "#{::Socket.gethostname}.redmine" if host.empty?
+    host = "#{::Socket.gethostname}.janya" if host.empty?
     "#{hash.join('.')}@#{host}"
   end
 

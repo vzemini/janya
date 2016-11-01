@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,8 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Project < ActiveRecord::Base
-  include Redmine::SafeAttributes
-  include Redmine::NestedSet::ProjectNestedSet
+  include Janya::SafeAttributes
+  include Janya::NestedSet::ProjectNestedSet
 
   # Project statuses
   STATUS_ACTIVE     = 1
@@ -177,7 +177,7 @@ class Project < ActiveRecord::Base
   # * :with_subprojects => limit the condition to project and its subprojects
   # * :member => limit the condition to the user projects
   def self.allowed_to_condition(user, permission, options={})
-    perm = Redmine::AccessControl.permission(permission)
+    perm = Janya::AccessControl.permission(permission)
     base_statement = (perm && perm.read? ? "#{Project.table_name}.status <> #{Project::STATUS_ARCHIVED}" : "#{Project.table_name}.status = #{Project::STATUS_ACTIVE}")
     if perm && perm.project_module
       # If the permission belongs to a project module, make sure the module is enabled
@@ -406,7 +406,7 @@ class Project < ActiveRecord::Base
 
   # Sets the parent of the project with authorization check
   def set_allowed_parent!(p)
-    ActiveSupport::Deprecation.warn "Project#set_allowed_parent! is deprecated and will be removed in Redmine 4, use #safe_attributes= instead."
+    ActiveSupport::Deprecation.warn "Project#set_allowed_parent! is deprecated and will be removed in Janya 4, use #safe_attributes= instead."
     p = p.id if p.is_a?(Project)
     send :safe_attributes, {:project_id => p}
     save
@@ -651,7 +651,7 @@ class Project < ActiveRecord::Base
       # No action allowed on archived projects
       return false
     end
-    unless active? || Redmine::AccessControl.read_action?(action)
+    unless active? || Janya::AccessControl.read_action?(action)
       # No write action allowed on closed projects
       return false
     end
@@ -789,7 +789,7 @@ class Project < ActiveRecord::Base
         to_be_copied.each do |name|
           send "copy_#{name}", project
         end
-        Redmine::Hook.call_hook(:model_project_copy_before_save, :source_project => project, :destination_project => self)
+        Janya::Hook.call_hook(:model_project_copy_before_save, :source_project => project, :destination_project => self)
         save
       else
         false
@@ -798,7 +798,7 @@ class Project < ActiveRecord::Base
   end
 
   def member_principals
-    ActiveSupport::Deprecation.warn "Project#member_principals is deprecated and will be removed in Redmine 4.0. Use #memberships.active instead."
+    ActiveSupport::Deprecation.warn "Project#member_principals is deprecated and will be removed in Janya 4.0. Use #memberships.active instead."
     memberships.active
   end
 
@@ -1069,12 +1069,12 @@ class Project < ActiveRecord::Base
   def allowed_permissions
     @allowed_permissions ||= begin
       module_names = enabled_modules.loaded? ? enabled_modules.map(&:name) : enabled_modules.pluck(:name)
-      Redmine::AccessControl.modules_permissions(module_names).collect {|p| p.name}
+      Janya::AccessControl.modules_permissions(module_names).collect {|p| p.name}
     end
   end
 
   def allowed_actions
-    @actions_allowed ||= allowed_permissions.inject([]) { |actions, permission| actions += Redmine::AccessControl.allowed_actions(permission) }.flatten
+    @actions_allowed ||= allowed_permissions.inject([]) { |actions, permission| actions += Janya::AccessControl.allowed_actions(permission) }.flatten
   end
 
   # Archives subprojects recursively

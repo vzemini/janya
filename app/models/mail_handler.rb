@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 class MailHandler < ActionMailer::Base
   include ActionView::Helpers::SanitizeHelper
-  include Redmine::I18n
+  include Janya::I18n
 
   class UnauthorizedAction < StandardError; end
   class MissingInformation < StandardError; end
@@ -93,7 +93,7 @@ class MailHandler < ActionMailer::Base
     # Ignore emails received from the application emission address to avoid hell cycles
     if sender_email.casecmp(Setting.mail_from.to_s.strip) == 0
       if logger
-        logger.info  "MailHandler: ignoring email from Redmine emission address [#{sender_email}]"
+        logger.info  "MailHandler: ignoring email from Janya emission address [#{sender_email}]"
       end
       return false
     end
@@ -152,7 +152,7 @@ class MailHandler < ActionMailer::Base
 
   private
 
-  MESSAGE_ID_RE = %r{^<?redmine\.([a-z0-9_]+)\-(\d+)\.\d+(\.[a-f0-9]+)?@}
+  MESSAGE_ID_RE = %r{^<?janya\.([a-z0-9_]+)\-(\d+)\.\d+(\.[a-f0-9]+)?@}
   ISSUE_REPLY_SUBJECT_RE = %r{\[(?:[^\]]*\s+)?#(\d+)\]}
   MESSAGE_REPLY_SUBJECT_RE = %r{\[[^\]]*msg(\d+)\]}
 
@@ -216,7 +216,7 @@ class MailHandler < ActionMailer::Base
     issue.start_date ||= User.current.today if Setting.default_issue_start_date_to_creation_date?
     issue.is_private = (handler_options[:issue][:is_private] == '1')
 
-    # add To and Cc as watchers before saving so the watchers can reply to Redmine
+    # add To and Cc as watchers before saving so the watchers can reply to Janya
     add_watchers(issue)
     issue.save!
     add_attachments(issue)
@@ -248,7 +248,7 @@ class MailHandler < ActionMailer::Base
     issue.safe_attributes = {'custom_field_values' => custom_field_values_from_keywords(issue)}
     journal.notes = cleaned_up_text_body
 
-    # add To and Cc as watchers before saving so the watchers can reply to Redmine
+    # add To and Cc as watchers before saving so the watchers can reply to Janya
     add_watchers(issue)
     add_attachments(issue)
     issue.save!
@@ -461,7 +461,7 @@ class MailHandler < ActionMailer::Base
       body_charset = Mail::RubyVer.respond_to?(:pick_encoding) ?
                        Mail::RubyVer.pick_encoding(p.charset).to_s : p.charset
 
-      body = Redmine::CodesetUtil.to_utf8(p.body.decoded, body_charset)
+      body = Janya::CodesetUtil.to_utf8(p.body.decoded, body_charset)
       # convert html parts to text
       p.mime_type == 'text/html' ? self.class.html_body_to_text(body) : self.class.plain_text_body_to_text(body)
     end.join("\r\n")
@@ -480,7 +480,7 @@ class MailHandler < ActionMailer::Base
 
   # Converts a HTML email body to text
   def self.html_body_to_text(html)
-    Redmine::WikiFormatting.html_parser.to_text(html)
+    Janya::WikiFormatting.html_parser.to_text(html)
   end
 
   # Converts a plain/text email body to text
@@ -513,7 +513,7 @@ class MailHandler < ActionMailer::Base
     user.mail_notification = 'only_my_events'
 
     unless user.valid?
-      user.login = "user#{Redmine::Utils.random_hex(6)}" unless user.errors[:login].blank?
+      user.login = "user#{Janya::Utils.random_hex(6)}" unless user.errors[:login].blank?
       user.firstname = "-" unless user.errors[:firstname].blank?
       (puts user.errors[:lastname];user.lastname  = "-") unless user.errors[:lastname].blank?
     end

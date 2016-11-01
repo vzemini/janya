@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@ module AdminHelper
   end
 
   def plugin_data_for_updates(plugins)
-    data = {"v" => Redmine::VERSION.to_s, "p" => {}}
+    data = {"v" => Janya::VERSION.to_s, "p" => {}}
     plugins.each do |plugin|
       data["p"].merge! plugin.id => {"v" => plugin.version, "n" => plugin.name, "a" => plugin.author}
     end

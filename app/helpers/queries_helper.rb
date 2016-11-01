@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -226,7 +226,7 @@ module QueriesHelper
       end
     end
 
-    Redmine::Export::CSV.generate do |csv|
+    Janya::Export::CSV.generate do |csv|
       # csv header fields
       csv << columns.map {|c| c.caption.to_s}
       # csv lines

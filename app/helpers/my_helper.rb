@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -40,7 +40,7 @@ module MyHelper
 
   # Renders a single block content
   def render_block_content(block, user)
-    unless Redmine::MyPage.blocks.key?(block)
+    unless Janya::MyPage.blocks.key?(block)
       Rails.logger.warn("Unknown block \"#{block}\" found in #{user.login} (id=#{user.id}) preferences")
       return
     end
@@ -57,7 +57,7 @@ module MyHelper
   def block_select_tag(user)
     disabled = user.pref.my_page_layout.values.flatten
     options = content_tag('option')
-    Redmine::MyPage.block_options.each do |label, block|
+    Janya::MyPage.block_options.each do |label, block|
       options << content_tag('option', label, :value => block, :disabled => disabled.include?(block))
     end
     select_tag('block', options, :id => "block-select")

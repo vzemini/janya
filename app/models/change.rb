@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -24,8 +24,8 @@ class Change < ActiveRecord::Base
   attr_protected :id
 
   def replace_invalid_utf8_of_path
-    self.path      = Redmine::CodesetUtil.replace_invalid_utf8(self.path)
-    self.from_path = Redmine::CodesetUtil.replace_invalid_utf8(self.from_path)
+    self.path      = Janya::CodesetUtil.replace_invalid_utf8(self.path)
+    self.from_path = Janya::CodesetUtil.replace_invalid_utf8(self.from_path)
   end
 
   def init_path

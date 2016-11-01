@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Role < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   # Custom coder for the permissions attribute that should be an
   # array of symbols. Rails 3 uses Psych which can be *unbelievably*
@@ -198,9 +198,9 @@ class Role < ActiveRecord::Base
 
   # Return all the permissions that can be given to the role
   def setable_permissions
-    setable_permissions = Redmine::AccessControl.permissions - Redmine::AccessControl.public_permissions
-    setable_permissions -= Redmine::AccessControl.members_only_permissions if self.builtin == BUILTIN_NON_MEMBER
-    setable_permissions -= Redmine::AccessControl.loggedin_only_permissions if self.builtin == BUILTIN_ANONYMOUS
+    setable_permissions = Janya::AccessControl.permissions - Janya::AccessControl.public_permissions
+    setable_permissions -= Janya::AccessControl.members_only_permissions if self.builtin == BUILTIN_NON_MEMBER
+    setable_permissions -= Janya::AccessControl.loggedin_only_permissions if self.builtin == BUILTIN_ANONYMOUS
     setable_permissions
   end
 
@@ -281,11 +281,11 @@ class Role < ActiveRecord::Base
 private
 
   def allowed_permissions
-    @allowed_permissions ||= permissions + Redmine::AccessControl.public_permissions.collect {|p| p.name}
+    @allowed_permissions ||= permissions + Janya::AccessControl.public_permissions.collect {|p| p.name}
   end
 
   def allowed_actions
-    @actions_allowed ||= allowed_permissions.inject([]) { |actions, permission| actions += Redmine::AccessControl.allowed_actions(permission) }.flatten
+    @actions_allowed ||= allowed_permissions.inject([]) { |actions, permission| actions += Janya::AccessControl.allowed_actions(permission) }.flatten
   end
 
   def check_deletable

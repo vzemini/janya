@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -44,7 +44,7 @@ class Import < ActiveRecord::Base
     return unless arg.present? && arg.size > 0
 
     self.filename = generate_filename
-    Redmine::Utils.save_upload(arg, filepath)
+    Janya::Utils.save_upload(arg, filepath)
   end
 
   def set_default_settings
@@ -228,7 +228,7 @@ class Import < ActiveRecord::Base
 
   # Generates a filename used to store the import file
   def generate_filename
-    Redmine::Utils.random_hex(16)
+    Janya::Utils.random_hex(16)
   end
 
   # Deletes the import file

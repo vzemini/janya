@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # FileSystem adapter
@@ -18,7 +18,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/filesystem_adapter'
+require 'janya/scm/adapters/filesystem_adapter'
 
 class Repository::Filesystem < Repository
   attr_protected :root_url
@@ -33,7 +33,7 @@ class Repository::Filesystem < Repository
   end
 
   def self.scm_adapter_class
-    Redmine::Scm::Adapters::FilesystemAdapter
+    Janya::Scm::Adapters::FilesystemAdapter
   end
 
   def self.scm_name

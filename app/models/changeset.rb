@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -240,7 +240,7 @@ class Changeset < ActiveRecord::Base
     if rule
       issue.assign_attributes rule.slice(*Issue.attribute_names)
     end
-    Redmine::Hook.call_hook(:model_changeset_scan_commit_for_issue_ids_pre_issue_update,
+    Janya::Hook.call_hook(:model_changeset_scan_commit_for_issue_ids_pre_issue_update,
                             { :changeset => self, :issue => issue, :action => action })
 
     if issue.changes.any?
@@ -289,6 +289,6 @@ class Changeset < ActiveRecord::Base
   end
 
   def self.to_utf8(str, encoding)
-    Redmine::CodesetUtil.to_utf8(str, encoding)
+    Janya::CodesetUtil.to_utf8(str, encoding)
   end
 end

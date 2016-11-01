@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ require "digest/md5"
 require "fileutils"
 
 class Attachment < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
   belongs_to :container, :polymorphic => true
   belongs_to :author, :class_name => "User"
 
@@ -48,7 +48,7 @@ class Attachment < ActiveRecord::Base
                                             "LEFT JOIN #{Project.table_name} ON #{Document.table_name}.project_id = #{Project.table_name}.id")
 
   cattr_accessor :storage_path
-  @@storage_path = Redmine::Configuration['attachments_storage_path'] || File.join(Rails.root, "files")
+  @@storage_path = Janya::Configuration['attachments_storage_path'] || File.join(Rails.root, "files")
 
   cattr_accessor :thumbnails_storage_path
   @@thumbnails_storage_path = File.join(Rails.root, "tmp", "thumbnails")
@@ -136,7 +136,7 @@ class Attachment < ActiveRecord::Base
     @temp_file = nil
 
     if content_type.blank? && filename.present?
-      self.content_type = Redmine::MimeType.of(filename)
+      self.content_type = Janya::MimeType.of(filename)
     end
     # Don't save the content type if it's longer than the authorized length
     if self.content_type && self.content_type.length > 255
@@ -221,7 +221,7 @@ class Attachment < ActiveRecord::Base
       target = File.join(self.class.thumbnails_storage_path, "#{id}_#{digest}_#{size}.thumb")
 
       begin
-        Redmine::Thumbnail.generate(self.diskfile, target, size)
+        Janya::Thumbnail.generate(self.diskfile, target, size)
       rescue => e
         logger.error "An error occured while generating thumbnail for #{disk_filename} to #{target}\nException was: #{e.message}" if logger
         return nil
@@ -237,11 +237,11 @@ class Attachment < ActiveRecord::Base
   end
 
   def is_text?
-    Redmine::MimeType.is_type?('text', filename)
+    Janya::MimeType.is_type?('text', filename)
   end
 
   def is_image?
-    Redmine::MimeType.is_type?('image', filename)
+    Janya::MimeType.is_type?('image', filename)
   end
 
   def is_diff?
@@ -249,7 +249,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def is_pdf?
-    Redmine::MimeType.of(filename) == "application/pdf"
+    Janya::MimeType.of(filename) == "application/pdf"
   end
 
   # Returns true if the file is readable
@@ -347,7 +347,7 @@ class Attachment < ActiveRecord::Base
   end
 
   # Moves existing attachments that are stored at the root of the files
-  # directory (ie. created before Redmine 2.3) to their target subdirectories
+  # directory (ie. created before Janya 2.3) to their target subdirectories
   def self.move_from_root_to_target_directory
     Attachment.where("disk_directory IS NULL OR disk_directory = ''").find_each do |attachment|
       attachment.move_to_target_directory!

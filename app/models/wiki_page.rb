@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ require 'diff'
 require 'enumerator'
 
 class WikiPage < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   belongs_to :wiki
   has_one :content, :class_name => 'WikiContent', :foreign_key => 'page_id', :dependent => :destroy
@@ -244,7 +244,7 @@ class WikiPage < ActiveRecord::Base
   end
 end
 
-class WikiDiff < Redmine::Helpers::Diff
+class WikiDiff < Janya::Helpers::Diff
   attr_reader :content_to, :content_from
 
   def initialize(content_to, content_from)

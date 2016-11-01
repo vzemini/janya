@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -129,7 +129,7 @@ module RepositoriesHelper
 
   def scm_select_tag(repository)
     scm_options = [["--- #{l(:actionview_instancetag_blank_option)} ---", '']]
-    Redmine::Scm::Base.all.each do |scm|
+    Janya::Scm::Base.all.each do |scm|
     if Setting.enabled_scm.include?(scm) ||
           (repository && repository.class.name.demodulize == scm)
         scm_options << ["Repository::#{scm}".constantize.scm_name, scm]
@@ -236,7 +236,7 @@ module RepositoriesHelper
   def scm_path_info(repository)
     scm_name = repository.scm_name.to_s.downcase
 
-    info_from_config = Redmine::Configuration["scm_#{scm_name}_path_info"].presence
+    info_from_config = Janya::Configuration["scm_#{scm_name}_path_info"].presence
     return info_from_config.html_safe if info_from_config
 
     l("text_#{scm_name}_repository_note", :default => '')

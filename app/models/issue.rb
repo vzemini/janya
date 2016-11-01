@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,11 +16,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Issue < ActiveRecord::Base
-  include Redmine::SafeAttributes
-  include Redmine::Utils::DateCalculation
-  include Redmine::I18n
+  include Janya::SafeAttributes
+  include Janya::Utils::DateCalculation
+  include Janya::I18n
   before_save :set_parent_id
-  include Redmine::NestedSet::IssueNestedSet
+  include Janya::NestedSet::IssueNestedSet
 
   belongs_to :project
   belongs_to :tracker
@@ -183,7 +183,7 @@ class Issue < ActiveRecord::Base
     user_tracker_permission?(user, :edit_issues)
   end
 
-  # Overrides Redmine::Acts::Attachable::InstanceMethods#attachments_editable?
+  # Overrides Janya::Acts::Attachable::InstanceMethods#attachments_editable?
   def attachments_editable?(user=User.current)
     attributes_editable?(user)
   end
@@ -247,7 +247,7 @@ class Issue < ActiveRecord::Base
     base_reload(*args)
   end
 
-  # Overrides Redmine::Acts::Customizable::InstanceMethods#available_custom_fields
+  # Overrides Janya::Acts::Customizable::InstanceMethods#available_custom_fields
   def available_custom_fields
     (project && tracker) ? (project.all_issue_custom_fields & tracker.custom_fields) : []
   end
@@ -751,7 +751,7 @@ class Issue < ActiveRecord::Base
     end
   end
 
-  # Overrides Redmine::Acts::Customizable::InstanceMethods#validate_custom_field_values
+  # Overrides Janya::Acts::Customizable::InstanceMethods#validate_custom_field_values
   # so that custom values that are not editable are not validated (eg. a custom field that
   # is marked as required should not trigger a validation error if the user is not allowed
   # to edit this field).
@@ -1437,7 +1437,7 @@ class Issue < ActiveRecord::Base
 
   def user_tracker_permission?(user, permission)
     if project && !project.active?
-      perm = Redmine::AccessControl.permission(permission)
+      perm = Janya::AccessControl.permission(permission)
       return false unless perm && perm.read?
     end
 

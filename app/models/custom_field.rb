@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,8 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class CustomField < ActiveRecord::Base
-  include Redmine::SafeAttributes
-  include Redmine::SubclassFactory
+  include Janya::SafeAttributes
+  include Janya::SubclassFactory
 
   has_many :enumerations,
            lambda { order(:position) },
@@ -32,7 +32,7 @@ class CustomField < ActiveRecord::Base
   validates_presence_of :name, :field_format
   validates_uniqueness_of :name, :scope => :type
   validates_length_of :name, :maximum => 30
-  validates_inclusion_of :field_format, :in => Proc.new { Redmine::FieldFormat.available_formats }
+  validates_inclusion_of :field_format, :in => Proc.new { Janya::FieldFormat.available_formats }
   validate :validate_custom_field
   attr_protected :id
 
@@ -91,7 +91,7 @@ class CustomField < ActiveRecord::Base
     'extensions_allowed'
 
   def format
-    @format ||= Redmine::FieldFormat.find(field_format)
+    @format ||= Janya::FieldFormat.find(field_format)
   end
 
   def field_format=(arg)
@@ -324,4 +324,4 @@ class CustomField < ActiveRecord::Base
   end
 end
 
-require_dependency 'redmine/field_format'
+require_dependency 'janya/field_format'

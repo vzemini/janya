@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 # Copyright (C) 2007  Patrick Aljord patcito@ŋmail.com
 #
@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/git_adapter'
+require 'janya/scm/adapters/git_adapter'
 
 class Repository::Git < Repository
   attr_protected :root_url
@@ -33,7 +33,7 @@ class Repository::Git < Repository
   end
 
   def self.scm_adapter_class
-    Redmine::Scm::Adapters::GitAdapter
+    Janya::Scm::Adapters::GitAdapter
   end
 
   def self.scm_name
@@ -102,27 +102,27 @@ class Repository::Git < Repository
 
   # With SCMs that have a sequential commit numbering,
   # such as Subversion and Mercurial,
-  # Redmine is able to be clever and only fetch changesets
+  # Janya is able to be clever and only fetch changesets
   # going forward from the most recent one it knows about.
   #
   # However, Git does not have a sequential commit numbering.
   #
   # In order to fetch only new adding revisions,
-  # Redmine needs to save "heads".
+  # Janya needs to save "heads".
   #
   # In Git and Mercurial, revisions are not in date order.
-  # Redmine Mercurial fixed issues.
-  #    * Redmine Takes Too Long On Large Mercurial Repository
-  #      http://www.redmine.org/issues/3449
+  # Janya Mercurial fixed issues.
+  #    * Janya Takes Too Long On Large Mercurial Repository
+  #      http://www.janya.org/issues/3449
   #    * Sorting for changesets might go wrong on Mercurial repos
-  #      http://www.redmine.org/issues/3567
+  #      http://www.janya.org/issues/3567
   #
-  # Database revision column is text, so Redmine can not sort by revision.
+  # Database revision column is text, so Janya can not sort by revision.
   # Mercurial has revision number, and revision number guarantees revision order.
-  # Redmine Mercurial model stored revisions ordered by database id to database.
-  # So, Redmine Mercurial model can use correct ordering revisions.
+  # Janya Mercurial model stored revisions ordered by database id to database.
+  # So, Janya Mercurial model can use correct ordering revisions.
   #
-  # Redmine Mercurial adapter uses "hg log -r 0:tip --limit 10"
+  # Janya Mercurial adapter uses "hg log -r 0:tip --limit 10"
   # to get limited revisions from old to new.
   # But, Git 1.7.3.4 does not support --reverse with -n or --skip.
   #
@@ -178,7 +178,7 @@ class Repository::Git < Repository
     # So, "git log --not deleted_branch_head_revision" return code is 0.
     #
     # After re-pushing branch, "git log" returns revisions which are saved in database.
-    # So, Redmine needs to scan revisions and database every time.
+    # So, Janya needs to scan revisions and database every time.
     #
     # This is replacing the one-after-one queries.
     # Find all revisions, that are in the database, and then remove them
@@ -197,7 +197,7 @@ class Repository::Git < Repository
     while offset < revisions_copy.size
       scmids = revisions_copy.slice(offset, limit).map{|x| x.scmid}
       recent_changesets_slice = changesets.where(:scmid => scmids)
-      # Subtract revisions that redmine already knows about
+      # Subtract revisions that janya already knows about
       recent_revisions = recent_changesets_slice.map{|c| c.scmid}
       revisions.reject!{|r| recent_revisions.include?(r.scmid)}
       offset += limit

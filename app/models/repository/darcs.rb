@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/darcs_adapter'
+require 'janya/scm/adapters/darcs_adapter'
 
 class Repository::Darcs < Repository
   validates_presence_of :url, :log_encoding
@@ -29,7 +29,7 @@ class Repository::Darcs < Repository
   end
 
   def self.scm_adapter_class
-    Redmine::Scm::Adapters::DarcsAdapter
+    Janya::Scm::Adapters::DarcsAdapter
   end
 
   def self.scm_name

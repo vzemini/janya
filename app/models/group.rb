@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Group < Principal
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   has_and_belongs_to_many :users,
                           :join_table   => "#{table_name_prefix}groups_users#{table_name_suffix}",

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Journal < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   belongs_to :journalized, :polymorphic => true
   # added as a quick fix to allow eager loading of the polymorphic association

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 class IssueRelation < ActiveRecord::Base
   # Class used to represent the relations of an issue
   class Relations < Array
-    include Redmine::I18n
+    include Janya::I18n
 
     def initialize(issue, *args)
       @issue = issue
@@ -30,7 +30,7 @@ class IssueRelation < ActiveRecord::Base
     end
   end
 
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   belongs_to :issue_from, :class_name => 'Issue'
   belongs_to :issue_to, :class_name => 'Issue'

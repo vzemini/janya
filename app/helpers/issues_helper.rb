@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 
 module IssuesHelper
   include ApplicationHelper
-  include Redmine::Export::PDF::IssuesPdfHelper
+  include Janya::Export::PDF::IssuesPdfHelper
 
   def issue_list(issues, &block)
     ancestors = []

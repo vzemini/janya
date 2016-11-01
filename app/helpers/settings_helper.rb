@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -89,7 +89,7 @@ module SettingsHelper
     end
   end
 
-  # Renders a notification field for a Redmine::Notifiable option
+  # Renders a notification field for a Janya::Notifiable option
   def notification_field(notifiable)
     tag_data = notifiable.parent.present? ?
       {:parent_notifiable => notifiable.parent} :

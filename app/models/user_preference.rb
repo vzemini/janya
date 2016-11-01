@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class UserPreference < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   belongs_to :user
   serialize :others
@@ -84,7 +84,7 @@ class UserPreference < ActiveRecord::Base
   def textarea_font=(value); self[:textarea_font]=value; end
 
   def my_page_layout
-    self[:my_page_layout] ||= Redmine::MyPage.default_layout.deep_dup
+    self[:my_page_layout] ||= Janya::MyPage.default_layout.deep_dup
   end
 
   def my_page_layout=(arg)
@@ -114,7 +114,7 @@ class UserPreference < ActiveRecord::Base
 
   def add_block(block)
     block = block.to_s.underscore
-    return unless Redmine::MyPage.blocks.key?(block)
+    return unless Janya::MyPage.blocks.key?(block)
 
     remove_block(block)
     # add it on top

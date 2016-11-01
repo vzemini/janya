@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -131,7 +131,7 @@ module CustomFieldsHelper
 
   # Return an array of custom field formats which can be used in select_tag
   def custom_field_formats_for_select(custom_field)
-    Redmine::FieldFormat.as_select(custom_field.class.customized_class.name)
+    Janya::FieldFormat.as_select(custom_field.class.customized_class.name)
   end
 
   # Yields the given block for each custom field value of object that should be

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Enumeration < ActiveRecord::Base
-  include Redmine::SubclassFactory
+  include Janya::SubclassFactory
 
   default_scope lambda {order(:position)}
 
@@ -135,7 +135,7 @@ class Enumeration < ActiveRecord::Base
     raise "Cannot delete enumeration" if self.in_use?
   end
 
-  # Overrides Redmine::Acts::Positioned#set_default_position so that enumeration overrides
+  # Overrides Janya::Acts::Positioned#set_default_position so that enumeration overrides
   # get the same position as the overriden enumeration
   def set_default_position
     if position.nil? && parent
@@ -144,7 +144,7 @@ class Enumeration < ActiveRecord::Base
     super
   end
 
-  # Overrides Redmine::Acts::Positioned#update_position so that overrides get the same
+  # Overrides Janya::Acts::Positioned#update_position so that overrides get the same
   # position as the overriden enumeration
   def update_position
     super
@@ -158,7 +158,7 @@ class Enumeration < ActiveRecord::Base
     end
   end
 
-  # Overrides Redmine::Acts::Positioned#remove_position so that enumeration overrides
+  # Overrides Janya::Acts::Positioned#remove_position so that enumeration overrides
   # get the same position as the overriden enumeration
   def remove_position
     if parent_id.blank?

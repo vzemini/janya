@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@ module MembersHelper
   def render_principals_for_new_members(project, limit=100)
     scope = Principal.active.visible.sorted.not_member_of(project).like(params[:q])
     principal_count = scope.count
-    principal_pages = Redmine::Pagination::Paginator.new principal_count, limit, params['page']
+    principal_pages = Janya::Pagination::Paginator.new principal_count, limit, params['page']
     principals = scope.offset(principal_pages.offset).limit(principal_pages.per_page).to_a
 
     s = content_tag('div',

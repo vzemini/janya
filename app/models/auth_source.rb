@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -21,9 +21,9 @@ class AuthSourceException < Exception; end
 class AuthSourceTimeoutException < AuthSourceException; end
 
 class AuthSource < ActiveRecord::Base
-  include Redmine::SafeAttributes
-  include Redmine::SubclassFactory
-  include Redmine::Ciphering
+  include Janya::SafeAttributes
+  include Janya::SubclassFactory
+  include Janya::Ciphering
 
   has_many :users
 

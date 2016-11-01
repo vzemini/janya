@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -251,7 +251,7 @@ END_SRC
   end
 
   def self.load_plugin_settings
-    Redmine::Plugin.all.each do |plugin|
+    Janya::Plugin.all.each do |plugin|
       define_plugin_setting(plugin)
     end
   end

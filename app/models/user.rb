@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 require "digest/sha1"
 
 class User < Principal
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   # Different ways of displaying/sorting users
   USER_FORMATS = {
@@ -462,7 +462,7 @@ class User < Principal
   # Find a user account by matching the exact login and then a case-insensitive
   # version.  Exact matches will be given priority.
   def self.find_by_login(login)
-    login = Redmine::CodesetUtil.replace_invalid_utf8(login.to_s)
+    login = Janya::CodesetUtil.replace_invalid_utf8(login.to_s)
     if login.present?
       # First look for an exact match
       user = where(:login => login).detect {|u| u.login == login}
@@ -841,7 +841,7 @@ class User < Principal
 
   # Returns a 128bits random salt as a hex string (32 chars long)
   def self.generate_salt
-    Redmine::Utils.random_hex(16)
+    Janya::Utils.random_hex(16)
   end
 
   # Send a security notification to all admins if the user has gained/lost admin privileges

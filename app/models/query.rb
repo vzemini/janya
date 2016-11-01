@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 class QueryColumn
   attr_accessor :name, :sortable, :groupable, :totalable, :default_order
-  include Redmine::I18n
+  include Janya::I18n
 
   def initialize(name, options={})
     self.name = name
@@ -164,7 +164,7 @@ class Query < ActiveRecord::Base
   class StatementInvalid < ::ActiveRecord::StatementInvalid
   end
 
-  include Redmine::SubclassFactory
+  include Janya::SubclassFactory
 
   VISIBILITY_PRIVATE = 0
   VISIBILITY_ROLES   = 1
@@ -1010,7 +1010,7 @@ class Query < ActiveRecord::Base
   # Returns a SQL LIKE statement with wildcards
   def sql_contains(db_field, value, match=true)
     queried_class.send :sanitize_sql_for_conditions,
-      [Redmine::Database.like(db_field, '?', :match => match), "%#{value}%"]
+      [Janya::Database.like(db_field, '?', :match => match), "%#{value}%"]
   end
 
   # Adds a filter for the given custom field

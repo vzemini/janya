@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Tracker < ActiveRecord::Base
-  include Redmine::SafeAttributes
+  include Janya::SafeAttributes
 
   CORE_FIELDS_UNDISABLABLE = %w(project_id tracker_id subject description priority_id is_private).freeze
   # Fields that can be disabled

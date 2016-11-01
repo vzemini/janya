@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,8 +18,8 @@
 class ScmFetchError < Exception; end
 
 class Repository < ActiveRecord::Base
-  include Redmine::Ciphering
-  include Redmine::SafeAttributes
+  include Janya::Ciphering
+  include Janya::SafeAttributes
 
   # Maximum length for repository identifiers
   IDENTIFIER_MAX_LENGTH = 255
@@ -305,7 +305,7 @@ class Repository < ActiveRecord::Base
     end
   end
 
-  # Returns the Redmine User corresponding to the given +committer+
+  # Returns the Janya User corresponding to the given +committer+
   # It will return nil if the committer is not yet mapped and if no User
   # with the same username or email was found
   def find_committer_user(committer)
@@ -342,7 +342,7 @@ class Repository < ActiveRecord::Base
       project.repositories.each do |repository|
         begin
           repository.fetch_changesets
-        rescue Redmine::Scm::Adapters::CommandFailed => e
+        rescue Janya::Scm::Adapters::CommandFailed => e
           logger.error "scm: error during fetching changesets: #{e.message}"
         end
       end
@@ -368,7 +368,7 @@ class Repository < ActiveRecord::Base
 
   def self.repository_class(class_name)
     class_name = class_name.to_s.camelize
-    if Redmine::Scm::Base.all.include?(class_name)
+    if Janya::Scm::Base.all.include?(class_name)
       "Repository::#{class_name}".constantize
     end
   end
@@ -463,9 +463,9 @@ class Repository < ActiveRecord::Base
   protected
 
   # Validates repository url based against an optional regular expression
-  # that can be set in the Redmine configuration file.
+  # that can be set in the Janya configuration file.
   def validate_repository_path(attribute=:url)
-    regexp = Redmine::Configuration["scm_#{scm_name.to_s.downcase}_path_regexp"]
+    regexp = Janya::Configuration["scm_#{scm_name.to_s.downcase}_path_regexp"]
     if changes[attribute] && regexp.present?
       regexp = regexp.to_s.strip.gsub('%project%') {Regexp.escape(project.try(:identifier).to_s)}
       unless send(attribute).to_s.match(Regexp.new("\\A#{regexp}\\z"))
