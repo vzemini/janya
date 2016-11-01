@@ -1,4 +1,4 @@
-/* Redmine - project management software
+/* Janya - project management software
    Copyright (C) 2006-2016  Jean-Philippe Lang */
 
 var draw_gantt = null;
