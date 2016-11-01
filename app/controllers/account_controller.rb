@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -266,14 +266,14 @@ class AccountController < ApplicationController
 
   def set_autologin_cookie(user)
     token = Token.create(:user => user, :action => 'autologin')
-    secure = Redmine::Configuration['autologin_cookie_secure']
+    secure = Janya::Configuration['autologin_cookie_secure']
     if secure.nil?
       secure = request.ssl?
     end
     cookie_options = {
       :value => token.value,
       :expires => 1.year.from_now,
-      :path => (Redmine::Configuration['autologin_cookie_path'] || RedmineApp::Application.config.relative_url_root || '/'),
+      :path => (Janya::Configuration['autologin_cookie_path'] || JanyaApp::Application.config.relative_url_root || '/'),
       :secure => secure,
       :httponly => true
     }
