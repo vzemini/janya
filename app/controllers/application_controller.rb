@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   include Janya::SudoMode::Controller
 
   def session_expiration
-    if session[:user_id] && Rails.application.config.redmine_verify_sessions != false
+    if session[:user_id] && Rails.application.config.janya_verify_sessions != false
       if session_expired? && !try_to_autologin
         set_localization(User.active.find_by_id(session[:user_id]))
         self.logged_user = nil
