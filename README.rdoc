@@ -1,5 +1,5 @@
-= Redmine
+= Janya Server for compliance management 
 
-Redmine is a flexible project management web application written using Ruby on Rails framework.
+Janya is a flexible compliance management web application server written using Ruby on Rails framework.
 
-More details can be found in the doc directory or on the official website http://www.redmine.org
+More details can be found in the doc directory or on the official website http://www.janya.xyz
