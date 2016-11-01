@@ -8,7 +8,7 @@
 
 <%= render :partial => 'link_to_functions' %>
 
-<% if Redmine::MimeType.is_type?('image', @path) %>
+<% if Janya::MimeType.is_type?('image', @path) %>
   <%= render :partial => 'common/image', :locals => {:path => url_for(:action => 'raw',
                                                                       :id     => @project,
                                                                       :repository_id => @repository.identifier_param,

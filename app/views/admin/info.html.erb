@@ -1,6 +1,6 @@
 <h2><%=l(:label_information_plural)%></h2>
 
-<p><strong><%= Redmine::Info.versioned_name %></strong></p>
+<p><strong><%= Janya::Info.versioned_name %></strong></p>
 
 <table class="list">
 <% @checklist.each do |label, result| %>
@@ -12,7 +12,7 @@
 </table>
 <br />
 <div class="box">
-<pre><%= Redmine::Info.environment %></pre>
+<pre><%= Janya::Info.environment %></pre>
 </div>
 
 <% html_title(l(:label_information_plural)) -%>

@@ -32,7 +32,7 @@
               <%= check_box 'query', 'draw_relations', :id => 'draw_relations' %>
               <% rels = [IssueRelation::TYPE_BLOCKS, IssueRelation::TYPE_PRECEDES] %>
               <% rels.each do |rel| %>
-                <% color = Redmine::Helpers::Gantt::DRAW_TYPES[rel][:color] %>
+                <% color = Janya::Helpers::Gantt::DRAW_TYPES[rel][:color] %>
                 <%= content_tag(:span, '&nbsp;&nbsp;&nbsp;'.html_safe,
                                 :style => "background-color: #{color}") %>
                 <%= l(IssueRelation::TYPES[rel][:name]) %>
@@ -362,7 +362,7 @@
 <% end %>
 
 <%= javascript_tag do %>
-  var issue_relation_type = <%= raw Redmine::Helpers::Gantt::DRAW_TYPES.to_json %>;
+  var issue_relation_type = <%= raw Janya::Helpers::Gantt::DRAW_TYPES.to_json %>;
   $(document).ready(drawGanttHandler);
   $(window).resize(drawGanttHandler);
   $(function() {

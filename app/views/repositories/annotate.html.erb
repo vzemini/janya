@@ -14,7 +14,7 @@
 <table class="filecontent annotate syntaxhl">
   <tbody>
     <% line_num = 1; previous_revision = nil %>
-    <% syntax_highlight_lines(@path, Redmine::CodesetUtil.to_utf8_by_setting(@annotate.content)).each do |line| %>
+    <% syntax_highlight_lines(@path, Janya::CodesetUtil.to_utf8_by_setting(@annotate.content)).each do |line| %>
       <% revision = @annotate.revisions[line_num - 1] %>
       <tr id="L<%= line_num %>" class="bloc-<%= revision.nil? ? 0 : colors[revision.identifier || revision.revision] %>">
         <th class="line-num"><a href="#L<%= line_num %>"><%= line_num %></a></th>
@@ -26,7 +26,7 @@
         </td>
         <td class="author">
           <% if revision && revision != previous_revision %>
-            <% author = Redmine::CodesetUtil.to_utf8(revision.author.to_s,
+            <% author = Janya::CodesetUtil.to_utf8(revision.author.to_s,
                                                      @repository.repo_log_encoding) %>
             <%= author.split('<').first %>
           <% end %>
