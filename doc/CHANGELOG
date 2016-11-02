@@ -1,8 +1,8 @@
-== Redmine changelog
+== JANYA changelog
 
-Redmine - project management software
+JANYA - project management software
 Copyright (C) 2006-2016  Jean-Philippe Lang
-http://www.redmine.org/
+http://www.janya.org/
 
 == 2016-10-10 v3.3.1
 
@@ -33,7 +33,7 @@ http://www.redmine.org/
 * Patch #23117: Traditional Chinese textile and markdown help translation
 * Patch #23387: Traditional Chinese textile and markdown detailed help translation (to r15723)
 * Patch #23764: closed_on field of copied issue is always set to source issue's value
-* Patch #23269: Fix for Error: Unable to autoload constant Redmine::Version when accessing the time report in first request
+* Patch #23269: Fix for Error: Unable to autoload constant JANYA::Version when accessing the time report in first request
 * Patch #23278: When creating issues by receiving an email, watchers created via CC in the mail don't get an email notification
 * Patch #23389: Print Styles get overriden by responsive media query
 * Patch #23708: Too long words in subtasks break layout
@@ -285,7 +285,7 @@ http://www.redmine.org/
 * Feature #8335: Email styles inline
 * Feature #10672: Extend Filesize in the attachments table for files with size > 2147483647 bytes
 * Feature #13429: Include attachment thumbnails in issue history
-* Feature #13946: Add tracker name to Redmine issue link titles
+* Feature #13946: Add tracker name to JANYA issue link titles
 * Feature #16072: Markdown footnote support
 * Feature #16621: Ability to filter issues blocked by any/no open issues
 * Feature #16941: Do not clear category on project change if category with same exists
@@ -315,12 +315,12 @@ http://www.redmine.org/
 * Patch #20411: Change Japanese translation for "view"
 * Patch #20413: Use a table instead of an unordered list in "Issue tracking" box
 * Patch #20496: Change Japanese translation for "time tracking"
-* Patch #20506: redmine I18n autoload instead of require
+* Patch #20506: janya I18n autoload instead of require
 * Patch #20507: ThemesHelper reopening ApplicationHelper is problem with autoloading
-* Patch #20508: Required file lib/redmine/hook.rb is patching autoloaded ApplicationHelper
+* Patch #20508: Required file lib/janya/hook.rb is patching autoloaded ApplicationHelper
 * Patch #20589: Activate sudo mode after password based login
 * Patch #20720: Traditional Chinese "issue" translation change
-* Patch #20732: MailHandler: Select project by subaddress (redmine+project@example.com)
+* Patch #20732: MailHandler: Select project by subaddress (janya+project@example.com)
 * Patch #20740: Confusing name: test public query called "private"
 * Patch #21033: Polish translation change
 * Patch #21110: Keep anchor (i.e. to a specific issue note) throughout login
@@ -335,10 +335,10 @@ http://www.redmine.org/
 
 == 2015-12-05 v3.1.3
 
-* Defect #16948: Broken anonymous repository access for public projects with Apache 2.4 (redmine.pm)
+* Defect #16948: Broken anonymous repository access for public projects with Apache 2.4 (janya.pm)
 * Defect #21328: pdf: Vietnamese Italic is not shown
 * Defect #21419: Information leak in Atom feed
-* Patch #21312: Fix exception in Redmine.pm when authenticating anonymous users
+* Patch #21312: Fix exception in JANYA.pm when authenticating anonymous users
 * Patch #21430: Simplified Chinese translation
 
 == 2015-11-14 v3.1.2
@@ -390,7 +390,7 @@ http://www.redmine.org/
 * Patch #20512: Project.copy_from deletes enabled_modules on source
 * Patch #20737: Czech translation for 3.0-stable
 * Patch #20746: Portuguese translation for 3.0-stable
-* Patch #20243: Use https links instead of http links in ApplicationHelper#avatar_edit_link and Redmine::Info class methods
+* Patch #20243: Use https links instead of http links in ApplicationHelper#avatar_edit_link and JANYA::Info class methods
 * Patch #20410: Turkish translation for 3.1-stable
 * Patch #20452: Czech localisation update
 * Patch #20731: Change Japanese translation for "spent time"
@@ -407,7 +407,7 @@ http://www.redmine.org/
 * Defect #19737: HTML Sanitizer not working for Outlook mails
 * Defect #19740: "Truncate emails after one of these lines" setting is not working
 * Defect #19995: Can't apply textile modifiers to 1 non-ASCII character
-* Defect #20141: Sync #wiki_format_provider plugin API shortcut with changes to Redmine::WikiFormatting.register from r12450 and r14313
+* Defect #20141: Sync #wiki_format_provider plugin API shortcut with changes to JANYA::WikiFormatting.register from r12450 and r14313
 * Defect #20159: Disallow users to delete a version referenced by a custom field
 * Defect #20206: Members w/o view issues permission are able to list issues on public projects if the non member role has the permission
 * Defect #20372: Contents inside <pre> are not rendered as monospace font in Chrome for Mac
@@ -422,7 +422,7 @@ http://www.redmine.org/
 * Feature #16373: TextFormatting help for Markdown formatting
 * Feature #16535: Set a max width to html email content
 * Feature #16962: Better handle html-only emails
-* Feature #19182: Patch to the Redmine Mail Handler for specifying a custom CA bundle
+* Feature #19182: Patch to the JANYA Mail Handler for specifying a custom CA bundle
 * Feature #19458: Add the ability to expire passwords after a configurable number of days
 * Feature #19707: Ability to limit member management to certain roles
 * Feature #19851: Sudo mode: Require password re-entry for sensitive actions (optional)
@@ -450,7 +450,7 @@ http://www.redmine.org/
 * Defect #19840: Missing validation for description size of versions
 * Defect #19842: User allowed to manage public queries in any project, can create public query visible to everyone for ALL projects
 * Defect #19844: Roles are not aligned on new member form
-* Defect #19956: Connection leak on svn/redmine integration
+* Defect #19956: Connection leak on svn/janya integration
 * Defect #19957: acts_as_versioned not compatible with ActiveRecord 4.2.1
 * Defect #20066: List of groups sorted in desc by default
 * Defect #20118: Missing row in PDF if issue description contains '<'-character
@@ -531,11 +531,11 @@ http://www.redmine.org/
 * Defect #18605: Wrong usage of logger.info to test log level
 * Defect #18654: Custom field is rendered, even if its value is empty (for multiple)
 * Defect #18711: Respect cross-project subtask setting on issue bulk edit form
-* Defect #18781: Redmine::FieldFormat::IntFormat does not accept "real" Integer values
+* Defect #18781: JANYA::FieldFormat::IntFormat does not accept "real" Integer values
 * Defect #18832: Activity Stream Filter missing on right hand side due to permission
 * Defect #18855: User with only Move Issue rights in the project can still create issues using mass copy!
 * Defect #18918: Grouping label for "none" should be changed to "null", "No Value", or" (blank) ".
-* Defect #19024: link_to in Redmine::Hook::ViewListener omits url root
+* Defect #19024: link_to in JANYA::Hook::ViewListener omits url root
 * Defect #19030: Links to completed versions on the roadmap page might lead to a "403 not authorized page"
 * Defect #19039: Mail notification is formatting dates with changer's locale
 * Defect #19040: Potential DB deadlocks on concurrent issue creation
@@ -559,7 +559,7 @@ http://www.redmine.org/
 * Feature #12734: Add table reference to textile help
 * Feature #13051: Support any macro in (pdf) export for wiki's and issues
 * Feature #13425: Ignore X-Autoreply mails
-* Feature #13497: Document all available Redmine links properly
+* Feature #13497: Document all available JANYA links properly
 * Feature #13849: Grouped filters in the filter drop-down
 * Feature #14371: Drop Ruby 1.8.7 support
 * Feature #14534: Upgrade to Rails 4.2
@@ -590,14 +590,14 @@ http://www.redmine.org/
 * Patch #18707: Allow attachment thumbnails from REST api
 * Patch #18817: Sort helper undefined to_a for string
 * Patch #18818: TimeEntry acts_as_activity_provider scope should joins(:project)
-* Patch #18983: Allow filtering of Redmine Reminders by Version
+* Patch #18983: Allow filtering of JANYA Reminders by Version
 * Patch #19005: Make search results per page configurable
 * Patch #19035: Japanese translation fix (label_age)
 
 == 2015-02-19 v2.6.2
 
 * Defect #10681: Export to Persian PDF problem
-* Defect #17722: Plugin update check not working if redmine is viewed over https
+* Defect #17722: Plugin update check not working if janya is viewed over https
 * Defect #18586: Arabic PDF
 * Defect #18632: PDF Export has no left padding for tables
 * Defect #18883: Slow rendering of large textile tables
@@ -711,7 +711,7 @@ http://www.redmine.org/
 * Patch #17602: Include enabled modules in projects API
 * Patch #17717: Password/Email address change should invalidate security tokens
 * Patch #17796: Expire all other sessions on password change
-* Patch #17847: Wiki extended help macros do not reflect basic Redmine macros
+* Patch #17847: Wiki extended help macros do not reflect basic JANYA macros
 * Patch #17853: Portuguese translation file
 * Patch #18047: MailHandler: Don't use String#respond_to?(:force_encoding) to differentiate between Ruby 1.8 and Ruby 1.9
 
@@ -723,7 +723,7 @@ http://www.redmine.org/
 * Defect #16564: Repository identifiers can be reserved words
 * Defect #16619: Mailer.token_for generates invalid message_id when using from address with full name
 * Defect #16655: start_date not set despite settings[default_issue_start_date_to_creation_date] being set.
-* Defect #16668: Redmine links broken when object name contains special characters
+* Defect #16668: JANYA links broken when object name contains special characters
 * Defect #16669: Markdown formatter should use the :no_intra_emphasis extension
 * Defect #16708: Form is submitted when switching tab
 * Defect #16739: custom_fields.json only returns single tracker instead of array of trackers
@@ -826,7 +826,7 @@ http://www.redmine.org/
 * Defect #15664: Unable to upload attachments without add_issues, edit_issues or add_issue_notes permission
 * Defect #15756: 500 on admin info/settings page on development environment
 * Defect #15781: Customfields have a noticable impact on search performance due to slow database COUNT
-* Defect #15849: Redmine:Fetch_Changesets Single-inheritance issue in subclass "Repository:Git"
+* Defect #15849: JANYA:Fetch_Changesets Single-inheritance issue in subclass "Repository:Git"
 * Defect #15870: Parent task completion is 104% after update of subtasks
 * Defect #16032: Repository.fetch_changesets > app/models/repository/git.rb:137:in `[]=': string not matched (IndexError)
 * Defect #16038: Issue#css_classes corrupts user.groups association cache
@@ -890,7 +890,7 @@ It is in v2.5.0.
 * Defect #14986: 500 error when viewing a wiki page without WikiContent
 * Defect #14995: Japanese "notice_not_authorized" translation is incorrect
 * Defect #15044: Patch for giving controller_issues_edit_after_save api hook the correct context
-* Defect #15050: redmine:migrate_from_mantis fails to migrate projects with all upper case name
+* Defect #15050: janya:migrate_from_mantis fails to migrate projects with all upper case name
 * Defect #15058: Project authorization EnabledModule N+1 queries
 * Defect #15113: The mail method should return a Mail::Message
 * Defect #15135: Issue#update_nested_set_attributes comparing nil with empty string
@@ -913,7 +913,7 @@ It is in v2.5.0.
 * Feature #8253: Update CodeRay to 1.1 final
 * Feature #11159: REST API for getting CustomField definitions
 * Feature #12293: Add links to attachments in new issue email notification
-* Feature #12912: Issue-notes Redmine links: append actual note reference to rendered links
+* Feature #12912: Issue-notes JANYA links: append actual note reference to rendered links
 * Feature #13157: Link on "My Page" to view all my spent time
 * Feature #13746: Highlighting of source link target line
 * Feature #13943: Better handling of validation errors when bulk editing issues
@@ -927,7 +927,7 @@ It is in v2.5.0.
 * Feature #15182: Return to section anchor after wiki section edit
 * Feature #15218: Update Rails 3.2.15
 * Feature #15311: Add an indication to admin/info whether or not ImageMagick convert is available
-* Patch #6689: Document project-links in parse_redmine_links
+* Patch #6689: Document project-links in parse_janya_links
 * Patch #13460: All translations: RSS -> Atom
 * Patch #13482: Do not add empty header/footer to notification emails
 * Patch #13528: Traditional Chinese "label_total_time" translation
@@ -992,7 +992,7 @@ It is in v2.5.0.
 * Defect #14511: warning: class variable access from toplevel on Ruby 2.0
 * Defect #14562: diff of CJK (Chinese/Japanese/Korean) is broken on Ruby 1.8
 * Defect #14584: Standard fields disabled for certain trackers still appear in email notifications
-* Defect #14607: rake redmine:load_default_data Error
+* Defect #14607: rake janya:load_default_data Error
 * Defect #14697: Wrong Russian translation in close project message
 * Defect #14798: Wrong done_ratio calculation for parent with subtask having estimated_hours=0
 * Patch #14485: Traditional Chinese translation for 2.3-stable
@@ -1002,7 +1002,7 @@ It is in v2.5.0.
 
 == 2013-07-14 v2.3.2
 
-* Defect #9996: configuration.yml in documentation , but redmine ask me to create email.yml
+* Defect #9996: configuration.yml in documentation , but janya ask me to create email.yml
 * Defect #13692: warning: already initialized constant on Ruby 1.8.7
 * Defect #13783: Internal error on time tracking activity enumeration deletion
 * Defect #13821: "obj" parameter is not defined for macros used in description of documents
@@ -1011,7 +1011,7 @@ It is in v2.5.0.
 * Defect #13950: Duplicate Lithuanian "error_attachment_too_big" translation keys
 * Defect #14015: Ruby hangs when adding a subtask
 * Defect #14020: Locking and unlocking a user resets the email notification checkbox
-* Defect #14023: Can't delete relation when Redmine runs in a subpath
+* Defect #14023: Can't delete relation when JANYA runs in a subpath
 * Defect #14051: Filtering issues with custom field in date format with NULL(empty) value
 * Defect #14178: PDF API broken in version 2.3.1
 * Defect #14186: Project name is not properly escaped in issue filters JSON
@@ -1057,10 +1057,10 @@ It is in v2.5.0.
 * Defect #8794: Circular loop when using relations and subtasks
 * Defect #9475: German Translation "My custom queries" and "Custom queries"
 * Defect #9549: Only 100 users are displayed when adding new project members
-* Defect #10277: Redmine wikitext URL-into-link creation with hyphen is wrong
+* Defect #10277: JANYA wikitext URL-into-link creation with hyphen is wrong
 * Defect #10364: Custom field float separator in CSV export
-* Defect #10930: rake redmine:load_default_data error in 2.0 with SQLServer
-* Defect #10977: Redmine shouldn't require all database gems
+* Defect #10930: rake janya:load_default_data error in 2.0 with SQLServer
+* Defect #10977: JANYA shouldn't require all database gems
 * Defect #12528: Handle temporary failures gracefully in the external mail handler script
 * Defect #12629: Wrong German "label_issues_by" translation
 * Defect #12641: Diff outputs become ??? in some non ASCII words.
@@ -1223,7 +1223,7 @@ It is in v2.5.0.
 * Defect #11834: Bazaar: "???" instead of non ASCII character in paths on non UTF-8 locale
 * Defect #11868: Git and Mercurial diff displays deleted files as /dev/null
 * Defect #11979: No validation errors when entering an invalid "Parent task"
-* Defect #12012: Redmine::VERSION.revision method does not work on Subversion 1.7 working copy
+* Defect #12012: JANYA::VERSION.revision method does not work on Subversion 1.7 working copy
 * Defect #12018: Issue filter select box order changes randomly
 * Defect #12090: email recipients not written to action_mailer log if BCC recipients setting is checked
 * Defect #12092: Issue "start date" validation does not work correctly
@@ -1254,7 +1254,7 @@ It is in v2.5.0.
 * Feature #12167: Macro for inserting collapsible block of text
 * Feature #12211: Wrap issue description and its contextual menu in a div
 * Feature #12216: Textual CSS class for priorities
-* Feature #12299: Redmine version requirement improvements (in plugins)
+* Feature #12299: JANYA version requirement improvements (in plugins)
 * Feature #12393: Upgrade to Rails 3.2.9
 * Feature #12475: Lazy loading of translation files for faster startup
 * Patch #11846: Fill username when authentification failed
@@ -1315,13 +1315,13 @@ It is in v2.5.0.
 
 == 2012-09-30 v2.1.2
 
-* Defect #11929: XSS vulnerability in Redmine 2.1.x
+* Defect #11929: XSS vulnerability in JANYA 2.1.x
 
 == 2012-09-30 v2.1.1
 
 * Defect #11290: ParseDate missing in Ruby 1.9x
 * Defect #11844: "load_default_data" rake task fails to print the error message if one occurs
-* Defect #11850: Can't create a user from ldap by on-the-fly on the redmine server using URI prefix
+* Defect #11850: Can't create a user from ldap by on-the-fly on the janya server using URI prefix
 * Defect #11872: Private issue visible to anonymous users after its author is deleted
 * Defect #11885: Filter misses Selectionfield on IE8
 * Defect #11893: New relation form Cancel link is broken with Chrome 21
@@ -1359,13 +1359,13 @@ It is in v2.5.0.
 * Defect #11571: Custom fields of type version not proper handled in receiving e-mails
 * Defect #11577: Can't use non-latin anchor in wiki
 * Defect #11612: Revision graph sometimes broken due to raphael.js error
-* Defect #11621: Redmine MIME Detection Of Javascript Files Non-Standard
+* Defect #11621: JANYA MIME Detection Of Javascript Files Non-Standard
 * Defect #11633: Macro arguments should not be parsed by text formatters
 * Defect #11662: Invalid query returned from Issues.visible scope after accessing User#projects_by_role with a role that is not present
 * Defect #11691: 404 response when deleting a user from the edit page
-* Defect #11723: redmine:send_reminders notification misses if assignee is a group
+* Defect #11723: janya:send_reminders notification misses if assignee is a group
 * Defect #11738: Batch update of issues clears project path
-* Defect #11749: Redmine.pm: HEAD is not considered as a read-only method
+* Defect #11749: JANYA.pm: HEAD is not considered as a read-only method
 * Defect #11814: Date picker does not respect week start setting
 * Feature #703: Configurable required fields per tracker/status/role
 * Feature #1006: Display thumbnails of attached images
@@ -1392,13 +1392,13 @@ It is in v2.5.0.
 * Feature #11205: Reversed order of priorities on the issue summary page
 * Feature #11445: Switch from Prototype to JQuery
 * Feature #11469: JSONP support
-* Feature #11475: Redmine.pm: Allow fallback to other Apache auth providers
+* Feature #11475: JANYA.pm: Allow fallback to other Apache auth providers
 * Feature #11494: Don't turn #nnn with leading zeros into links
 * Feature #11539: Display a projects tree instead of a flat list in notification preferences
 * Feature #11578: Option to pass whole arguments to a macro without splitting them
 * Feature #11595: Missing mime type for svg files
 * Feature #11758: Upgrade to Rails 3.2.8
-* Patch #4905: Redmine.pm: add support for Git's smart HTTP protocol
+* Patch #4905: JANYA.pm: add support for Git's smart HTTP protocol
 * Patch #10988: New Korean translation patch
 * Patch #11201: Korean translation special update
 * Patch #11401: Fix Japanese mistranslation for "button_submit"
@@ -1408,7 +1408,7 @@ It is in v2.5.0.
 * Patch #11419: Fix wrong Japanese "label_attachment" translation
 * Patch #11496: Make labels clickable in Adminstration/Settings
 * Patch #11704: Avoid the use of tag("...", "...", true) in layout
-* Patch #11818: Redmine.pm fails when permissions are NULL
+* Patch #11818: JANYA.pm fails when permissions are NULL
 
 == 2012-09-16 v2.0.4
 
@@ -1421,13 +1421,13 @@ It is in v2.5.0.
 * Defect #11341: Escaped link in conflict resolution form
 * Defect #11365: Attachment description length is not validated
 * Defect #11511: Confirmation page has broken HTML when a project folding sub project is deleted
-* Defect #11533: rake redmine:plugins:test doesn't run tests in subdirectories
+* Defect #11533: rake janya:plugins:test doesn't run tests in subdirectories
 * Defect #11541: Version sharing is missing in the REST API
 * Defect #11550: Issue reminder doesn't work when using asynchronous delivery
-* Defect #11776: Can't override mailer views inside redmine plugin.
+* Defect #11776: Can't override mailer views inside janya plugin.
 * Defect #11789: Edit section links broken with h5/h6 headings
 * Feature #11338: Exclude emails with auto-submitted => auto-generated
-* Patch #11299: redmine:plugins:migrate should update db/schema.rb
+* Patch #11299: janya:plugins:migrate should update db/schema.rb
 * Patch #11328: Fix Japanese mistranslation for 'label_language_based'
 * Patch #11448: Russian translation for 1.4-stable and 2.0-stable
 * Patch #11600: Fix plural form of the abbreviation for hours in Brazilian Portuguese
@@ -1444,9 +1444,9 @@ It is in v2.5.0.
 * Defect #11124: Link to user is escaped in activity title
 * Defect #11133: Wiki-page section edit link can point to incorrect section
 * Defect #11160: SQL Error on time report if a custom field has multiple values for an entry
-* Defect #11170: Topics sort order is broken in Redmine 2.x
+* Defect #11170: Topics sort order is broken in JANYA 2.x
 * Defect #11178: Spent time sorted by date-descending order lists same-date entries in physical order (not-reverse)
-* Defect #11185: Redmine fails to delete a project with parent/child task
+* Defect #11185: JANYA fails to delete a project with parent/child task
 * Feature #11162: Upgrade to Rails 3.2.6
 * Patch #11113: Small glitch in German localization
 
@@ -1454,22 +1454,22 @@ It is in v2.5.0.
 
 * Defect #11032: Project list is not shown when "For any event on the selected projects only..." is selected on user edit panel
 * Defect #11038: "Create and continue" should preserve project, issue and activity when logging time
-* Defect #11046: Redmine.pm does not support "bind as user" ldap authentication
+* Defect #11046: JANYA.pm does not support "bind as user" ldap authentication
 * Defect #11051: reposman.rb fails in 1.4.2 because of missing require for rubygems
 * Defect #11085: Wiki start page can't be changed
 * Feature #11084: Update Rails to 3.2.5
 
 == 2012-05-28 v2.0.1
 
-* Defect #10923: After creating a new Version Redmine jumps back to "Information"
+* Defect #10923: After creating a new Version JANYA jumps back to "Information"
 * Defect #10932: Links to delete watchers are escaped when gravatars are enabled
 * Defect #10964: Updated column doesn't get updated on issues
 * Defect #10965: rake yard does not work for generating documentation.
 * Defect #10972: Columns selection not displayed on the custom query form
 * Defect #10991: My page > Spent time 'project' column is html-encoded
-* Defect #10996: Time zones lost when upgrading from Redmine 1.4 to 2.0
+* Defect #10996: Time zones lost when upgrading from JANYA 1.4 to 2.0
 * Defect #11013: Fetching Email from IMAP/POP3 - uninitialized constant RAILS_DEFAULT_LOGGER error
-* Defect #11024: redmine_plugin_model generator does not create the migration
+* Defect #11024: janya_plugin_model generator does not create the migration
 * Defect #11027: Saving new query without name causes escaping of input field
 * Defect #11028: Project identifier can be updated
 
@@ -1482,7 +1482,7 @@ It is in v2.5.0.
 
 == 2012-05-13 v1.4.2
 
-* Defect #10744: rake task redmine:email:test broken
+* Defect #10744: rake task janya:email:test broken
 * Defect #10787: "Allow users to unsubscribe" option is confusing
 * Defect #10827: Cannot access Repositories page and Settings in a Project - Error 500
 * Defect #10829: db:migrate fails 0.8.2 -> 1.4.1
@@ -1567,7 +1567,7 @@ It is in v2.5.0.
 * Feature #4774: Change the hyperlink for file attachment to view and download
 * Feature #5159: Ability to add Non-Member watchers to the watch list
 * Feature #5638: Use Bundler (Gemfile) for gem management
-* Feature #5643: Add X-Redmine-Sender header to email notifications
+* Feature #5643: Add X-JANYA-Sender header to email notifications
 * Feature #6296: Bulk-edit custom fields through context menu
 * Feature #6386: Issue mail should render the HTML version of the issue details
 * Feature #6449: Edit a wiki page's parent on the edit page
@@ -1606,7 +1606,7 @@ It is in v2.5.0.
 * Defect #10564: Unable to change locked, sticky flags and board when editing a message
 * Defect #10591: Dutch "label_file_added" translation is wrong
 * Defect #10622: "Default administrator account changed" is always true
-* Patch #10555: rake redmine:send_reminders aborted if issue assigned to group
+* Patch #10555: rake janya:send_reminders aborted if issue assigned to group
 * Patch #10611: Simplified Chinese translations for 1.3-stable
 
 == 2012-03-11 v1.3.2
@@ -1626,7 +1626,7 @@ It is in v2.5.0.
 * Defect #10390: Mass assignment security vulnerability
 * Patch #8413: Confirmation message before deleting a relationship
 * Patch #10160: Bulgarian translation (r8777)
-* Patch #10242: Migrate Redmine.pm from Digest::Sha1 to Digest::Sha
+* Patch #10242: Migrate JANYA.pm from Digest::Sha1 to Digest::Sha
 * Patch #10258: Italian translation for 1.3-stable
 
 == 2012-02-06 v1.3.1
@@ -1645,7 +1645,7 @@ It is in v2.5.0.
 * Feature #9943: Arabic translation
 * Patch #9874: pt-BR translation updates
 * Patch #9922: Spanish translation updated
-* Patch #10137: Korean language file ko.yml updated to Redmine 1.3.0
+* Patch #10137: Korean language file ko.yml updated to JANYA 1.3.0
 
 == 2011-12-10 v1.3.0
 
@@ -1689,7 +1689,7 @@ It is in v2.5.0.
 * Feature #3033: Bug Reporting: Using "Create and continue" should show bug id of saved bug
 * Feature #3261: support attachment images in PDF export
 * Feature #4264: Update CodeRay to 1.0 final
-* Feature #4324: Redmine renames my files, it shouldn't.
+* Feature #4324: JANYA renames my files, it shouldn't.
 * Feature #4729: Add Date-Based Filters for Issues List
 * Feature #4742: CSV export: option to export selected or all columns
 * Feature #4976: Allow rdm-mailhandler to read the API key from a file
@@ -1738,8 +1738,8 @@ It is in v2.5.0.
 * Defect #9448: The attached images are not shown in documents
 * Defect #9520: Copied private query not visible after project copy
 * Defect #9552: Error when reading ciphered text from the database without cipher key configured
-* Defect #9566: Redmine.pm considers all projects private when login_required is enabled
-* Defect #9567: Redmine.pm potential security issue with cache credential enabled and subversion
+* Defect #9566: JANYA.pm considers all projects private when login_required is enabled
+* Defect #9567: JANYA.pm potential security issue with cache credential enabled and subversion
 * Defect #9577: Deleting a subtasks doesn't update parent's rgt & lft values
 * Defect #9597: Broken version links in wiki annotate history
 * Defect #9682: Wiki HTML Export only useful when Access history is accessible
@@ -1757,7 +1757,7 @@ It is in v2.5.0.
 * Defect #8615: Custom 'version' fields don't show shared versions
 * Defect #8633: Pagination counts non visible issues
 * Defect #8651: Email attachments are not added to issues any more in v1.2
-* Defect #8825: JRuby + Windows: SCMs do not work on Redmine 1.2
+* Defect #8825: JRuby + Windows: SCMs do not work on JANYA 1.2
 * Defect #8836: Additional workflow transitions not available when set to both author and assignee
 * Defect #8865: Custom field regular expression is not validated
 * Defect #8880: Error deleting issue with grandchild
@@ -1791,12 +1791,12 @@ It is in v2.5.0.
 * Defect #8738: Missing revision number/id of associated revisions on issue PDF
 * Defect #8739: Workflow copy does not copy advanced workflow settings
 * Defect #8759: Setting issue attributes from mail should be case-insensitive
-* Defect #8777: Mercurial: Not able to Resetting Redmine project respository
+* Defect #8777: Mercurial: Not able to Resetting JANYA project respository
 
 == 2011-05-30 v1.2.0
 
 * Defect #61: Broken character encoding in pdf export
-* Defect #1965: Redmine is not Tab Safe
+* Defect #1965: JANYA is not Tab Safe
 * Defect #2274: Filesystem Repository path encoding of non UTF-8 characters
 * Defect #2664: Mercurial: Repository path encoding of non UTF-8 characters
 * Defect #3421: Mercurial reads files from working dir instead of changesets
@@ -1812,7 +1812,7 @@ It is in v2.5.0.
 * Defect #5817: Shared versions not shown in subproject's gantt chart
 * Defect #6013: git tab,browsing, very slow -- even after first time
 * Defect #6148: Quoting, newlines, and nightmares...
-* Defect #6256: Redmine considers non ASCII and UTF-16 text files as binary in SCM
+* Defect #6256: JANYA considers non ASCII and UTF-16 text files as binary in SCM
 * Defect #6476: Subproject's issues are not shown in the subproject's gantt
 * Defect #6496: Remove i18n 0.3.x/0.4.x hack for Rails 2.3.5
 * Defect #6562: Context-menu deletion of issues deletes all subtasks too without explicit prompt
@@ -1832,7 +1832,7 @@ It is in v2.5.0.
 * Defect #7367: Receiving pop3 email should not output debug messages
 * Defect #7373: Error with PDF output and ruby 1.9.2
 * Defect #7379: Remove extraneous hidden_field on wiki history
-* Defect #7516: Redmine does not work with RubyGems 1.5.0
+* Defect #7516: JANYA does not work with RubyGems 1.5.0
 * Defect #7518: Mercurial diff can be wrong if the previous changeset isn't the parent
 * Defect #7581: Not including a spent time value on the main issue update screen causes silent data loss
 * Defect #7582: hiding form pages from search engines
@@ -1879,9 +1879,9 @@ It is in v2.5.0.
 * Feature #7236: Collapse All for Groups
 * Feature #7246: Handle "named branch" for mercurial
 * Feature #7296: Ability for admin to delete users
-* Feature #7318: Add user agent to Redmine Mailhandler
+* Feature #7318: Add user agent to JANYA Mailhandler
 * Feature #7408: Add an application configuration file
-* Feature #7409: Cross project Redmine links
+* Feature #7409: Cross project JANYA links
 * Feature #7410: Add salt to user passwords
 * Feature #7411: Option to cipher LDAP ans SCM passwords stored in the database
 * Feature #7412: Add an issue visibility level to each role
@@ -1899,7 +1899,7 @@ It is in v2.5.0.
 * Feature #8365: Git: per project setting to report last commit or not in repository tree
 * Patch #5148: metaKey not handled in issues selection
 * Patch #5629: Wrap text fields properly in PDF
-* Patch #7418: Redmine Persian Translation
+* Patch #7418: JANYA Persian Translation
 * Patch #8295: Wrap title fields properly in PDF
 * Patch #8310: fixes automatic line break problem with TCPDF
 * Patch #8312: Switch to TCPDF from FPDF for PDF export
@@ -1933,7 +1933,7 @@ It is in v2.5.0.
 == 2011-03-07 v1.1.2
 
 * Defect #3132: Bulk editing menu non-functional in Opera browser
-* Defect #6090: Most binary files become corrupted when downloading from CVS repository browser when Redmine is running on a Windows server
+* Defect #6090: Most binary files become corrupted when downloading from CVS repository browser when JANYA is running on a Windows server
 * Defect #7280: Issues subjects wrap in Gantt
 * Defect #7288: Non ASCII filename downloaded from repo is broken on Internet Explorer.
 * Defect #7317: Gantt tab gives internal error due to nil avatar icon
@@ -1950,9 +1950,9 @@ It is in v2.5.0.
 
 == 2011-01-30 v1.1.1
 
-* Defect #4899: Redmine fails to list files for darcs repository
+* Defect #4899: JANYA fails to list files for darcs repository
 * Defect #7245: Wiki fails to find pages with cyrillic characters using postgresql
-* Defect #7256: redmine/public/.htaccess must be moved for non-fastcgi installs/upgrades
+* Defect #7256: janya/public/.htaccess must be moved for non-fastcgi installs/upgrades
 * Defect #7258: Automatic spent time logging does not work properly with SQLite3
 * Defect #7259: Released 1.1.0 uses "devel" label inside admin information
 * Defect #7265: "Loading..." icon does not disappear after add project member
@@ -1974,10 +1974,10 @@ It is in v2.5.0.
 == 2011-01-09 v1.1.0
 
 * Defect #2038: Italics in wiki headers show-up wrong in the toc
-* Defect #3449: Redmine Takes Too Long On Large Mercurial Repository
+* Defect #3449: JANYA Takes Too Long On Large Mercurial Repository
 * Defect #3567: Sorting for changesets might go wrong on Mercurial repos
 * Defect #3707: {{toc}} doesn't work with {{include}}
-* Defect #5096: Redmine hangs up while browsing Git repository
+* Defect #5096: JANYA hangs up while browsing Git repository
 * Defect #6000: Safe Attributes prevents plugin extension of Issue model...
 * Defect #6064: Modules not assigned to projects created via API
 * Defect #6110: MailHandler should allow updating Issue Priority and Custom fields
@@ -2045,7 +2045,7 @@ It is in v2.5.0.
 == 2010-12-23 v1.0.5
 
 * #6656: Mercurial adapter loses seconds of commit times
-* #6996: Migration trac(sqlite3) -> redmine(postgresql) doesnt escape ' char
+* #6996: Migration trac(sqlite3) -> janya(postgresql) doesnt escape ' char
 * #7013: v-1.0.4 trunk - see {{count}} in page display rather than value
 * #7016: redundant 'field_start_date' in ja.yml
 * #7018: 'undefined method `reschedule_after' for nil:NilClass' on new issues
@@ -2065,7 +2065,7 @@ It is in v2.5.0.
 * #6740: Max attachment size, incorrect usage of 'KB'
 * #6760: Select box sorted by ID instead of name in Issue Category
 * #6766: Changing target version name can cause an internal error
-* #6784: Redmine not working with i18n gem 0.4.2
+* #6784: JANYA not working with i18n gem 0.4.2
 * #6839: Hardcoded absolute links in my/page_layout
 * #6841: Projects API doesn't allow full key auth for all actions
 * #6860: svn: Write error: Broken pipe when browsing repository
@@ -2083,7 +2083,7 @@ It is in v2.5.0.
 
 == 2010-10-31 v1.0.3
 
-* #4065: Redmine.pm doesn't work with LDAPS and a non-standard port
+* #4065: JANYA.pm doesn't work with LDAPS and a non-standard port
 * #4416: Link from version details page to edit the wiki.
 * #5484: Add new issue as subtask to an existing ticket
 * #5948: Update help/wiki_syntax_detailed.html with more link options
@@ -2189,13 +2189,13 @@ It is in v2.5.0.
 * #5740: Swedish Translation for r3810
 * #5785: pt-BR translation update
 * #5898: Projects should be displayed as links in users/memberships
-* #5910: Chinese translation to redmine-1.0.0
+* #5910: Chinese translation to janya-1.0.0
 * #5912: Translation update for french locale
 * #5962: Hungarian translation update to r3892
 * #5971: Remove falsly applied chrome on revision links
 * #5972: Updated Hebrew translation for 1.0.0
 * #5982: Updated german translation
-* #6008: Move admin_menu to Redmine::MenuManager
+* #6008: Move admin_menu to JANYA::MenuManager
 * #6012: RTL layout
 * #6021: Spanish translation 1.0.0-RC
 * #6025: nl translation updated for r3905
@@ -2280,7 +2280,7 @@ It is in v2.5.0.
 * Fixed #2990: Ruby 1.9 - wrong number of arguments (1 for 0) on rake db:migrate
 * Fixed #3089: Text formatting sometimes breaks when combined
 * Fixed #3690: Status change info duplicates on the issue screen
-* Fixed #3691: Redmine allows two files with the same file name to be uploaded to the same issue
+* Fixed #3691: JANYA allows two files with the same file name to be uploaded to the same issue
 * Fixed #3764: ApplicationHelperTest fails with JRuby
 * Fixed #4265: Unclosed code tags in issue descriptions affects main UI
 * Fixed #4745: Bug in index.xml.builder (issues)
@@ -2303,8 +2303,8 @@ It is in v2.5.0.
 * Fixed #5548: SVN Repository: Can not list content of a folder which includes square brackets.
 * Fixed #5589: "with subproject" malfunction
 * Fixed #5676: Search for Numeric Value
-* Fixed #5696: Redmine + PostgreSQL 8.4.4 fails on _dir_list_content.rhtml
-* Fixed #5698: redmine:email:receive_imap fails silently for mails with subject longer than 255 characters
+* Fixed #5696: JANYA + PostgreSQL 8.4.4 fails on _dir_list_content.rhtml
+* Fixed #5698: janya:email:receive_imap fails silently for mails with subject longer than 255 characters
 * Fixed #5700: TimelogController#destroy assumes success
 * Fixed #5751: developer role is mispelled
 * Fixed #5769: Popup Calendar doesn't Advance in Chrome
@@ -2314,7 +2314,7 @@ It is in v2.5.0.
 
 == 2010-07-07 v0.9.6
 
-* Fixed: Redmine.pm access by unauthorized users
+* Fixed: JANYA.pm access by unauthorized users
 
 == 2010-06-24 v0.9.5
 
@@ -2357,9 +2357,9 @@ It is in v2.5.0.
 * Fixed: Sidebar overlap on Users tab of Group editor
 * Fixed: Error on db:migrate with table prefix set (hardcoded name in principal.rb)
 * Fixed: Report shows sub-projects for non-members
-* Fixed: 500 internal error when browsing any Redmine page in epiphany
+* Fixed: 500 internal error when browsing any JANYA page in epiphany
 * Fixed: Watchers selection lost when issue creation fails
-* Fixed: When copying projects, redmine should not generate an email to people who created issues
+* Fixed: When copying projects, janya should not generate an email to people who created issues
 * Fixed: Issue "#" table cells should have a class attribute to enable fine-grained CSS theme
 * Fixed: Plugin generators should display help if no parameter is given
 
@@ -2401,7 +2401,7 @@ It is in v2.5.0.
 == 2010-01-30 v0.9.1
 
 * Vertical alignment for inline images in formatted text set to 'middle'
-* Fixed: Redmine.pm error "closing dbh with active statement handles at /usr/lib/perl5/Apache/Redmine.pm"
+* Fixed: JANYA.pm error "closing dbh with active statement handles at /usr/lib/perl5/Apache/JANYA.pm"
 * Fixed: copyright year in footer set to 2010
 * Fixed: Trac migration script may not output query lines
 * Fixed: Email notifications may affect language of notice messages on the UI
@@ -2510,7 +2510,7 @@ It is in v2.5.0.
 * Fixed: Wrong language used when closing an issue via a commit message
 * Fixed: email handler drops emails for new issues with no subject
 * Fixed: Calendar misspelled under Roles/Permissions
-* Fixed: Emails from no-reply redmine's address hell cycle
+* Fixed: Emails from no-reply janya's address hell cycle
 * Fixed: child_pages macro fails on wiki page history
 * Fixed: Pre-filled time tracking date ignores timezone
 * Fixed: Links on locked users lead to 404 page
@@ -2518,7 +2518,7 @@ It is in v2.5.0.
 * Fixed: diff parser removes lines starting with multiple dashes
 * Fixed: Quoting in forums resets message subject
 * Fixed: Editing issue comment removes quote link
-* Fixed: Redmine.pm ignore browse_repository permission
+* Fixed: JANYA.pm ignore browse_repository permission
 * Fixed: text formatting breaks on [msg1][msg2]
 * Fixed: Spent Time Default Value of 0.0
 * Fixed: Wiki pages in search results are referenced by project number, not by project identifier.
@@ -2556,7 +2556,7 @@ It is in v2.5.0.
 == 2009-09-13 v0.8.5
 
 * Incoming mail handler : Allow spaces between keywords and colon
-* Do not require a non-word character after a comma in Redmine links
+* Do not require a non-word character after a comma in JANYA links
 * Include issue hyperlinks in reminder emails
 * Prevent nil error when retrieving svn version
 * Various plugin hooks added
@@ -2572,7 +2572,7 @@ It is in v2.5.0.
 
 * Allow textile mailto links
 * Fixed: memory consumption when uploading file
-* Fixed: Mercurial integration doesn't work if Redmine is installed in folder path containing space
+* Fixed: Mercurial integration doesn't work if JANYA is installed in folder path containing space
 * Fixed: an error is raised when no tab is available on project settings
 * Fixed: insert image macro corrupts urls with excalamation marks
 * Fixed: error on cross-project gantt PNG export
@@ -2587,11 +2587,11 @@ It is in v2.5.0.
 == 2009-04-05 v0.8.3
 
 * Separate project field and subject in cross-project issue view
-* Ability to set language for redmine:load_default_data task using REDMINE_LANG environment variable
-* Rescue Redmine::DefaultData::DataAlreadyLoaded in redmine:load_default_data task
+* Ability to set language for janya:load_default_data task using JANYA_LANG environment variable
+* Rescue JANYA::DefaultData::DataAlreadyLoaded in janya:load_default_data task
 * CSS classes to highlight own and assigned issues
 * Hide "New file" link on wiki pages from printing
-* Flush buffer when asking for language in redmine:load_default_data task
+* Flush buffer when asking for language in janya:load_default_data task
 * Minimum project identifier length set to 1
 * Include headers so that emails don't trigger vacation auto-responders
 * Fixed: Time entries csv export links for all projects are malformed
@@ -2693,8 +2693,8 @@ It is in v2.5.0.
 * Adds permissions for viewing the watcher list and adding new watchers on the issue detail view
 * Adds permissions to let users edit and/or delete their messages
 * Link to activity view when displaying dates
-* Hide Redmine version in atom feeds and pdf properties
-* Maps repository users to Redmine users. Users with same username or email are automatically mapped. Mapping can be manually adjusted in repository settings. Multiple usernames can be mapped to the same Redmine user.
+* Hide JANYA version in atom feeds and pdf properties
+* Maps repository users to JANYA users. Users with same username or email are automatically mapped. Mapping can be manually adjusted in repository settings. Multiple usernames can be mapped to the same JANYA user.
 * Sort users by their display names so that user dropdown lists are sorted alphabetically
 * Adds estimated hours to issue filters
 * Switch order of current and previous revisions in side-by-side diff
@@ -2749,11 +2749,11 @@ It is in v2.5.0.
 * Plugins can provide activity content
 * Moves plugin list to its own administration menu item
 * Adds url and author_url plugin attributes
-* Adds Plugin#requires_redmine method so that plugin compatibility can be checked against current Redmine version
+* Adds Plugin#requires_janya method so that plugin compatibility can be checked against current JANYA version
 * Adds atom feed on time entries details
 * Adds project name to issues feed title
 * Adds a css class on menu items in order to apply item specific styles (eg. icons)
-* Adds a Redmine plugin generators
+* Adds a JANYA plugin generators
 * Adds timelog link to the issue context menu
 * Adds links to the user page on various views
 * Turkish translation by Ismail Sezen
@@ -2787,7 +2787,7 @@ It is in v2.5.0.
 * Ability to disable unused SCM adapters in application settings
 * Adds Filesystem adapter
 * Clear changesets and changes with raw sql when deleting a repository for performance
-* Redmine.pm now uses the 'commit access' permission defined in Redmine
+* JANYA.pm now uses the 'commit access' permission defined in JANYA
 * Reposman can create any type of scm (--scm option)
 * Reposman creates a repository if the 'repository' module is enabled at project level only
 * Display svn properties in the browser, svn >= 1.5.0 only
@@ -2812,7 +2812,7 @@ It is in v2.5.0.
 * Renames bundled RedCloth to RedCloth3 to avoid RedCloth 4 to be loaded instead
 * Fixed: Roadmap crashes when a version has a due date > 2037
 * Fixed: invalid effective date (eg. 99999-01-01) causes an error on version edition screen
-* Fixed: login filter providing incorrect back_url for Redmine installed in sub-directory
+* Fixed: login filter providing incorrect back_url for JANYA installed in sub-directory
 * Fixed: logtime entry duplicated when edited from parent project
 * Fixed: wrong digest for text files under Windows
 * Fixed: associated revisions are displayed in wrong order on issue view
@@ -2892,7 +2892,7 @@ It is in v2.5.0.
 * Fixed: Bad rendering on projects/add
 * Fixed: exception when viewing differences on cvs
 * Fixed: export issue to pdf will messup when use Chinese language
-* Fixed: Redmine::Scm::Adapters::GitAdapter#get_rev ignored GIT_BIN constant
+* Fixed: JANYA::Scm::Adapters::GitAdapter#get_rev ignored GIT_BIN constant
 * Fixed: Adding non-ASCII new issue type in the New Issue page have encoding error using IE
 * Fixed: Importing from trac : some wiki links are messed
 * Fixed: Incorrect weekend definition in Hebrew calendar locale
@@ -2900,7 +2900,7 @@ It is in v2.5.0.
 * Fixed: In Activity views, changesets titles can be multiline while they should not
 * Fixed: Ignore unreadable subversion directories (read disabled using authz)
 * Fixed: lib/SVG/Graph/Graph.rb can't externalize stylesheets
-* Fixed: Close statement handler in Redmine.pm
+* Fixed: Close statement handler in JANYA.pm
 
 
 == 2008-05-04 v0.7.1
@@ -2920,7 +2920,7 @@ It is in v2.5.0.
 
 == 2008-04-28 v0.7.0
 
-* Forces Redmine to use rails 2.0.2 gem when vendor/rails is not present
+* Forces JANYA to use rails 2.0.2 gem when vendor/rails is not present
 * Queries can be marked as 'For all projects'. Such queries will be available on all projects and on the global issue list.
 * Add predefined date ranges to the time report
 * Time report can be done at issue level
@@ -2930,7 +2930,7 @@ It is in v2.5.0.
 * Make the admin project files list sortable
 * Mercurial: display working directory files sizes unless browsing a specific revision
 * Preserve status filter and page number when using lock/unlock/activate links on the users list
-* Redmine.pm support for LDAP authentication
+* JANYA.pm support for LDAP authentication
 * Better error message and AR errors in log for failed LDAP on-the-fly user creation
 * Redirected user to where he is coming from after logging hours
 * Warn user that subprojects are also deleted when deleting a project
@@ -2961,7 +2961,7 @@ It is in v2.5.0.
 * Project description is now unlimited and optional
 * Wiki annotate view
 * Escape HTML tag in textile content
-* Add Redmine links to documents, versions, attachments and repository files
+* Add JANYA links to documents, versions, attachments and repository files
 * New setting to specify how many objects should be displayed on paginated lists. There are 2 ways to select a set of issues on the issue list:
     * by using checkbox and/or the little pencil that will select/unselect all issues
     * by clicking on the rows (but not on the links), Ctrl and Shift keys can be used to select multiple issues
@@ -3015,7 +3015,7 @@ It is in v2.5.0.
 * Breadcrumb nav for the forums
 * Show replies when choosing to display messages in the activity
 * Added 'include' macro to include another wiki page
-* RedmineWikiFormatting page available as a static HTML file locally
+* JANYAWikiFormatting page available as a static HTML file locally
 * Wrap diff content
 * Strip out email address from authors in repository screens
 * Highlight the current item of the main menu
@@ -3029,23 +3029,23 @@ It is in v2.5.0.
 * RedCloth's glyphs no longer user
 * New icons for the wiki toolbar (from http://www.famfamfam.com/lab/icons/silk/)
 * The following menus can now be extended by plugins: top_menu, account_menu, application_menu
-* Added a simple rake task to fetch changesets from the repositories: rake redmine:fetch_changesets
-* Remove hardcoded "Redmine" strings in account related emails and use application title instead
+* Added a simple rake task to fetch changesets from the repositories: rake janya:fetch_changesets
+* Remove hardcoded "JANYA" strings in account related emails and use application title instead
 * Mantis importer preserve bug ids
 * Trac importer: Trac guide wiki pages skipped
 * Trac importer: wiki attachments migration added
 * Trac importer: support database schema for Trac migration
 * Trac importer: support CamelCase links
-* Removes the Redmine version from the footer (can be viewed on admin -> info)
+* Removes the JANYA version from the footer (can be viewed on admin -> info)
 * Rescue and display an error message when trying to delete a role that is in use
-* Add various 'X-Redmine' headers to email notifications: X-Redmine-Host, X-Redmine-Site, X-Redmine-Project, X-Redmine-Issue-Id, -Author, -Assignee, X-Redmine-Topic-Id
+* Add various 'X-JANYA' headers to email notifications: X-JANYA-Host, X-JANYA-Site, X-JANYA-Project, X-JANYA-Issue-Id, -Author, -Assignee, X-JANYA-Topic-Id
 * Add "--encoding utf8" option to the Mercurial "hg log" command in order to get utf8 encoded commit logs
 * Fixed: Gantt and calendar not properly refreshed (fragment caching removed)
 * Fixed: Textile image with style attribute cause internal server error
 * Fixed: wiki TOC not rendered properly when used in an issue or document description
 * Fixed: 'has already been taken' error message on username and email fields if left empty
 * Fixed: non-ascii attachement filename with IE
-* Fixed: wrong url for wiki syntax pop-up when Redmine urls are prefixed
+* Fixed: wrong url for wiki syntax pop-up when JANYA urls are prefixed
 * Fixed: search for all words doesn't work
 * Fixed: Do not show sticky and locked checkboxes when replying to a message
 * Fixed: Mantis importer: do not duplicate Mantis username in firstname and lastname if realname is blank
@@ -3214,7 +3214,7 @@ It is in v2.5.0.
 * Email notifications are now sent in plain text and html
 * Gantt chart can now be exported to a graphic file (png). This functionality is only available if RMagick is installed.
 * Added syntax highlightment for repository files and wiki
-* Improved automatic Redmine links
+* Improved automatic JANYA links
 * Added automatic table of content support on wiki pages
 * Added radio buttons on the documents list to sort documents by category, date, title or author
 * Added basic plugin support, with a sample plugin
@@ -3226,7 +3226,7 @@ It is in v2.5.0.
 * Added the ability to reset its own RSS access key
 * Main project list now displays root projects with their subprojects
 * Added anchor links to issue notes
-* Added reposman Ruby version. This script can now register created repositories in Redmine (Nicolas Chuche)
+* Added reposman Ruby version. This script can now register created repositories in JANYA (Nicolas Chuche)
 * Issue notes are now included in search
 * Added email sending test functionality
 * Added LDAPS support for LDAP authentication

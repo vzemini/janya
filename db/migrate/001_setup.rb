@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -288,7 +288,7 @@ class Setup < ActiveRecord::Migration
     Permission.create :controller => "versions", :action => "destroy_file", :description => "button_delete", :sort => 1322
 
     # create default administrator account
-    user = User.new :firstname => "Redmine",
+    user = User.new :firstname => "Janya",
                     :lastname => "Admin",
                     :mail => "admin@example.net",
                     :mail_notification => true,

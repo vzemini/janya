@@ -8,7 +8,7 @@ class CreateEnabledModules < ActiveRecord::Migration
 
     # Enable all modules for existing projects
     Project.all.each do |project|
-      project.enabled_module_names = Redmine::AccessControl.available_project_modules
+      project.enabled_module_names = Janya::AccessControl.available_project_modules
     end
   end
 

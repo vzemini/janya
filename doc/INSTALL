@@ -1,8 +1,8 @@
-== Redmine installation
+== JANYA installation
 
-Redmine - project management software
+JANYA - project management software
 Copyright (C) 2006-2016  Jean-Philippe Lang
-http://www.redmine.org/
+http://www.janya.org/
 
 
 == Requirements
@@ -26,7 +26,7 @@ Optional:
 
 1. Uncompress the program archive
 
-2. Create an empty utf8 encoded database: "redmine" for example
+2. Create an empty utf8 encoded database: "janya" for example
 
 3. Configure the database parameters in config/database.yml
    for the "production" environment (default database is MySQL and ruby1.9)
@@ -44,14 +44,14 @@ Optional:
    will be installed). Don't forget to re-run `bundle install` when you
    change config/database.yml for using other database adapters.
 
-   If you need to load some gems that are not required by Redmine core
+   If you need to load some gems that are not required by JANYA core
    (eg. fcgi), you can create a file named Gemfile.local at the root of
-   your redmine directory.
+   your janya directory.
    It will be loaded automatically when running `bundle install`.
 
 5. Generate a session store secret
    
-   Redmine stores session data in cookies by default, which requires
+   JANYA stores session data in cookies by default, which requires
    a secret to be generated. Under the application main directory run:
      bundle exec rake generate_secret_token
 
@@ -67,11 +67,11 @@ Optional:
 
 7. Setting up permissions (Windows users have to skip this section)
    
-   The user who runs Redmine must have write permission on the following
+   The user who runs JANYA must have write permission on the following
    subdirectories: files, log, tmp & public/plugin_assets.
    
-   Assuming you run Redmine with a user named "redmine":
-     sudo chown -R redmine:redmine files log tmp public/plugin_assets
+   Assuming you run JANYA with a user named "janya":
+     sudo chown -R janya:janya files log tmp public/plugin_assets
      sudo chmod -R 755 files log tmp public/plugin_assets
 
 8. Test the installation by running the WEBrick web server
@@ -99,10 +99,10 @@ Please do not enter your SMTP settings in environment.rb.
 
 == References
 
-* http://www.redmine.org/wiki/redmine/RedmineInstall
-* http://www.redmine.org/wiki/redmine/EmailConfiguration
-* http://www.redmine.org/wiki/redmine/RedmineSettings
-* http://www.redmine.org/wiki/redmine/RedmineRepositories
-* http://www.redmine.org/wiki/redmine/RedmineReceivingEmails
-* http://www.redmine.org/wiki/redmine/RedmineReminderEmails
-* http://www.redmine.org/wiki/redmine/RedmineLDAP
+* http://www.janya.org/wiki/janya/JANYAInstall
+* http://www.janya.org/wiki/janya/EmailConfiguration
+* http://www.janya.org/wiki/janya/JANYASettings
+* http://www.janya.org/wiki/janya/JANYARepositories
+* http://www.janya.org/wiki/janya/JANYAReceivingEmails
+* http://www.janya.org/wiki/janya/JANYAReminderEmails
+* http://www.janya.org/wiki/janya/JANYALDAP
