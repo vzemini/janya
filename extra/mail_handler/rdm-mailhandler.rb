@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -41,7 +41,7 @@ module Net
   end
 end
 
-class RedmineMailHandler
+class JanyaMailHandler
   VERSION = '0.2.3'
 
   attr_accessor :verbose, :issue_attributes, :allow_override, :unknown_user, :default_group, :no_permission_check,
@@ -51,16 +51,16 @@ class RedmineMailHandler
     self.issue_attributes = {}
 
     optparse = OptionParser.new do |opts|
-      opts.banner = "Usage: rdm-mailhandler.rb [options] --url=<Redmine URL> --key=<API key>"
+      opts.banner = "Usage: rdm-mailhandler.rb [options] --url=<Janya URL> --key=<API key>"
       opts.separator("")
-      opts.separator("Reads an email from standard input and forwards it to a Redmine server through a HTTP request.")
+      opts.separator("Reads an email from standard input and forwards it to a Janya server through a HTTP request.")
       opts.separator("")
       opts.separator("Required arguments:")
-      opts.on("-u", "--url URL",              "URL of the Redmine server") {|v| self.url = v}
-      opts.on("-k", "--key KEY",              "Redmine API key") {|v| self.key = v}
+      opts.on("-u", "--url URL",              "URL of the Janya server") {|v| self.url = v}
+      opts.on("-k", "--key KEY",              "Janya API key") {|v| self.key = v}
       opts.separator("")
       opts.separator("General options:")
-      opts.on("--key-file FILE",              "full path to a file that contains your Redmine",
+      opts.on("--key-file FILE",              "full path to a file that contains your Janya",
                                               "API key (use this option instead of --key if",
                                               "you don't want the key to appear in the command",
                                               "line)") {|v| read_key_from_file(v)}
@@ -119,21 +119,21 @@ Examples:
   No project specified, emails MUST contain the 'Project' keyword, otherwise
   they will be dropped (not recommanded):
 
-    rdm-mailhandler.rb --url http://redmine.domain.foo --key secret
+    rdm-mailhandler.rb --url http://janya.domain.foo --key secret
 
   Fixed project and default tracker specified, but emails can override
   both tracker and priority attributes using keywords:
 
-    rdm-mailhandler.rb --url https://domain.foo/redmine --key secret \\
+    rdm-mailhandler.rb --url https://domain.foo/janya --key secret \\
       --project myproject \\
       --tracker bug \\
       --allow-override tracker,priority
 
-  Project selected by subaddress of redmine@example.net. Sending the email
-  to redmine+myproject@example.net will add the issue to myproject:
+  Project selected by subaddress of janya@example.net. Sending the email
+  to janya+myproject@example.net will add the issue to myproject:
 
-    rdm-mailhandler.rb --url http://redmine.domain.foo --key secret \\
-      --project-from-subaddress redmine@example.net
+    rdm-mailhandler.rb --url http://janya.domain.foo --key secret \\
+      --project-from-subaddress janya@example.net
 END_DESC
 
       opts.summary_width = 27
@@ -149,7 +149,7 @@ END_DESC
   def submit(email)
     uri = url.gsub(%r{/*$}, '') + '/mail_handler'
 
-    headers = { 'User-Agent' => "Redmine mail handler/#{VERSION}" }
+    headers = { 'User-Agent' => "Janya mail handler/#{VERSION}" }
 
     data = { 'key' => key, 'email' => email,
                            'allow_override' => allow_override,
@@ -165,25 +165,25 @@ END_DESC
     begin
       response = Net::HTTPS.post_form(URI.parse(uri), data, headers, :no_check_certificate => no_check_certificate, :certificate_bundle => certificate_bundle)
     rescue SystemCallError, IOError => e # connection refused, etc.
-      warn "An error occured while contacting your Redmine server: #{e.message}"
+      warn "An error occured while contacting your Janya server: #{e.message}"
       return 75 # temporary failure
     end
     debug "Response received: #{response.code}"
 
     case response.code.to_i
       when 403
-        warn "Request was denied by your Redmine server. " +
+        warn "Request was denied by your Janya server. " +
              "Make sure that 'WS for incoming emails' is enabled in application settings and that you provided the correct API key."
         return 77
       when 422
-        warn "Request was denied by your Redmine server. " +
+        warn "Request was denied by your Janya server. " +
              "Possible reasons: email is sent from an invalid email address or is missing some information."
         return 77
       when 400..499
-        warn "Request was denied by your Redmine server (#{response.code})."
+        warn "Request was denied by your Janya server (#{response.code})."
         return 77
       when 500..599
-        warn "Failed to contact your Redmine server (#{response.code})."
+        warn "Failed to contact your Janya server (#{response.code})."
         return 75
       when 201
         debug "Proccessed successfully"
@@ -209,5 +209,5 @@ END_DESC
   end
 end
 
-handler = RedmineMailHandler.new
+handler = JanyaMailHandler.new
 exit(handler.submit(STDIN.read))

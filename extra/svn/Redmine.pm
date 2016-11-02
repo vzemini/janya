@@ -1,15 +1,15 @@
-package Apache::Authn::Redmine;
+package Apache::Authn::Janya;
 
-=head1 Apache::Authn::Redmine
+=head1 Apache::Authn::Janya
 
-Redmine - a mod_perl module to authenticate webdav subversion users
-against redmine database
+Janya - a mod_perl module to authenticate webdav subversion users
+against janya database
 
 =head1 SYNOPSIS
 
 This module allow anonymous users to browse public project and
 registred users to browse and commit their project. Authentication is
-done against the redmine database or the LDAP configured in redmine.
+done against the janya database or the LDAP configured in janya.
 
 This method is far simpler than the one with pam_* and works with all
 database without an hassle but you need to have apache/mod_perl on the
@@ -29,7 +29,7 @@ On debian/ubuntu you must do :
 
   aptitude install libapache-dbi-perl libapache2-mod-perl2 libdbd-mysql-perl
 
-If your Redmine users use LDAP authentication, you will also need
+If your Janya users use LDAP authentication, you will also need
 Authen::Simple::LDAP (and IO::Socket::SSL if LDAPS is used):
 
   aptitude install libauthen-simple-ldap-perl libio-socket-ssl-perl
@@ -37,34 +37,34 @@ Authen::Simple::LDAP (and IO::Socket::SSL if LDAPS is used):
 =head1 CONFIGURATION
 
    ## This module has to be in your perl path
-   ## eg:  /usr/lib/perl5/Apache/Authn/Redmine.pm
-   PerlLoadModule Apache::Authn::Redmine
+   ## eg:  /usr/lib/perl5/Apache/Authn/Janya.pm
+   PerlLoadModule Apache::Authn::Janya
    <Location /svn>
      DAV svn
      SVNParentPath "/var/svn"
 
      AuthType Basic
-     AuthName redmine
+     AuthName janya
      Require valid-user
 
-     PerlAccessHandler Apache::Authn::Redmine::access_handler
-     PerlAuthenHandler Apache::Authn::Redmine::authen_handler
+     PerlAccessHandler Apache::Authn::Janya::access_handler
+     PerlAuthenHandler Apache::Authn::Janya::authen_handler
 
      ## for mysql
-     RedmineDSN "DBI:mysql:database=databasename;host=my.db.server"
+     JanyaDSN "DBI:mysql:database=databasename;host=my.db.server"
      ## for postgres
-     # RedmineDSN "DBI:Pg:dbname=databasename;host=my.db.server"
+     # JanyaDSN "DBI:Pg:dbname=databasename;host=my.db.server"
 
-     RedmineDbUser "redmine"
-     RedmineDbPass "password"
+     JanyaDbUser "janya"
+     JanyaDbPass "password"
      ## Optional where clause (fulltext search would be slow and
      ## database dependant).
-     # RedmineDbWhereClause "and members.role_id IN (1,2)"
+     # JanyaDbWhereClause "and members.role_id IN (1,2)"
      ## Optional credentials cache size
-     # RedmineCacheCredsMax 50
+     # JanyaCacheCredsMax 50
   </Location>
 
-To be able to browse repository inside redmine, you must add something
+To be able to browse repository inside janya, you must add something
 like that :
 
    <Location /svn-private>
@@ -74,13 +74,13 @@ like that :
      Deny from all
      # only allow reading orders
      <Limit GET PROPFIND OPTIONS REPORT>
-       Allow from redmine.server.ip
+       Allow from janya.server.ip
      </Limit>
    </Location>
 
 and you will have to use this reposman.rb command line to create repository :
 
-  reposman.rb --redmine my.redmine.server --svn-dir /var/svn --owner www-data -u http://svn.server/svn-private/
+  reposman.rb --janya my.janya.server --svn-dir /var/svn --owner www-data -u http://svn.server/svn-private/
 
 =head1 REPOSITORIES NAMING
 
@@ -105,7 +105,7 @@ And you need to upgrade at least reposman.rb (after r860).
 =head1 GIT SMART HTTP SUPPORT
 
 Git's smart HTTP protocol (available since Git 1.7.0) will not work with the
-above settings. Redmine.pm normally does access control depending on the HTTP
+above settings. Janya.pm normally does access control depending on the HTTP
 method used: read-only methods are OK for everyone in public projects and
 members with read rights in private projects. The rest require membership with
 commit rights in the project.
@@ -118,7 +118,7 @@ git-receive-pack service is read-only.
 To activate this mode of operation, add this line inside your <Location /git>
 block:
 
-  RedmineGitSmartHttp yes
+  JanyaGitSmartHttp yes
 
 Here's a sample Apache configuration which integrates git-http-backend with
 a MySQL database and this new option:
@@ -134,26 +134,26 @@ a MySQL database and this new option:
        AuthName Git
        Require valid-user
 
-       PerlAccessHandler Apache::Authn::Redmine::access_handler
-       PerlAuthenHandler Apache::Authn::Redmine::authen_handler
+       PerlAccessHandler Apache::Authn::Janya::access_handler
+       PerlAuthenHandler Apache::Authn::Janya::authen_handler
        # for mysql
-       RedmineDSN "DBI:mysql:database=redmine;host=127.0.0.1"
-       RedmineDbUser "redmine"
-       RedmineDbPass "xxx"
-       RedmineGitSmartHttp yes
+       JanyaDSN "DBI:mysql:database=janya;host=127.0.0.1"
+       JanyaDbUser "janya"
+       JanyaDbPass "xxx"
+       JanyaGitSmartHttp yes
     </Location>
 
 Make sure that all the names of the repositories under /var/www/git/ have a
 matching identifier for some project: /var/www/git/myproject and
 /var/www/git/myproject.git will work. You can put both bare and non-bare
 repositories in /var/www/git, though bare repositories are strongly
-recommended. You should create them with the rights of the user running Redmine,
+recommended. You should create them with the rights of the user running Janya,
 like this:
 
   cd /var/www/git
-  sudo -u user-running-redmine mkdir myproject
+  sudo -u user-running-janya mkdir myproject
   cd myproject
-  sudo -u user-running-redmine git init --bare
+  sudo -u user-running-janya git init --bare
 
 Once you have activated this option, you have three options when cloning a
 repository:
@@ -202,42 +202,42 @@ use APR::Table ();
 
 my @directives = (
   {
-    name => 'RedmineDSN',
+    name => 'JanyaDSN',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
     errmsg => 'Dsn in format used by Perl DBI. eg: "DBI:Pg:dbname=databasename;host=my.db.server"',
   },
   {
-    name => 'RedmineDbUser',
+    name => 'JanyaDbUser',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
   },
   {
-    name => 'RedmineDbPass',
+    name => 'JanyaDbPass',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
   },
   {
-    name => 'RedmineDbWhereClause',
+    name => 'JanyaDbWhereClause',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
   },
   {
-    name => 'RedmineCacheCredsMax',
+    name => 'JanyaCacheCredsMax',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
-    errmsg => 'RedmineCacheCredsMax must be decimal number',
+    errmsg => 'JanyaCacheCredsMax must be decimal number',
   },
   {
-    name => 'RedmineGitSmartHttp',
+    name => 'JanyaGitSmartHttp',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
   },
 );
 
-sub RedmineDSN {
+sub JanyaDSN {
   my ($self, $parms, $arg) = @_;
-  $self->{RedmineDSN} = $arg;
+  $self->{JanyaDSN} = $arg;
   my $query = "SELECT 
                  users.hashed_password, users.salt, users.auth_source_id, roles.permissions, projects.status
               FROM projects, users, roles
@@ -257,34 +257,34 @@ sub RedmineDSN {
                   )
                 )
                 AND roles.permissions IS NOT NULL";
-  $self->{RedmineQuery} = trim($query);
+  $self->{JanyaQuery} = trim($query);
 }
 
-sub RedmineDbUser { set_val('RedmineDbUser', @_); }
-sub RedmineDbPass { set_val('RedmineDbPass', @_); }
-sub RedmineDbWhereClause {
+sub JanyaDbUser { set_val('JanyaDbUser', @_); }
+sub JanyaDbPass { set_val('JanyaDbPass', @_); }
+sub JanyaDbWhereClause {
   my ($self, $parms, $arg) = @_;
-  $self->{RedmineQuery} = trim($self->{RedmineQuery}.($arg ? $arg : "")." ");
+  $self->{JanyaQuery} = trim($self->{JanyaQuery}.($arg ? $arg : "")." ");
 }
 
-sub RedmineCacheCredsMax {
+sub JanyaCacheCredsMax {
   my ($self, $parms, $arg) = @_;
   if ($arg) {
-    $self->{RedmineCachePool} = APR::Pool->new;
-    $self->{RedmineCacheCreds} = APR::Table::make($self->{RedmineCachePool}, $arg);
-    $self->{RedmineCacheCredsCount} = 0;
-    $self->{RedmineCacheCredsMax} = $arg;
+    $self->{JanyaCachePool} = APR::Pool->new;
+    $self->{JanyaCacheCreds} = APR::Table::make($self->{JanyaCachePool}, $arg);
+    $self->{JanyaCacheCredsCount} = 0;
+    $self->{JanyaCacheCredsMax} = $arg;
   }
 }
 
-sub RedmineGitSmartHttp {
+sub JanyaGitSmartHttp {
   my ($self, $parms, $arg) = @_;
   $arg = lc $arg;
 
   if ($arg eq "yes" || $arg eq "true") {
-    $self->{RedmineGitSmartHttp} = 1;
+    $self->{JanyaGitSmartHttp} = 1;
   } else {
-    $self->{RedmineGitSmartHttp} = 0;
+    $self->{JanyaGitSmartHttp} = 0;
   }
 }
 
@@ -309,7 +309,7 @@ sub request_is_read_only {
   my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
 
   # Do we use Git's smart HTTP protocol, or not?
-  if (defined $cfg->{RedmineGitSmartHttp} and $cfg->{RedmineGitSmartHttp}) {
+  if (defined $cfg->{JanyaGitSmartHttp} and $cfg->{JanyaGitSmartHttp}) {
     my $uri = $r->unparsed_uri;
     my $location = $r->location;
     my $is_read_only = $uri !~ m{^$location/*[^/]+/+(info/refs\?service=)?git\-receive\-pack$}o;
@@ -344,10 +344,10 @@ sub access_handler {
 sub authen_handler {
   my $r = shift;
 
-  my ($res, $redmine_pass) =  $r->get_basic_auth_pw();
+  my ($res, $janya_pass) =  $r->get_basic_auth_pw();
   return $res unless $res == OK;
 
-  if (is_member($r->user, $redmine_pass, $r)) {
+  if (is_member($r->user, $janya_pass, $r)) {
       return OK;
   } else {
       $r->note_auth_failure();
@@ -452,26 +452,26 @@ sub anonymous_allowed_to_browse_repository {
 # }
 
 sub is_member {
-  my $redmine_user = shift;
-  my $redmine_pass = shift;
+  my $janya_user = shift;
+  my $janya_pass = shift;
   my $r = shift;
 
   my $project_id  = get_project_identifier($r);
 
-  my $pass_digest = Digest::SHA::sha1_hex($redmine_pass);
+  my $pass_digest = Digest::SHA::sha1_hex($janya_pass);
 
   my $access_mode = request_is_read_only($r) ? "R" : "W";
 
   my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
   my $usrprojpass;
-  if ($cfg->{RedmineCacheCredsMax}) {
-    $usrprojpass = $cfg->{RedmineCacheCreds}->get($redmine_user.":".$project_id.":".$access_mode);
+  if ($cfg->{JanyaCacheCredsMax}) {
+    $usrprojpass = $cfg->{JanyaCacheCreds}->get($janya_user.":".$project_id.":".$access_mode);
     return 1 if (defined $usrprojpass and ($usrprojpass eq $pass_digest));
   }
   my $dbh = connect_database($r);
-  my $query = $cfg->{RedmineQuery};
+  my $query = $cfg->{JanyaQuery};
   my $sth = $dbh->prepare($query);
-  $sth->execute($redmine_user, $project_id);
+  $sth->execute($janya_user, $project_id);
 
   my $ret;
   while (my ($hashed_password, $salt, $auth_source_id, $permissions, $project_status) = $sth->fetchrow_array) {
@@ -495,9 +495,9 @@ sub is_member {
             my $bind_as = $rowldap[3] ? $rowldap[3] : "";
             my $bind_pw = $rowldap[4] ? $rowldap[4] : "";
             if ($bind_as =~ m/\$login/) {
-              # replace $login with $redmine_user and use $redmine_pass
-              $bind_as =~ s/\$login/$redmine_user/g;
-              $bind_pw = $redmine_pass
+              # replace $login with $janya_user and use $janya_pass
+              $bind_as =~ s/\$login/$janya_user/g;
+              $bind_pw = $janya_pass
             }
             my $ldap = Authen::Simple::LDAP->new(
                 host    =>      ($rowldap[2] eq "1" || $rowldap[2] eq "t") ? "ldaps://$rowldap[0]:$rowldap[1]" : $rowldap[0],
@@ -508,7 +508,7 @@ sub is_member {
                 filter  =>      "(".$rowldap[6]."=%s)"
             );
             my $method = $r->method;
-            $ret = 1 if ($ldap->authenticate($redmine_user, $redmine_pass) && (($access_mode eq "R" && $permissions =~ /:browse_repository/) || $permissions =~ /:commit_access/));
+            $ret = 1 if ($ldap->authenticate($janya_user, $janya_pass) && (($access_mode eq "R" && $permissions =~ /:browse_repository/) || $permissions =~ /:commit_access/));
 
           }
           $sthldap->finish();
@@ -520,16 +520,16 @@ sub is_member {
   $dbh->disconnect();
   undef $dbh;
 
-  if ($cfg->{RedmineCacheCredsMax} and $ret) {
+  if ($cfg->{JanyaCacheCredsMax} and $ret) {
     if (defined $usrprojpass) {
-      $cfg->{RedmineCacheCreds}->set($redmine_user.":".$project_id.":".$access_mode, $pass_digest);
+      $cfg->{JanyaCacheCreds}->set($janya_user.":".$project_id.":".$access_mode, $pass_digest);
     } else {
-      if ($cfg->{RedmineCacheCredsCount} < $cfg->{RedmineCacheCredsMax}) {
-        $cfg->{RedmineCacheCreds}->set($redmine_user.":".$project_id.":".$access_mode, $pass_digest);
-        $cfg->{RedmineCacheCredsCount}++;
+      if ($cfg->{JanyaCacheCredsCount} < $cfg->{JanyaCacheCredsMax}) {
+        $cfg->{JanyaCacheCreds}->set($janya_user.":".$project_id.":".$access_mode, $pass_digest);
+        $cfg->{JanyaCacheCredsCount}++;
       } else {
-        $cfg->{RedmineCacheCreds}->clear();
-        $cfg->{RedmineCacheCredsCount} = 0;
+        $cfg->{JanyaCacheCreds}->clear();
+        $cfg->{JanyaCacheCredsCount} = 0;
       }
     }
   }
@@ -542,7 +542,7 @@ sub get_project_identifier {
 
     my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
     my $location = $r->location;
-    $location =~ s/\.git$// if (defined $cfg->{RedmineGitSmartHttp} and $cfg->{RedmineGitSmartHttp});
+    $location =~ s/\.git$// if (defined $cfg->{JanyaGitSmartHttp} and $cfg->{JanyaGitSmartHttp});
     my ($identifier) = $r->uri =~ m{$location/*([^/.]+)};
     $identifier;
 }
@@ -551,7 +551,7 @@ sub connect_database {
     my $r = shift;
 
     my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
-    return DBI->connect($cfg->{RedmineDSN}, $cfg->{RedmineDbUser}, $cfg->{RedmineDbPass});
+    return DBI->connect($cfg->{JanyaDSN}, $cfg->{JanyaDbUser}, $cfg->{JanyaDbPass});
 }
 
 1;

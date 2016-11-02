@@ -1,9 +1,9 @@
-Rails.logger.info 'Starting Example plugin for RedMine'
+Rails.logger.info 'Starting Example plugin for Janya'
 
-Redmine::Plugin.register :sample_plugin do
+Janya::Plugin.register :sample_plugin do
   name 'Example plugin'
   author 'Author name'
-  description 'This is a sample plugin for Redmine'
+  description 'This is a sample plugin for Janya'
   version '0.0.1'
   settings :default => {'sample_setting' => 'value', 'foo'=>'bar'}, :partial => 'settings/sample_plugin_settings'
 
