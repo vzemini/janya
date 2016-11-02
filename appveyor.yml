@@ -1,6 +1,4 @@
-# Redmine runs tests on own continuous integration server.
-# http://www.redmine.org/projects/redmine/wiki/Continuous_integration
-# You can also run tests on your environment.
+# Janya Server runs tests on own continuous integration server.
 
 install:
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
