@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RedmineApp::Application.load_tasks
+JanyaApp::Application.load_tasks
