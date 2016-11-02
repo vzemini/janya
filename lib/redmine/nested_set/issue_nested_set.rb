@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module NestedSet
     module IssueNestedSet
       def self.included(base)
@@ -28,7 +28,7 @@ module Redmine
           before_destroy :destroy_children
         end
         base.extend ClassMethods
-        base.send :include, Redmine::NestedSet::Traversing
+        base.send :include, Janya::NestedSet::Traversing
       end
 
       private

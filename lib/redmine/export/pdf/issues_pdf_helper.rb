@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Export
     module PDF
       module IssuesPdfHelper

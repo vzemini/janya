@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,12 +18,12 @@
 require 'redcloth3'
 require 'digest/md5'
 
-module Redmine
+module Janya
   module WikiFormatting
     module Textile
       class Formatter < RedCloth3
         include ActionView::Helpers::TagHelper
-        include Redmine::WikiFormatting::LinksHelper
+        include Janya::WikiFormatting::LinksHelper
 
         alias :inline_auto_link :auto_link!
         alias :inline_auto_mailto :auto_mailto!
@@ -52,7 +52,7 @@ module Redmine
         def update_section(index, update, hash=nil)
           t = extract_sections(index)
           if hash.present? && hash != Digest::MD5.hexdigest(t[1])
-            raise Redmine::WikiFormatting::StaleSectionError
+            raise Janya::WikiFormatting::StaleSectionError
           end
           t[1] = update unless t[1].blank?
           t.reject(&:blank?).join "\n\n"
@@ -122,7 +122,7 @@ module Redmine
               content = @pre_list[$1.to_i]
               if content.match(/<code\s+class="(\w+)">\s?(.+)/m)
                 content = "<code class=\"#{$1} syntaxhl\">" +
-                  Redmine::SyntaxHighlighting.highlight_by_language($2, $1)
+                  Janya::SyntaxHighlighting.highlight_by_language($2, $1)
               end
               content
             end

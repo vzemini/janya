@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Acts
     module Positioned
       def self.included(base)
@@ -34,7 +34,7 @@ module Redmine
           class_attribute :positioned_options
           self.positioned_options = {:scope => Array(options[:scope])}
 
-          send :include, Redmine::Acts::Positioned::InstanceMethods
+          send :include, Janya::Acts::Positioned::InstanceMethods
 
           before_save :set_default_position
           after_save :update_position
@@ -115,4 +115,4 @@ module Redmine
   end
 end
 
-ActiveRecord::Base.send :include, Redmine::Acts::Positioned
+ActiveRecord::Base.send :include, Janya::Acts::Positioned

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require 'digest/md5'
 
-module Redmine
+module Janya
   module WikiFormatting
     class StaleSectionError < Exception; end
 
@@ -35,7 +35,7 @@ module Redmine
 
         formatter, helper, parser = args.any? ?
           args :
-          %w(Formatter Helper HtmlParser).map {|m| "Redmine::WikiFormatting::#{name.classify}::#{m}".constantize rescue nil}
+          %w(Formatter Helper HtmlParser).map {|m| "Janya::WikiFormatting::#{name.classify}::#{m}".constantize rescue nil}
 
         raise "A formatter class is required" if formatter.nil? 
 
@@ -57,17 +57,17 @@ module Redmine
 
       def formatter_for(name)
         entry = @@formatters[name.to_s]
-        (entry && entry[:formatter]) || Redmine::WikiFormatting::NullFormatter::Formatter
+        (entry && entry[:formatter]) || Janya::WikiFormatting::NullFormatter::Formatter
       end
 
       def helper_for(name)
         entry = @@formatters[name.to_s]
-        (entry && entry[:helper]) || Redmine::WikiFormatting::NullFormatter::Helper
+        (entry && entry[:helper]) || Janya::WikiFormatting::NullFormatter::Helper
       end
 
       def html_parser_for(name)
         entry = @@formatters[name.to_s]
-        (entry && entry[:html_parser]) || Redmine::WikiFormatting::HtmlParser
+        (entry && entry[:html_parser]) || Janya::WikiFormatting::HtmlParser
       end
 
       def format_names
@@ -170,7 +170,7 @@ module Redmine
         include ActionView::Helpers::TagHelper
         include ActionView::Helpers::TextHelper
         include ActionView::Helpers::UrlHelper
-        include Redmine::WikiFormatting::LinksHelper
+        include Janya::WikiFormatting::LinksHelper
 
         def initialize(text)
           @text = text

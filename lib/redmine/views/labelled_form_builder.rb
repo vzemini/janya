@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,8 +17,8 @@
 
 require 'action_view/helpers/form_helper'
 
-class Redmine::Views::LabelledFormBuilder < ActionView::Helpers::FormBuilder
-  include Redmine::I18n
+class Janya::Views::LabelledFormBuilder < ActionView::Helpers::FormBuilder
+  include Janya::I18n
 
   (field_helpers.map(&:to_s) - %w(radio_button hidden_field fields_for check_box label) +
         %w(date_select)).each do |selector|

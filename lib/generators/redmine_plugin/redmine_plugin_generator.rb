@@ -1,4 +1,4 @@
-class RedminePluginGenerator < Rails::Generators::NamedBase
+class JanyaPluginGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("../templates", __FILE__)
 
   attr_reader :plugin_path, :plugin_name, :plugin_pretty_name

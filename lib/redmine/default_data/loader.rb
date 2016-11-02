@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,12 +15,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module DefaultData
     class DataAlreadyLoaded < Exception; end
 
     module Loader
-      include Redmine::I18n
+      include Janya::I18n
 
       class << self
         # Returns true if no data is already loaded in the database

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,15 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class GitAdapter < AbstractAdapter
 
         # Git executable name
-        GIT_BIN = Redmine::Configuration['scm_git_command'] || "git"
+        GIT_BIN = Janya::Configuration['scm_git_command'] || "git"
 
         class GitBranch < Branch
           attr_accessor :is_default
@@ -376,7 +376,7 @@ module Redmine
           nil
         end
 
-        class Revision < Redmine::Scm::Adapters::Revision
+        class Revision < Janya::Scm::Adapters::Revision
           # Returns the readable identifier
           def format_identifier
             identifier[0,8]

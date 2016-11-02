@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Acts
     module Searchable
       def self.included(base)
@@ -33,7 +33,7 @@ module Redmine
         # * :scope - scope used to search results
         # * :preload - associations to preload when loading results for display
         def acts_as_searchable(options = {})
-          return if self.included_modules.include?(Redmine::Acts::Searchable::InstanceMethods)
+          return if self.included_modules.include?(Janya::Acts::Searchable::InstanceMethods)
           options.assert_valid_keys(:columns, :project_key, :date_column, :permission, :scope, :preload)
 
           cattr_accessor :searchable_options
@@ -53,7 +53,7 @@ module Redmine
           searchable_options[:search_attachments] = reflect_on_association(:attachments).present?
           searchable_options[:search_journals] = reflect_on_association(:journals).present?
 
-          send :include, Redmine::Acts::Searchable::InstanceMethods
+          send :include, Janya::Acts::Searchable::InstanceMethods
         end
       end
 
@@ -159,7 +159,7 @@ module Redmine
           private :search_tokens_condition
 
           def search_token_match_statement(column, value='?')
-            Redmine::Database.like(column, value)
+            Janya::Database.like(column, value)
           end
           private :search_token_match_statement
 

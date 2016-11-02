@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Acts
     module Customizable
       def self.included(base)
@@ -24,7 +24,7 @@ module Redmine
 
       module ClassMethods
         def acts_as_customizable(options = {})
-          return if self.included_modules.include?(Redmine::Acts::Customizable::InstanceMethods)
+          return if self.included_modules.include?(Janya::Acts::Customizable::InstanceMethods)
           cattr_accessor :customizable_options
           self.customizable_options = options
           has_many :custom_values, lambda {includes(:custom_field).order("#{CustomField.table_name}.position")},
@@ -32,7 +32,7 @@ module Redmine
                                    :dependent => :delete_all,
                                    :validate => false
 
-          send :include, Redmine::Acts::Customizable::InstanceMethods
+          send :include, Janya::Acts::Customizable::InstanceMethods
           validate :validate_custom_field_values
           after_save :save_custom_field_values
         end

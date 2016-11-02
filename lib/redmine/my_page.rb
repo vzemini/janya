@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,9 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module MyPage
-    include Redmine::I18n
+    include Janya::I18n
 
     CORE_BLOCKS = {
         'issuesassignedtome' => :label_assigned_to_me_issues,
@@ -44,7 +44,7 @@ module Redmine
 
     # Returns the additional blocks that are defined by plugin partials
     def self.additional_blocks
-      @@additional_blocks ||= Dir.glob("#{Redmine::Plugin.directory}/*/app/views/my/blocks/_*.{rhtml,erb}").inject({}) do |h,file|
+      @@additional_blocks ||= Dir.glob("#{Janya::Plugin.directory}/*/app/views/my/blocks/_*.{rhtml,erb}").inject({}) do |h,file|
         name = File.basename(file).split('.').first.gsub(/^_/, '')
         h[name] = name.to_sym
         h

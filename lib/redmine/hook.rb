@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Hook
     @@listener_classes = []
     @@listeners = nil
@@ -23,7 +23,7 @@ module Redmine
 
     class << self
       # Adds a listener class.
-      # Automatically called when a class inherits from Redmine::Hook::Listener.
+      # Automatically called when a class inherits from Janya::Hook::Listener.
       def add_listener(klass)
         raise "Hooks must include Singleton module." unless klass.included_modules.include?(Singleton)
         @@listener_classes << klass
@@ -88,12 +88,12 @@ module Redmine
       def call_hook(hook, context={})
         if is_a?(ActionController::Base)
           default_context = {:controller => self, :project => @project, :request => request, :hook_caller => self}
-          Redmine::Hook.call_hook(hook, default_context.merge(context))
+          Janya::Hook.call_hook(hook, default_context.merge(context))
         else
           default_context = { :project => @project, :hook_caller => self }
           default_context[:controller] = controller if respond_to?(:controller)
           default_context[:request] = request if respond_to?(:request)
-          Redmine::Hook.call_hook(hook, default_context.merge(context)).join(' ').html_safe
+          Janya::Hook.call_hook(hook, default_context.merge(context)).join(' ').html_safe
         end
       end
     end

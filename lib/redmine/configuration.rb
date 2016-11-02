@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Configuration
 
     # Configuration default values
@@ -27,7 +27,7 @@ module Redmine
     @config = nil
 
     class << self
-      # Loads the Redmine configuration file
+      # Loads the Janya configuration file
       # Valid options:
       # * <tt>:file</tt>: the configuration file to load (default: config/configuration.yml)
       # * <tt>:env</tt>: the environment to load the configuration for (default: Rails.env)
@@ -85,9 +85,9 @@ module Redmine
         begin
           yaml = YAML::load(ERB.new(File.read(filename)).result)
         rescue ArgumentError
-          abort "Your Redmine configuration file located at #{filename} is not a valid YAML file and could not be loaded."
+          abort "Your Janya configuration file located at #{filename} is not a valid YAML file and could not be loaded."
         rescue SyntaxError => e
-          abort "A syntax error occurred when parsing your Redmine configuration file located at #{filename} with ERB:\n#{e.message}"
+          abort "A syntax error occurred when parsing your Janya configuration file located at #{filename} with ERB:\n#{e.message}"
         end
         conf = {}
         if yaml.is_a?(Hash)
@@ -98,7 +98,7 @@ module Redmine
             conf.merge!(yaml[env])
           end
         else
-          abort "Your Redmine configuration file located at #{filename} is not a valid Redmine configuration file."
+          abort "Your Janya configuration file located at #{filename} is not a valid Janya configuration file."
         end
         conf
       end
@@ -118,7 +118,7 @@ module Redmine
             begin
               Regexp.new value.to_s.strip
             rescue => e
-              abort "Invalid regular expression set as #{name} setting in your Redmine configuration file:\n#{e.message}"
+              abort "Invalid regular expression set as #{name} setting in your Janya configuration file:\n#{e.message}"
             end
           end
         end

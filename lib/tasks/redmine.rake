@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,14 +15,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace :redmine do
+namespace :janya do
   namespace :attachments do
     desc 'Removes uploaded files left unattached after one day.'
     task :prune => :environment do
       Attachment.prune
     end
 
-    desc 'Moves attachments stored at the root of the file directory (ie. created before Redmine 2.3) to their subdirectories'
+    desc 'Moves attachments stored at the root of the file directory (ie. created before Janya 2.3) to their subdirectories'
     task :move_to_subdirectories => :environment do
       Attachment.move_from_root_to_target_directory
     end
@@ -49,12 +49,12 @@ namespace :redmine do
 
   desc 'Migrates and copies plugins assets.'
   task :plugins do
-    Rake::Task["redmine:plugins:migrate"].invoke
-    Rake::Task["redmine:plugins:assets"].invoke
+    Rake::Task["janya:plugins:migrate"].invoke
+    Rake::Task["janya:plugins:assets"].invoke
   end
 
 desc <<-DESC
-FOR EXPERIMENTAL USE ONLY, Moves Redmine data from production database to the development database.
+FOR EXPERIMENTAL USE ONLY, Moves Janya data from production database to the development database.
 This task should only be used when you need to move data from one DBMS to a different one (eg. MySQL to PostgreSQL).
 WARNING: All data in the development database is deleted.
 DESC
@@ -124,8 +124,8 @@ DESC
       end
 
       begin
-        Redmine::Plugin.migrate(name, version)
-      rescue Redmine::PluginNotFound
+        Janya::Plugin.migrate(name, version)
+      rescue Janya::PluginNotFound
         abort "Plugin #{name} was not found."
       end
 
@@ -137,17 +137,17 @@ DESC
       name = ENV['NAME']
 
       begin
-        Redmine::Plugin.mirror_assets(name)
-      rescue Redmine::PluginNotFound
+        Janya::Plugin.mirror_assets(name)
+      rescue Janya::PluginNotFound
         abort "Plugin #{name} was not found."
       end
     end
 
     desc 'Runs the plugins tests.'
     task :test do
-      Rake::Task["redmine:plugins:test:units"].invoke
-      Rake::Task["redmine:plugins:test:functionals"].invoke
-      Rake::Task["redmine:plugins:test:integration"].invoke
+      Rake::Task["janya:plugins:test:units"].invoke
+      Rake::Task["janya:plugins:test:functionals"].invoke
+      Rake::Task["janya:plugins:test:integration"].invoke
     end
 
     namespace :test do

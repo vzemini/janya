@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require 'loofah/helpers'
 
-module Redmine
+module Janya
   module WikiFormatting
     class HtmlParser
 

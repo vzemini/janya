@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ desc 'Mantis migration script'
 require 'active_record'
 require 'pp'
 
-namespace :redmine do
+namespace :janya do
 task :migrate_from_mantis => :environment do
 
   module MantisMigrate
@@ -326,7 +326,7 @@ task :migrate_from_mantis => :environment do
         STDOUT.flush
 
         # Assignee
-        # Redmine checks that the assignee is a project member
+        # Janya checks that the assignee is a project member
         if (bug.handler_id && users_map[bug.handler_id])
           i.assigned_to = User.find_by_id(users_map[bug.handler_id])
           i.save(:validate => false)
@@ -456,15 +456,15 @@ task :migrate_from_mantis => :environment do
   end
 
   puts
-  if Redmine::DefaultData::Loader.no_data?
-    puts "Redmine configuration need to be loaded before importing data."
+  if Janya::DefaultData::Loader.no_data?
+    puts "Janya configuration need to be loaded before importing data."
     puts "Please, run this first:"
     puts
-    puts "  rake redmine:load_default_data RAILS_ENV=\"#{ENV['RAILS_ENV']}\""
+    puts "  rake janya:load_default_data RAILS_ENV=\"#{ENV['RAILS_ENV']}\""
     exit
   end
 
-  puts "WARNING: Your Redmine data will be deleted during this process."
+  puts "WARNING: Your Janya data will be deleted during this process."
   print "Are you sure you want to continue ? [y/N] "
   STDOUT.flush
   break unless STDIN.gets.match(/^y$/i)

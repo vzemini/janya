@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Acts
     module Attachable
       def self.included(base)
@@ -32,7 +32,7 @@ module Redmine
 
           has_many :attachments, lambda {order("#{Attachment.table_name}.created_on ASC, #{Attachment.table_name}.id ASC")},
                                  options.merge(:as => :container, :dependent => :destroy, :inverse_of => :container)
-          send :include, Redmine::Acts::Attachable::InstanceMethods
+          send :include, Janya::Acts::Attachable::InstanceMethods
           before_save :attach_saved_attachments
           after_rollback :detach_saved_attachments
           validate :warn_about_failed_attachments

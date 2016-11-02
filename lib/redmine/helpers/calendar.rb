@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,12 +15,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Helpers
 
     # Simple class to compute the start and end dates of a calendar
     class Calendar
-      include Redmine::I18n
+      include Janya::I18n
       attr_reader :startdt, :enddt
 
       def initialize(date, lang = current_language, period = :month)

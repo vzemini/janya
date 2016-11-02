@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,15 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 require 'rexml/document'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class DarcsAdapter < AbstractAdapter
         # Darcs executable name
-        DARCS_BIN = Redmine::Configuration['scm_darcs_command'] || "darcs"
+        DARCS_BIN = Janya::Configuration['scm_darcs_command'] || "darcs"
 
         class << self
           def client_command

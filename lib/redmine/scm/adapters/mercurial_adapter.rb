@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,18 +15,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 require 'cgi'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class MercurialAdapter < AbstractAdapter
 
         # Mercurial executable name
-        HG_BIN = Redmine::Configuration['scm_mercurial_command'] || "hg"
+        HG_BIN = Janya::Configuration['scm_mercurial_command'] || "hg"
         HELPERS_DIR = File.dirname(__FILE__) + "/mercurial"
-        HG_HELPER_EXT = "#{HELPERS_DIR}/redminehelper.py"
+        HG_HELPER_EXT = "#{HELPERS_DIR}/janyahelper.py"
         TEMPLATE_NAME = "hg-template"
         TEMPLATE_EXTENSION = "tmpl"
 
@@ -279,7 +279,7 @@ module Redmine
           Annotate.new
         end
 
-        class Revision < Redmine::Scm::Adapters::Revision
+        class Revision < Janya::Scm::Adapters::Revision
           # Returns the readable identifier
           def format_identifier
             "#{revision}:#{scmid}"
@@ -290,7 +290,7 @@ module Redmine
         def hg(*args, &block)
           repo_path = root_url || url
           full_args = ['-R', repo_path, '--encoding', 'utf-8']
-          full_args << '--config' << "extensions.redminehelper=#{HG_HELPER_EXT}"
+          full_args << '--config' << "extensions.janyahelper=#{HG_HELPER_EXT}"
           full_args << '--config' << 'diff.git=false'
           full_args += args
           ret = shellout(

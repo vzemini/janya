@@ -1,7 +1,7 @@
 require 'active_support/core_ext/object/to_query'
 require 'rack/utils'
 
-module Redmine
+module Janya
   module SudoMode
 
     class SudoRequired < StandardError
@@ -212,12 +212,12 @@ module Redmine
     end
 
     def self.enabled?
-      Redmine::Configuration['sudo_mode'] && !RequestStore.store[:sudo_mode_disabled]
+      Janya::Configuration['sudo_mode'] && !RequestStore.store[:sudo_mode_disabled]
     end
 
     # Timespan after which sudo mode expires when unused.
     def self.timeout
-      m = Redmine::Configuration['sudo_mode_timeout'].to_i
+      m = Janya::Configuration['sudo_mode_timeout'].to_i
       (m > 0 ? m : 15).minutes
     end
   end

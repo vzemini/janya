@@ -1,5 +1,5 @@
 # ActsAsWatchable
-module Redmine
+module Janya
   module Acts
     module Watchable
       def self.included(base)
@@ -8,7 +8,7 @@ module Redmine
 
       module ClassMethods
         def acts_as_watchable(options = {})
-          return if self.included_modules.include?(Redmine::Acts::Watchable::InstanceMethods)
+          return if self.included_modules.include?(Janya::Acts::Watchable::InstanceMethods)
           class_eval do
             has_many :watchers, :as => :watchable, :dependent => :delete_all
             has_many :watcher_users, :through => :watchers, :source => :user, :validate => false
@@ -19,7 +19,7 @@ module Redmine
             }
             attr_protected :watcher_ids, :watcher_user_ids
           end
-          send :include, Redmine::Acts::Watchable::InstanceMethods
+          send :include, Janya::Acts::Watchable::InstanceMethods
         end
       end
 

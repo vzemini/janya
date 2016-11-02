@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,18 +15,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine #:nodoc:
+module Janya #:nodoc:
 
   class PluginNotFound < StandardError; end
   class PluginRequirementError < StandardError; end
 
-  # Base class for Redmine plugins.
+  # Base class for Janya plugins.
   # Plugins are registered using the <tt>register</tt> class method that acts as the public constructor.
   #
-  #   Redmine::Plugin.register :example do
+  #   Janya::Plugin.register :example do
   #     name 'Example plugin'
   #     author 'John Smith'
-  #     description 'This is an example plugin for Redmine'
+  #     description 'This is an example plugin for Janya'
   #     version '0.0.1'
   #     settings :default => {'foo'=>'bar'}, :partial => 'settings/settings'
   #   end
@@ -178,46 +178,46 @@ module Redmine #:nodoc:
       self.id.to_s <=> plugin.id.to_s
     end
 
-    # Sets a requirement on Redmine version
+    # Sets a requirement on Janya version
     # Raises a PluginRequirementError exception if the requirement is not met
     #
     # Examples
-    #   # Requires Redmine 0.7.3 or higher
-    #   requires_redmine :version_or_higher => '0.7.3'
-    #   requires_redmine '0.7.3'
+    #   # Requires Janya 0.7.3 or higher
+    #   requires_janya :version_or_higher => '0.7.3'
+    #   requires_janya '0.7.3'
     #
-    #   # Requires Redmine 0.7.x or higher
-    #   requires_redmine '0.7'
+    #   # Requires Janya 0.7.x or higher
+    #   requires_janya '0.7'
     #
-    #   # Requires a specific Redmine version
-    #   requires_redmine :version => '0.7.3'              # 0.7.3 only
-    #   requires_redmine :version => '0.7'                # 0.7.x
-    #   requires_redmine :version => ['0.7.3', '0.8.0']   # 0.7.3 or 0.8.0
+    #   # Requires a specific Janya version
+    #   requires_janya :version => '0.7.3'              # 0.7.3 only
+    #   requires_janya :version => '0.7'                # 0.7.x
+    #   requires_janya :version => ['0.7.3', '0.8.0']   # 0.7.3 or 0.8.0
     #
-    #   # Requires a Redmine version within a range
-    #   requires_redmine :version => '0.7.3'..'0.9.1'     # >= 0.7.3 and <= 0.9.1
-    #   requires_redmine :version => '0.7'..'0.9'         # >= 0.7.x and <= 0.9.x
-    def requires_redmine(arg)
+    #   # Requires a Janya version within a range
+    #   requires_janya :version => '0.7.3'..'0.9.1'     # >= 0.7.3 and <= 0.9.1
+    #   requires_janya :version => '0.7'..'0.9'         # >= 0.7.x and <= 0.9.x
+    def requires_janya(arg)
       arg = { :version_or_higher => arg } unless arg.is_a?(Hash)
       arg.assert_valid_keys(:version, :version_or_higher)
 
-      current = Redmine::VERSION.to_a
+      current = Janya::VERSION.to_a
       arg.each do |k, req|
         case k
         when :version_or_higher
           raise ArgumentError.new(":version_or_higher accepts a version string only") unless req.is_a?(String)
           unless compare_versions(req, current) <= 0
-            raise PluginRequirementError.new("#{id} plugin requires Redmine #{req} or higher but current is #{current.join('.')}")
+            raise PluginRequirementError.new("#{id} plugin requires Janya #{req} or higher but current is #{current.join('.')}")
           end
         when :version
           req = [req] if req.is_a?(String)
           if req.is_a?(Array)
             unless req.detect {|ver| compare_versions(ver, current) == 0}
-              raise PluginRequirementError.new("#{id} plugin requires one the following Redmine versions: #{req.join(', ')} but current is #{current.join('.')}")
+              raise PluginRequirementError.new("#{id} plugin requires one the following Janya versions: #{req.join(', ')} but current is #{current.join('.')}")
             end
           elsif req.is_a?(Range)
             unless compare_versions(req.first, current) <= 0 && compare_versions(req.last, current) >= 0
-              raise PluginRequirementError.new("#{id} plugin requires a Redmine version between #{req.first} and #{req.last} but current is #{current.join('.')}")
+              raise PluginRequirementError.new("#{id} plugin requires a Janya version between #{req.first} and #{req.last} but current is #{current.join('.')}")
             end
           else
             raise ArgumentError.new(":version option accepts a version string, an array or a range of versions")
@@ -233,18 +233,18 @@ module Redmine #:nodoc:
     end
     private :compare_versions
 
-    # Sets a requirement on a Redmine plugin version
+    # Sets a requirement on a Janya plugin version
     # Raises a PluginRequirementError exception if the requirement is not met
     #
     # Examples
     #   # Requires a plugin named :foo version 0.7.3 or higher
-    #   requires_redmine_plugin :foo, :version_or_higher => '0.7.3'
-    #   requires_redmine_plugin :foo, '0.7.3'
+    #   requires_janya_plugin :foo, :version_or_higher => '0.7.3'
+    #   requires_janya_plugin :foo, '0.7.3'
     #
-    #   # Requires a specific version of a Redmine plugin
-    #   requires_redmine_plugin :foo, :version => '0.7.3'              # 0.7.3 only
-    #   requires_redmine_plugin :foo, :version => ['0.7.3', '0.8.0']   # 0.7.3 or 0.8.0
-    def requires_redmine_plugin(plugin_name, arg)
+    #   # Requires a specific version of a Janya plugin
+    #   requires_janya_plugin :foo, :version => '0.7.3'              # 0.7.3 only
+    #   requires_janya_plugin :foo, :version => ['0.7.3', '0.8.0']   # 0.7.3 or 0.8.0
+    def requires_janya_plugin(plugin_name, arg)
       arg = { :version_or_higher => arg } unless arg.is_a?(Hash)
       arg.assert_valid_keys(:version, :version_or_higher)
 
@@ -276,13 +276,13 @@ module Redmine #:nodoc:
     # +name+ parameter can be: :top_menu, :account_menu, :application_menu or :project_menu
     #
     def menu(menu, item, url, options={})
-      Redmine::MenuManager.map(menu).push(item, url, options)
+      Janya::MenuManager.map(menu).push(item, url, options)
     end
     alias :add_menu_item :menu
 
     # Removes +item+ from the given +menu+.
     def delete_menu_item(menu, item)
-      Redmine::MenuManager.map(menu).delete(item)
+      Janya::MenuManager.map(menu).delete(item)
     end
 
     # Defines a permission called +name+ for the given +actions+.
@@ -311,9 +311,9 @@ module Redmine #:nodoc:
     #   permission :say_hello, { :example => :say_hello }, :require => :member
     def permission(name, actions, options = {})
       if @project_module
-        Redmine::AccessControl.map {|map| map.project_module(@project_module) {|map|map.permission(name, actions, options)}}
+        Janya::AccessControl.map {|map| map.project_module(@project_module) {|map|map.permission(name, actions, options)}}
       else
-        Redmine::AccessControl.map {|map| map.permission(name, actions, options)}
+        Janya::AccessControl.map {|map| map.permission(name, actions, options)}
       end
     end
 
@@ -353,7 +353,7 @@ module Redmine #:nodoc:
     #
     # Note that :view_scrums permission is required to view these events in the activity view.
     def activity_provider(*args)
-      Redmine::Activity.register(*args)
+      Janya::Activity.register(*args)
     end
 
     # Registers a wiki formatter.
@@ -370,7 +370,7 @@ module Redmine #:nodoc:
     #   wiki_format_provider(:custom_formatter, CustomFormatter, :label => "My custom formatter") 
     #
     def wiki_format_provider(name, *args)
-      Redmine::WikiFormatting.register(name, *args)
+      Janya::WikiFormatting.register(name, *args)
     end
 
     # Returns +true+ if the plugin can be configured.
@@ -450,7 +450,7 @@ module Redmine #:nodoc:
     # Migrate this plugin to the given version
     def migrate(version = nil)
       puts "Migrating #{id} (#{name})..."
-      Redmine::Plugin::Migrator.migrate_plugin(self, version)
+      Janya::Plugin::Migrator.migrate_plugin(self, version)
     end
 
     # Migrates all plugins or a single plugin to a given version

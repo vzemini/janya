@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module MenuManager
     class MenuError < StandardError #:nodoc:
     end
@@ -60,7 +60,7 @@ module Redmine
       # Redirects user to the menu item of the given project
       # Returns false if user is not authorized
       def redirect_to_project_menu_item(project, name)
-        item = Redmine::MenuManager.items(:project_menu).detect {|i| i.name.to_s == name.to_s}
+        item = Janya::MenuManager.items(:project_menu).detect {|i| i.name.to_s == name.to_s}
         if item && item.allowed?(User.current, project)
           redirect_to({item.param => project}.merge(item.url))
           return true
@@ -82,7 +82,7 @@ module Redmine
 
       def display_main_menu?(project)
         menu_name = project && !project.new_record? ? :project_menu : :application_menu
-        Redmine::MenuManager.items(menu_name).children.present?
+        Janya::MenuManager.items(menu_name).children.present?
       end
 
       def render_menu(menu, project=nil)
@@ -168,7 +168,7 @@ module Redmine
 
       def menu_items_for(menu, project=nil)
         items = []
-        Redmine::MenuManager.items(menu).root.children.each do |node|
+        Janya::MenuManager.items(menu).root.children.each do |node|
           if node.allowed?(User.current, project)
             if block_given?
               yield node
@@ -240,7 +240,7 @@ module Redmine
       # * before, after: specify where the menu item should be inserted (eg. :after => :activity)
       # * parent: menu item will be added as a child of another named menu (eg. :parent => :issues)
       # * children: a Proc that is called before rendering the item. The Proc should return an array of MenuItems, which will be added as children to this item.
-      #   eg. :children => Proc.new {|project| [Redmine::MenuManager::MenuItem.new(...)] }
+      #   eg. :children => Proc.new {|project| [Janya::MenuManager::MenuItem.new(...)] }
       # * last: menu item will stay at the end (eg. :last => true)
       # * html_options: a hash of html options that are passed to link_to
       def push(name, url, options={})
@@ -388,7 +388,7 @@ module Redmine
     end
 
     class MenuItem < MenuNode
-      include Redmine::I18n
+      include Janya::I18n
       attr_reader :name, :url, :param, :condition, :parent, :child_menus, :last, :permission
 
       def initialize(name, url, options={})

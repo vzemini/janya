@@ -1,4 +1,4 @@
-desc "Run the Continuous Integration tests for Redmine"
+desc "Run the Continuous Integration tests for Janya"
 task :ci do
   # RAILS_ENV and ENV[] can diverge so force them both to test
   ENV['RAILS_ENV'] = 'test'
@@ -14,7 +14,7 @@ namespace :ci do
     puts "Ruby version: #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL} (#{RUBY_RELEASE_DATE}) [#{RUBY_PLATFORM}]"
   end
 
-  desc "Setup Redmine for a new build"
+  desc "Setup Janya for a new build"
   task :setup do
     Rake::Task["tmp:clear"].invoke
     Rake::Task["log:clear"].invoke
@@ -31,7 +31,7 @@ namespace :ci do
     Rake::Task["test:scm:update"].invoke
   end
 
-  desc "Build Redmine"
+  desc "Build Janya"
   task :build do
     if test_suite = ENV['TEST_SUITE']
       Rake::Task["test:#{test_suite}"].invoke

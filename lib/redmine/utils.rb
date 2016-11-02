@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require 'fileutils'
 
-module Redmine
+module Janya
   module Utils
     class << self
       # Returns the relative root url of the application
@@ -65,7 +65,7 @@ module Redmine
 
     module Shell
       def shell_quote(str)
-        if Redmine::Platform.mswin?
+        if Janya::Platform.mswin?
           '"' + str.gsub(/"/, '\\"') + '"'
         else
           "'" + str.gsub(/'/, "'\"'\"'") + "'"

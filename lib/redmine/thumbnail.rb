@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,11 +18,11 @@
 require 'fileutils'
 require 'mimemagic'
 
-module Redmine
+module Janya
   module Thumbnail
-    extend Redmine::Utils::Shell
+    extend Janya::Utils::Shell
 
-    CONVERT_BIN = (Redmine::Configuration['imagemagick_convert_command'] || 'convert').freeze
+    CONVERT_BIN = (Janya::Configuration['imagemagick_convert_command'] || 'convert').freeze
 
     # Generates a thumbnail for the source image to target
     def self.generate(source, target, size)

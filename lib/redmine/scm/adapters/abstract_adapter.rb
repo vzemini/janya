@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,15 +16,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require 'cgi'
-require 'redmine/scm/adapters'
+require 'janya/scm/adapters'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class AbstractAdapter #:nodoc:
 
         # raised if scm command exited with error, e.g. unknown revision.
-        class ScmCommandAborted < ::Redmine::Scm::Adapters::CommandFailed; end
+        class ScmCommandAborted < ::Janya::Scm::Adapters::CommandFailed; end
 
         class << self
           def client_command
@@ -32,7 +32,7 @@ module Redmine
           end
 
           def shell_quote_command
-            if Redmine::Platform.mswin? && RUBY_PLATFORM == 'java'
+            if Janya::Platform.mswin? && RUBY_PLATFORM == 'java'
               client_command
             else
               shell_quote(client_command)
@@ -65,7 +65,7 @@ module Redmine
           end
 
           def shell_quote(str)
-            if Redmine::Platform.mswin?
+            if Janya::Platform.mswin?
               '"' + str.gsub(/"/, '\\"') + '"'
             else
               "'" + str.gsub(/'/, "'\"'\"'") + "'"
@@ -217,7 +217,7 @@ module Redmine
         def self.stderr_log_file
           if @stderr_log_file.nil?
             writable = false
-            path = Redmine::Configuration['scm_stderr_log_file'].presence
+            path = Janya::Configuration['scm_stderr_log_file'].presence
             path ||= Rails.root.join("log/#{Rails.env}.scm.stderr.log").to_s
             if File.exists?(path)
               if File.file?(path) && File.writable?(path) 
@@ -273,7 +273,7 @@ module Redmine
 
         # Hides username/password in a given command
         def self.strip_credential(cmd)
-          q = (Redmine::Platform.mswin? ? '"' : "'")
+          q = (Janya::Platform.mswin? ? '"' : "'")
           cmd.to_s.gsub(/(\-\-(password|username))\s+(#{q}[^#{q}]+#{q}|[^#{q}]\S+)/, '\\1 xxxx')
         end
 
@@ -345,14 +345,14 @@ module Redmine
         end
 
         def is_text?
-          Redmine::MimeType.is_type?('text', name)
+          Janya::MimeType.is_type?('text', name)
         end
 
         def author
           if changeset
             changeset.author.to_s
           elsif lastrev
-            Redmine::CodesetUtil.replace_invalid_utf8(lastrev.author.to_s.split('<').first)
+            Janya::CodesetUtil.replace_invalid_utf8(lastrev.author.to_s.split('<').first)
           end
         end
       end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   # Class used to parse unified diffs
   class UnifiedDiff < Array
     attr_reader :diff_type, :diff_style
@@ -29,7 +29,7 @@ module Redmine
       @truncated = false
       diff_table = DiffTable.new(diff_type, diff_style)
       diff.each do |line_raw|
-        line = Redmine::CodesetUtil.to_utf8_by_setting(line_raw)
+        line = Janya::CodesetUtil.to_utf8_by_setting(line_raw)
         unless diff_table.add_line(line)
           self << diff_table if diff_table.length > 0
           diff_table = DiffTable.new(diff_type, diff_style)

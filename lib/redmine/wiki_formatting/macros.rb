@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,17 +15,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module WikiFormatting
     module Macros
       module Definitions
         # Returns true if +name+ is the name of an existing macro
         def macro_exists?(name)
-          Redmine::WikiFormatting::Macros.available_macros.key?(name.to_sym)
+          Janya::WikiFormatting::Macros.available_macros.key?(name.to_sym)
         end
 
         def exec_macro(name, obj, args, text)
-          macro_options = Redmine::WikiFormatting::Macros.available_macros[name.to_sym]
+          macro_options = Janya::WikiFormatting::Macros.available_macros[name.to_sym]
           return unless macro_options
 
           method_name = "macro_#{name}"
@@ -62,7 +62,7 @@ module Redmine
       class << self
         # Plugins can use this method to define new macros:
         #
-        #   Redmine::WikiFormatting::Macros.register do
+        #   Janya::WikiFormatting::Macros.register do
         #     desc "This is my macro"
         #     macro :my_macro do |obj, args|
         #       "My macro output"
@@ -218,7 +218,7 @@ module Redmine
              "{{collapse\nThis is a block of text that is collapsed by default.\nIt can be expanded by clicking a link.\n}}\n\n" +
              "{{collapse(View details...)\nWith custom link text.\n}}"
       macro :collapse do |obj, args, text|
-        html_id = "collapse-#{Redmine::Utils.random_hex(4)}"
+        html_id = "collapse-#{Janya::Utils.random_hex(4)}"
         show_label = args[0] || l(:button_show)
         hide_label = args[1] || args[0] || l(:button_hide)
         js = "$('##{html_id}-show, ##{html_id}-hide').toggle(); $('##{html_id}').fadeToggle(150);"

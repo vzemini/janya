@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require 'uri'
 
-module Redmine
+module Janya
   module FieldFormat
     def self.add(name, klass)
       all[name.to_s] = klass.instance
@@ -56,8 +56,8 @@ module Redmine
 
     class Base
       include Singleton
-      include Redmine::I18n
-      include Redmine::Helpers::URL
+      include Janya::I18n
+      include Janya::Helpers::URL
       include ERB::Util
 
       class_attribute :format_name
@@ -100,7 +100,7 @@ module Redmine
 
       def self.add(name)
         self.format_name = name
-        Redmine::FieldFormat.add(name, self)
+        Janya::FieldFormat.add(name, self)
       end
       private_class_method :add
 

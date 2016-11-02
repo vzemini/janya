@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Helpers
     # Simple class to handle gantt chart data
     class Gantt
@@ -23,8 +23,8 @@ module Redmine
       end
 
       include ERB::Util
-      include Redmine::I18n
-      include Redmine::Utils::DateCalculation
+      include Janya::I18n
+      include Janya::Utils::DateCalculation
 
       # Relation types that are rendered
       DRAW_TYPES = {
@@ -348,7 +348,7 @@ module Redmine
         imgl = Magick::ImageList.new
         imgl.new_image(subject_width + g_width + 1, height)
         gc = Magick::Draw.new
-        gc.font = Redmine::Configuration['rmagick_font_path'] || ""
+        gc.font = Janya::Configuration['rmagick_font_path'] || ""
         # Subjects
         gc.stroke('transparent')
         subjects(:image => gc, :top => (headers_height + 20), :indent => 4, :format => :image)
@@ -439,7 +439,7 @@ module Redmine
       end if Object.const_defined?(:Magick)
 
       def to_pdf
-        pdf = ::Redmine::Export::PDF::ITCPDF.new(current_language)
+        pdf = ::Janya::Export::PDF::ITCPDF.new(current_language)
         pdf.SetTitle("#{l(:label_gantt)} #{project}")
         pdf.alias_nb_pages
         pdf.footer_date = format_date(User.current.today)

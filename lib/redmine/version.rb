@@ -1,6 +1,6 @@
 require 'rexml/document'
 
-module Redmine
+module Janya
   module VERSION #:nodoc:
     MAJOR = 3
     MINOR = 3
@@ -16,7 +16,7 @@ module Redmine
     def self.revision
       if File.directory?(File.join(Rails.root, '.svn'))
         begin
-          path = Redmine::Scm::Adapters::AbstractAdapter.shell_quote(Rails.root.to_s)
+          path = Janya::Scm::Adapters::AbstractAdapter.shell_quote(Rails.root.to_s)
           if `svn info --xml #{path}` =~ /revision="(\d+)"/
             return $1.to_i
           end

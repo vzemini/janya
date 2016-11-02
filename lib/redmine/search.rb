@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Search
 
     mattr_accessor :available_search_types
@@ -33,11 +33,11 @@ module Redmine
       end
 
       # Returns the cache store for search results
-      # Can be configured with config.redmine_search_cache_store= in config/application.rb
+      # Can be configured with config.janya_search_cache_store= in config/application.rb
       def cache_store
         @@cache_store ||= begin
           # if config.search_cache_store was not previously set, a no method error would be raised
-          config = Rails.application.config.redmine_search_cache_store rescue :memory_store
+          config = Rails.application.config.janya_search_cache_store rescue :memory_store
           if config
             ActiveSupport::Cache.lookup_store config
           end
@@ -106,12 +106,12 @@ module Redmine
       end
 
       def load_result_ids_from_cache
-        if Redmine::Search.cache_store
+        if Janya::Search.cache_store
           cache_key = ActiveSupport::Cache.expand_cache_key(
             [@question, @user.id, @scope.sort, @options, project_ids.sort]
           )
   
-          Redmine::Search.cache_store.fetch(cache_key, :force => !@cache) do
+          Janya::Search.cache_store.fetch(cache_key, :force => !@cache) do
             load_result_ids
           end
         else

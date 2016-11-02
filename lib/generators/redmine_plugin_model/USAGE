@@ -2,4 +2,4 @@ Description:
     Generates a plugin model.
 
 Examples:
-    ./script/rails generate redmine_plugin_model meetings pool
+    ./script/rails generate janya_plugin_model meetings pool

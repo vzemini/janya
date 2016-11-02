@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -26,10 +26,10 @@ Available options:
   * version  => name of target version for filtering issues (defaults to none)
 
 Example:
-  rake redmine:send_reminders days=7 users="1,23, 56" RAILS_ENV="production"
+  rake janya:send_reminders days=7 users="1,23, 56" RAILS_ENV="production"
 END_DESC
 
-namespace :redmine do
+namespace :janya do
   task :send_reminders => :environment do
     options = {}
     options[:days] = ENV['days'].to_i if ENV['days']

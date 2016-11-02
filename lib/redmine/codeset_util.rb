@@ -1,5 +1,5 @@
 
-module Redmine
+module Janya
   module CodesetUtil
 
     def self.replace_invalid_utf8(str)

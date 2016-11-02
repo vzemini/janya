@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Ciphering
     def self.included(base)
       base.extend ClassMethods
@@ -57,7 +57,7 @@ module Redmine
       end
 
       def cipher_key
-        key = Redmine::Configuration['database_cipher_key'].to_s
+        key = Janya::Configuration['database_cipher_key'].to_s
         key.blank? ? nil : Digest::SHA256.hexdigest(key)
       end
       
@@ -92,12 +92,12 @@ module Redmine
 
     # Returns the value of the given ciphered attribute
     def read_ciphered_attribute(attribute)
-      Redmine::Ciphering.decrypt_text(read_attribute(attribute))
+      Janya::Ciphering.decrypt_text(read_attribute(attribute))
     end
 
     # Sets the value of the given ciphered attribute
     def write_ciphered_attribute(attribute, value)
-      write_attribute(attribute, Redmine::Ciphering.encrypt_text(value))
+      write_attribute(attribute, Janya::Ciphering.encrypt_text(value))
     end
   end
 end

@@ -1,15 +1,15 @@
-# redminehelper: Redmine helper extension for Mercurial
+# janyahelper: Janya helper extension for Mercurial
 #
 # Copyright 2010 Alessio Franceschelli (alefranz.net)
 # Copyright 2010-2011 Yuya Nishihara <yuya@tcha.org>
 #
 # This software may be used and distributed according to the terms of the
 # GNU General Public License version 2 or any later version.
-"""helper commands for Redmine to reduce the number of hg calls
+"""helper commands for Janya to reduce the number of hg calls
 
 To test this extension, please try::
 
-    $ hg --config extensions.redminehelper=redminehelper.py rhsummary
+    $ hg --config extensions.janyahelper=janyahelper.py rhsummary
 
 I/O encoding:
 
@@ -39,7 +39,7 @@ Output example of rhmanifest::
           <file name="diff.rb" revision="123" node="34567abc..." time="12345"
                  size="100"/>
           ...
-          <dir name="redmine"/>
+          <dir name="janya"/>
           ...
         </manifest>
       </repository>

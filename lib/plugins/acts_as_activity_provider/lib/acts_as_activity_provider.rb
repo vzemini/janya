@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Acts
     module ActivityProvider
       def self.included(base)
@@ -24,9 +24,9 @@ module Redmine
 
       module ClassMethods
         def acts_as_activity_provider(options = {})
-          unless self.included_modules.include?(Redmine::Acts::ActivityProvider::InstanceMethods)
+          unless self.included_modules.include?(Janya::Acts::ActivityProvider::InstanceMethods)
             cattr_accessor :activity_provider_options
-            send :include, Redmine::Acts::ActivityProvider::InstanceMethods
+            send :include, Janya::Acts::ActivityProvider::InstanceMethods
           end
 
           options.assert_valid_keys(:type, :permission, :timestamp, :author_key, :scope)

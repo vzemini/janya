@@ -1,15 +1,15 @@
-module Redmine
+module Janya
   module Info
     class << self
-      def app_name; 'Redmine' end
-      def url; 'https://www.redmine.org/' end
-      def help_url; 'https://www.redmine.org/guide' end
-      def versioned_name; "#{app_name} #{Redmine::VERSION}" end
+      def app_name; 'Janya' end
+      def url; 'https://www.janya.org/' end
+      def help_url; 'https://www.janya.org/guide' end
+      def versioned_name; "#{app_name} #{Janya::VERSION}" end
 
       def environment
         s = "Environment:\n"
         s << [
-          ["Redmine version", Redmine::VERSION],
+          ["Janya version", Janya::VERSION],
           ["Ruby version", "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL} (#{RUBY_RELEASE_DATE}) [#{RUBY_PLATFORM}]"],
           ["Rails version", Rails::VERSION::STRING],
           ["Environment", Rails.env],
@@ -17,15 +17,15 @@ module Redmine
         ].map {|info| "  %-30s %s" % info}.join("\n") + "\n"
 
         s << "SCM:\n"
-        Redmine::Scm::Base.all.each do |scm|
+        Janya::Scm::Base.all.each do |scm|
           scm_class = "Repository::#{scm}".constantize
           if scm_class.scm_available
             s << "  %-30s %s\n" % [scm, scm_class.scm_version_string]
           end
         end
 
-        s << "Redmine plugins:\n"
-        plugins = Redmine::Plugin.all
+        s << "Janya plugins:\n"
+        plugins = Janya::Plugin.all
         if plugins.any?
           s << plugins.map {|plugin| "  %-30s %s" % [plugin.id.to_s, plugin.version.to_s]}.join("\n")
         else

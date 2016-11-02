@@ -1,4 +1,4 @@
-module Redmine
+module Janya
   class Notifiable < Struct.new(:name, :parent)
 
     def to_s

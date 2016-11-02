@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module SafeAttributes
     def self.included(base)
       base.extend(ClassMethods)
@@ -31,7 +31,7 @@ module Redmine
       def safe_attributes(*args)
         @safe_attributes ||= []
         if args.empty?
-          if superclass.include?(Redmine::SafeAttributes)
+          if superclass.include?(Janya::SafeAttributes)
             @safe_attributes + superclass.safe_attributes 
           else
             @safe_attributes

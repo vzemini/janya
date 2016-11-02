@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,12 +17,12 @@
 
 require 'cgi'
 
-module Redmine
+module Janya
   module WikiFormatting
     module Markdown
       class HTML < Redcarpet::Render::HTML
         include ActionView::Helpers::TagHelper
-        include Redmine::Helpers::URL
+        include Janya::Helpers::URL
 
         def link(link, title, content)
           return nil unless uri_with_safe_scheme?(link)
@@ -37,7 +37,7 @@ module Redmine
         def block_code(code, language)
           if language.present?
             "<pre><code class=\"#{CGI.escapeHTML language} syntaxhl\">" +
-              Redmine::SyntaxHighlighting.highlight_by_language(code, language) +
+              Janya::SyntaxHighlighting.highlight_by_language(code, language) +
               "</code></pre>"
           else
             "<pre>" + CGI.escapeHTML(code) + "</pre>"
@@ -62,7 +62,7 @@ module Redmine
           html.gsub!(%r{\[<a href="(.*?)">(.*?)</a>\]}) do
             "[[#{$2}]]"
           end
-          # restore Redmine links with double-quotes, eg. version:"1.0"
+          # restore Janya links with double-quotes, eg. version:"1.0"
           html.gsub!(/(\w):&quot;(.+?)&quot;/) do
             "#{$1}:\"#{$2}\""
           end
@@ -78,7 +78,7 @@ module Redmine
         def update_section(index, update, hash=nil)
           t = extract_sections(index)
           if hash.present? && hash != Digest::MD5.hexdigest(t[1])
-            raise Redmine::WikiFormatting::StaleSectionError
+            raise Janya::WikiFormatting::StaleSectionError
           end
           t[1] = update unless t[1].blank?
           t.reject(&:blank?).join "\n\n"
@@ -127,7 +127,7 @@ module Redmine
 
         def formatter
           @@formatter ||= Redcarpet::Markdown.new(
-            Redmine::WikiFormatting::Markdown::HTML.new(
+            Janya::WikiFormatting::Markdown::HTML.new(
               :filter_html => true,
               :hard_wrap => true
             ),

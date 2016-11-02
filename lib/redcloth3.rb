@@ -165,7 +165,7 @@
 #  class RedCloth::Textile.new( str )
 
 class RedCloth3 < String
-    include Redmine::Helpers::URL
+    include Janya::Helpers::URL
 
     VERSION = '3.0.4'
     DEFAULT_RULES = [:textile, :markdown]

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,13 +15,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace :redmine do
+namespace :janya do
   namespace :email do
 
     desc <<-END_DESC
 Read an email from standard input.
 
-See redmine:email:receive_imap for more options and examples.
+See janya:email:receive_imap for more options and examples.
 END_DESC
 
     task :read => :environment do
@@ -88,15 +88,15 @@ Overrides:
 Examples:
   # No project specified. Emails MUST contain the 'Project' keyword:
 
-  rake redmine:email:receive_imap RAILS_ENV="production" \\
-    host=imap.foo.bar username=redmine@example.net password=xxx
+  rake janya:email:receive_imap RAILS_ENV="production" \\
+    host=imap.foo.bar username=janya@example.net password=xxx
 
 
   # Fixed project and default tracker specified, but emails can override
   # both tracker and priority attributes:
 
-  rake redmine:email:receive_imap RAILS_ENV="production" \\
-    host=imap.foo.bar username=redmine@example.net password=xxx ssl=1 \\
+  rake janya:email:receive_imap RAILS_ENV="production" \\
+    host=imap.foo.bar username=janya@example.net password=xxx ssl=1 \\
     project=foo \\
     tracker=bug \\
     allow_override=tracker,priority
@@ -114,7 +114,7 @@ END_DESC
                       :move_on_failure => ENV['move_on_failure']}
 
       Mailer.with_synched_deliveries do
-        Redmine::IMAP.check(imap_options, MailHandler.extract_options_from_env(ENV))
+        Janya::IMAP.check(imap_options, MailHandler.extract_options_from_env(ENV))
       end
     end
 
@@ -132,7 +132,7 @@ Available POP3 options:
                            successfully from the server (default
                            behaviour is to leave them on the server)
 
-See redmine:email:receive_imap for more options and examples.
+See janya:email:receive_imap for more options and examples.
 END_DESC
 
     task :receive_pop3 => :environment do
@@ -145,14 +145,14 @@ END_DESC
                       :delete_unprocessed => ENV['delete_unprocessed']}
 
       Mailer.with_synched_deliveries do
-        Redmine::POP3.check(pop_options, MailHandler.extract_options_from_env(ENV))
+        Janya::POP3.check(pop_options, MailHandler.extract_options_from_env(ENV))
       end
     end
 
     desc "Send a test email to the user with the provided login name"
     task :test, [:login] => :environment do |task, args|
-      include Redmine::I18n
-      abort l(:notice_email_error, "Please include the user login to test with. Example: rake redmine:email:test[login]") if args[:login].blank?
+      include Janya::I18n
+      abort l(:notice_email_error, "Please include the user login to test with. Example: rake janya:email:test[login]") if args[:login].blank?
 
       user = User.find_by_login(args[:login])
       abort l(:notice_email_error, "User #{args[:login]} not found") unless user && user.logged?

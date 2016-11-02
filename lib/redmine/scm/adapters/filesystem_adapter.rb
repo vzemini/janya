@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # FileSystem adapter
@@ -18,10 +18,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 require 'find'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class FilesystemAdapter < AbstractAdapter

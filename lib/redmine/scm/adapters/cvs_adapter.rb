@@ -1,4 +1,4 @@
-# redMine - project management software
+# janya - project management software
 # Copyright (C) 2006-2007  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,15 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class CvsAdapter < AbstractAdapter
 
         # CVS executable name
-        CVS_BIN = Redmine::Configuration['scm_cvs_command'] || "cvs"
+        CVS_BIN = Janya::Configuration['scm_cvs_command'] || "cvs"
 
         class << self
           def client_command
@@ -365,7 +365,7 @@ module Redmine
         end
         private :path_with_proj
 
-        class Revision < Redmine::Scm::Adapters::Revision
+        class Revision < Janya::Scm::Adapters::Revision
           # Returns the readable identifier
           def format_identifier
             revision.to_s

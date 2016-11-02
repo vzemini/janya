@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 
 require 'csv'
 
-module Redmine
+module Janya
   module Export
     module CSV
       def self.generate(*args, &block)
@@ -27,7 +27,7 @@ module Redmine
       end
 
       class Base < ::CSV
-        include Redmine::I18n
+        include Janya::I18n
 
         class << self
 
@@ -49,7 +49,7 @@ module Redmine
           row = row.map do |field|
             case field
             when String
-              Redmine::CodesetUtil.from_utf8(field, self.encoding.name)
+              Janya::CodesetUtil.from_utf8(field, self.encoding.name)
             when Float
               @decimal_separator ||= l(:general_csv_decimal_separator)
               ("%.2f" % field).gsub('.', @decimal_separator)

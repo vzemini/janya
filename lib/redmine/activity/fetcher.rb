@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module Activity
     # Class used to retrieve activity events
     class Fetcher
@@ -34,7 +34,7 @@ module Redmine
       def event_types
         return @event_types unless @event_types.nil?
 
-        @event_types = Redmine::Activity.available_event_types
+        @event_types = Janya::Activity.available_event_types
         if @project
           projects = @project.self_and_descendants
           @event_types = @event_types.select do |event_type|
@@ -77,7 +77,7 @@ module Redmine
 
       # Resets the scope to the default scope
       def default_scope!
-        @scope = Redmine::Activity.default_event_types
+        @scope = Janya::Activity.default_event_types
       end
 
       # Returns an array of events for the given date range
@@ -103,7 +103,7 @@ module Redmine
       private
 
       def constantized_providers(event_type)
-        Redmine::Activity.providers[event_type].map(&:constantize)
+        Janya::Activity.providers[event_type].map(&:constantize)
       end
     end
   end

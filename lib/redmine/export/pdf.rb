@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,11 +19,11 @@
 
 require 'rbpdf'
 
-module Redmine
+module Janya
   module Export
     module PDF
       class ITCPDF < RBPDF
-        include Redmine::I18n
+        include Janya::I18n
         attr_accessor :footer_date
 
         def initialize(lang, orientation='P')
@@ -37,7 +37,7 @@ module Redmine
           @font_for_content = l(:general_pdf_fontname)
           @monospaced_font_for_content = l(:general_pdf_monospaced_fontname)
           @font_for_footer  = l(:general_pdf_fontname)
-          set_creator(Redmine::Info.app_name)
+          set_creator(Janya::Info.app_name)
           set_font(@font_for_content)
 
           set_header_font([@font_for_content, '', 10])
@@ -66,7 +66,7 @@ module Redmine
         end
 
         def formatted_text(text)
-          Redmine::WikiFormatting.to_html(Setting.text_formatting, text)
+          Janya::WikiFormatting.to_html(Setting.text_formatting, text)
         end
 
         def RDMCell(w ,h=0, txt='', border=0, ln=0, align='', fill=0, link='')
@@ -133,13 +133,13 @@ module Redmine
       class RDMPdfEncoding
         def self.rdm_from_utf8(txt, encoding)
           txt ||= ''
-          txt = Redmine::CodesetUtil.from_utf8(txt, encoding)
+          txt = Janya::CodesetUtil.from_utf8(txt, encoding)
           txt.force_encoding('ASCII-8BIT')
           txt
         end
 
         def self.attach(attachments, filename, encoding)
-          filename_utf8 = Redmine::CodesetUtil.to_utf8(filename, encoding)
+          filename_utf8 = Janya::CodesetUtil.to_utf8(filename, encoding)
           atta = nil
           if filename_utf8 =~ /^[^\/"]+\.(gif|jpg|jpe|jpeg|png)$/i
             atta = Attachment.latest_attach(attachments, filename_utf8)

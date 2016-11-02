@@ -1,4 +1,4 @@
-class RedminePluginControllerGenerator < Rails::Generators::NamedBase
+class JanyaPluginControllerGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("../templates", __FILE__)
   argument :controller, :type => :string
   argument :actions, :type => :array, :default => [], :banner => "ACTION ACTION ..."

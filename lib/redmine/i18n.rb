@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,10 +15,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module Redmine
+module Janya
   module I18n
     def self.included(base)
-      base.extend Redmine::I18n
+      base.extend Janya::I18n
     end
 
     def l(*args)
@@ -110,7 +110,7 @@ module Redmine
           map {|lang| [ll(lang.to_s, :general_lang_name), lang.to_s]}.
           sort {|x,y| x.first <=> y.first }
       else
-        ActionController::Base.cache_store.fetch "i18n/languages_options/#{Redmine::VERSION}" do
+        ActionController::Base.cache_store.fetch "i18n/languages_options/#{Janya::VERSION}" do
           languages_options :cache => false
         end
       end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/core_ext'
+require 'janya/core_ext'
 
 begin
   require 'rmagick' unless Object.const_defined?(:Magick)
@@ -28,54 +28,54 @@ rescue LoadError
   # Redcarpet is not available
 end
 
-require 'redmine/acts/positioned'
+require 'janya/acts/positioned'
 
-require 'redmine/scm/base'
-require 'redmine/access_control'
-require 'redmine/access_keys'
-require 'redmine/activity'
-require 'redmine/activity/fetcher'
-require 'redmine/ciphering'
-require 'redmine/codeset_util'
-require 'redmine/field_format'
-require 'redmine/menu_manager'
-require 'redmine/notifiable'
-require 'redmine/platform'
-require 'redmine/mime_type'
-require 'redmine/notifiable'
-require 'redmine/search'
-require 'redmine/syntax_highlighting'
-require 'redmine/thumbnail'
-require 'redmine/unified_diff'
-require 'redmine/utils'
-require 'redmine/version'
-require 'redmine/wiki_formatting'
+require 'janya/scm/base'
+require 'janya/access_control'
+require 'janya/access_keys'
+require 'janya/activity'
+require 'janya/activity/fetcher'
+require 'janya/ciphering'
+require 'janya/codeset_util'
+require 'janya/field_format'
+require 'janya/menu_manager'
+require 'janya/notifiable'
+require 'janya/platform'
+require 'janya/mime_type'
+require 'janya/notifiable'
+require 'janya/search'
+require 'janya/syntax_highlighting'
+require 'janya/thumbnail'
+require 'janya/unified_diff'
+require 'janya/utils'
+require 'janya/version'
+require 'janya/wiki_formatting'
 
-require 'redmine/default_data/loader'
-require 'redmine/helpers/calendar'
-require 'redmine/helpers/diff'
-require 'redmine/helpers/gantt'
-require 'redmine/helpers/time_report'
-require 'redmine/views/other_formats_builder'
-require 'redmine/views/labelled_form_builder'
-require 'redmine/views/builders'
+require 'janya/default_data/loader'
+require 'janya/helpers/calendar'
+require 'janya/helpers/diff'
+require 'janya/helpers/gantt'
+require 'janya/helpers/time_report'
+require 'janya/views/other_formats_builder'
+require 'janya/views/labelled_form_builder'
+require 'janya/views/builders'
 
-require 'redmine/themes'
-require 'redmine/hook'
-require 'redmine/hook/listener'
-require 'redmine/hook/view_listener'
-require 'redmine/plugin'
+require 'janya/themes'
+require 'janya/hook'
+require 'janya/hook/listener'
+require 'janya/hook/view_listener'
+require 'janya/plugin'
 
-Redmine::Scm::Base.add "Subversion"
-Redmine::Scm::Base.add "Darcs"
-Redmine::Scm::Base.add "Mercurial"
-Redmine::Scm::Base.add "Cvs"
-Redmine::Scm::Base.add "Bazaar"
-Redmine::Scm::Base.add "Git"
-Redmine::Scm::Base.add "Filesystem"
+Janya::Scm::Base.add "Subversion"
+Janya::Scm::Base.add "Darcs"
+Janya::Scm::Base.add "Mercurial"
+Janya::Scm::Base.add "Cvs"
+Janya::Scm::Base.add "Bazaar"
+Janya::Scm::Base.add "Git"
+Janya::Scm::Base.add "Filesystem"
 
 # Permissions
-Redmine::AccessControl.map do |map|
+Janya::AccessControl.map do |map|
   map.permission :view_project, {:projects => [:show], :activities => [:index]}, :public => true, :read => true
   map.permission :search_project, {:search => :index}, :public => true, :read => true
   map.permission :add_project, {:projects => [:new, :create]}, :require => :loggedin
@@ -187,26 +187,26 @@ Redmine::AccessControl.map do |map|
   end
 end
 
-Redmine::MenuManager.map :top_menu do |menu|
+Janya::MenuManager.map :top_menu do |menu|
   menu.push :home, :home_path
   menu.push :my_page, { :controller => 'my', :action => 'page' }, :if => Proc.new { User.current.logged? }
   menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural
   menu.push :administration, { :controller => 'admin', :action => 'index' }, :if => Proc.new { User.current.admin? }, :last => true
-  menu.push :help, Redmine::Info.help_url, :last => true
+  menu.push :help, Janya::Info.help_url, :last => true
 end
 
-Redmine::MenuManager.map :account_menu do |menu|
+Janya::MenuManager.map :account_menu do |menu|
   menu.push :login, :signin_path, :if => Proc.new { !User.current.logged? }
   menu.push :register, :register_path, :if => Proc.new { !User.current.logged? && Setting.self_registration? }
   menu.push :my_account, { :controller => 'my', :action => 'account' }, :if => Proc.new { User.current.logged? }
   menu.push :logout, :signout_path, :html => {:method => 'post'}, :if => Proc.new { User.current.logged? }
 end
 
-Redmine::MenuManager.map :application_menu do |menu|
+Janya::MenuManager.map :application_menu do |menu|
   # Empty
 end
 
-Redmine::MenuManager.map :admin_menu do |menu|
+Janya::MenuManager.map :admin_menu do |menu|
   menu.push :projects, {:controller => 'admin', :action => 'projects'}, :caption => :label_project_plural
   menu.push :users, {:controller => 'users'}, :caption => :label_user_plural
   menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural
@@ -225,12 +225,12 @@ Redmine::MenuManager.map :admin_menu do |menu|
   menu.push :info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true
 end
 
-Redmine::MenuManager.map :project_menu do |menu|
+Janya::MenuManager.map :project_menu do |menu|
   menu.push :new_object, nil, :caption => ' + ',
               :if => Proc.new { |p| Setting.new_item_menu_tab == '2' },
               :html => { :id => 'new-object', :onclick => 'toggleNewObjectDropdown(); return false;' }
   menu.push :new_issue_sub, { :controller => 'issues', :action => 'new', :copy_from => nil }, :param => :project_id, :caption => :label_issue_new,
-              :html => { :accesskey => Redmine::AccessKeys.key_for(:new_issue) },
+              :html => { :accesskey => Janya::AccessKeys.key_for(:new_issue) },
               :if => Proc.new { |p| Issue.allowed_target_trackers(p).any? },
               :permission => :add_issues,
               :parent => :new_object
@@ -254,7 +254,7 @@ Redmine::MenuManager.map :project_menu do |menu|
               :if => Proc.new { |p| p.shared_versions.any? }
   menu.push :issues, { :controller => 'issues', :action => 'index' }, :param => :project_id, :caption => :label_issue_plural
   menu.push :new_issue, { :controller => 'issues', :action => 'new', :copy_from => nil }, :param => :project_id, :caption => :label_issue_new,
-              :html => { :accesskey => Redmine::AccessKeys.key_for(:new_issue) },
+              :html => { :accesskey => Janya::AccessKeys.key_for(:new_issue) },
               :if => Proc.new { |p| Setting.new_item_menu_tab == '1' && Issue.allowed_target_trackers(p).any? },
               :permission => :add_issues
   menu.push :time_entries, { :controller => 'timelog', :action => 'index' }, :param => :project_id, :caption => :label_spent_time
@@ -272,7 +272,7 @@ Redmine::MenuManager.map :project_menu do |menu|
   menu.push :settings, { :controller => 'projects', :action => 'settings' }, :last => true
 end
 
-Redmine::Activity.map do |activity|
+Janya::Activity.map do |activity|
   activity.register :issues, :class_name => %w(Issue Journal)
   activity.register :changesets
   activity.register :news
@@ -283,7 +283,7 @@ Redmine::Activity.map do |activity|
   activity.register :time_entries, :default => false
 end
 
-Redmine::Search.map do |search|
+Janya::Search.map do |search|
   search.register :issues
   search.register :news
   search.register :documents
@@ -293,9 +293,9 @@ Redmine::Search.map do |search|
   search.register :projects
 end
 
-Redmine::WikiFormatting.map do |format|
+Janya::WikiFormatting.map do |format|
   format.register :textile
   format.register :markdown if Object.const_defined?(:Redcarpet)
 end
 
-ActionView::Template.register_template_handler :rsb, Redmine::Views::ApiTemplateHandler
+ActionView::Template.register_template_handler :rsb, Janya::Views::ApiTemplateHandler

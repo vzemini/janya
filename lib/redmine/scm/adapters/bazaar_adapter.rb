@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -15,15 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require 'janya/scm/adapters/abstract_adapter'
 
-module Redmine
+module Janya
   module Scm
     module Adapters
       class BazaarAdapter < AbstractAdapter
 
         # Bazaar executable name
-        BZR_BIN = Redmine::Configuration['scm_bazaar_command'] || "bzr"
+        BZR_BIN = Janya::Configuration['scm_bazaar_command'] || "bzr"
 
         class << self
           def client_command

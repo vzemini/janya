@@ -1,4 +1,4 @@
-module Redmine
+module Janya
   module Scm
     class Base
       class << self
@@ -13,7 +13,7 @@ module Redmine
           @scms << scm_name
         end
 
-        # Remove a SCM adapter from Redmine's list of supported scms
+        # Remove a SCM adapter from Janya's list of supported scms
         def delete(scm_name)
           @scms.delete(scm_name)
         end

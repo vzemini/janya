@@ -1,4 +1,4 @@
-module RedmineDiff
+module JanyaDiff
   class Diff
 
     VERSION = 0.3
@@ -149,7 +149,7 @@ end
 
 module Diffable
   def diff(b)
-    RedmineDiff::Diff.new(self, b)
+    JanyaDiff::Diff.new(self, b)
   end
 
   # Create a hash that maps elements of the array to arrays of indices
