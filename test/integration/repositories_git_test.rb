@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,12 +17,12 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesGitTest < Redmine::IntegrationTest
+class RepositoriesGitTest < Janya::IntegrationTest
   fixtures :projects, :users, :roles, :members, :member_roles,
            :repositories, :enabled_modules
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/git_repository').to_s
-  REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
+  REPOSITORY_PATH.gsub!(/\//, "\\") if Janya::Platform.mswin?
   PRJ_ID     = 3
 
   def setup

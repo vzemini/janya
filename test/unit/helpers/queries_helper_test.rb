@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class QueriesHelperTest < Redmine::HelperTest
+class QueriesHelperTest < Janya::HelperTest
   include QueriesHelper
-  include Redmine::I18n
+  include Janya::I18n
 
   fixtures :projects, :enabled_modules, :users, :members,
            :member_roles, :roles, :trackers, :issue_statuses,

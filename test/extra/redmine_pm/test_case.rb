@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,12 +17,12 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-module RedminePmTest
+module JanyaPmTest
   class TestCase < ActiveSupport::TestCase
     attr_reader :command, :response, :status, :username, :password
     
     # Cannot use transactional fixtures here: database
-    # will be accessed from Redmine.pm with its own connection
+    # will be accessed from Janya.pm with its own connection
     self.use_transactional_fixtures = false
   
     def test_dummy
@@ -76,7 +76,7 @@ module RedminePmTest
     end
   
     def random_filename
-      Redmine::Utils.random_hex(16)
+      Janya::Utils.random_hex(16)
     end
   end
 end

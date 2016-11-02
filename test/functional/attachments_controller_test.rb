@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class AttachmentsControllerTest < Redmine::ControllerTest
+class AttachmentsControllerTest < Janya::ControllerTest
   fixtures :users, :projects, :roles, :members, :member_roles,
            :enabled_modules, :issues, :trackers, :attachments,
            :versions, :wiki_pages, :wikis, :documents
@@ -318,14 +318,14 @@ class AttachmentsControllerTest < Redmine::ControllerTest
     end
 
     def test_thumbnail_should_not_exceed_maximum_size
-      Redmine::Thumbnail.expects(:generate).with {|source, target, size| size == 800}
+      Janya::Thumbnail.expects(:generate).with {|source, target, size| size == 800}
 
       @request.session[:user_id] = 2
       get :thumbnail, :id => 16, :size => 2000
     end
 
     def test_thumbnail_should_round_size
-      Redmine::Thumbnail.expects(:generate).with {|source, target, size| size == 250}
+      Janya::Thumbnail.expects(:generate).with {|source, target, size| size == 250}
 
       @request.session[:user_id] = 2
       get :thumbnail, :id => 16, :size => 260

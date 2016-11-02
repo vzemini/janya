@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class MailerTest < ActiveSupport::TestCase
-  include Redmine::I18n
+  include Janya::I18n
   include Rails::Dom::Testing::Assertions
   fixtures :projects, :enabled_modules, :issues, :users, :email_addresses, :user_preferences, :members,
            :member_roles, :roles, :documents, :attachments, :news,
@@ -79,7 +79,7 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   def test_generated_links_with_prefix
-    relative_url_root = Redmine::Utils.relative_url_root
+    relative_url_root = Janya::Utils.relative_url_root
     with_settings :host_name => 'mydomain.foo/rdm', :protocol => 'http' do
       journal = Journal.find(3)
       assert Mailer.deliver_issue_edit(journal)
@@ -119,11 +119,11 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   def test_generated_links_with_port_and_prefix
-    with_settings :host_name => '10.0.0.1:81/redmine', :protocol => 'http' do
+    with_settings :host_name => '10.0.0.1:81/janya', :protocol => 'http' do
       Mailer.test_email(User.find(1)).deliver
       mail = last_email
       assert_not_nil mail
-      assert_include 'http://10.0.0.1:81/redmine', mail_body(mail)
+      assert_include 'http://10.0.0.1:81/janya', mail_body(mail)
     end
   end
 
@@ -147,8 +147,8 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   def test_generated_links_with_prefix_and_no_relative_url_root
-    relative_url_root = Redmine::Utils.relative_url_root
-    Redmine::Utils.relative_url_root = nil
+    relative_url_root = Janya::Utils.relative_url_root
+    Janya::Utils.relative_url_root = nil
 
     with_settings :host_name => 'mydomain.foo/rdm', :protocol => 'http' do
       journal = Journal.find(3)
@@ -188,7 +188,7 @@ class MailerTest < ActiveSupport::TestCase
     end
   ensure
     # restore it
-    Redmine::Utils.relative_url_root = relative_url_root
+    Janya::Utils.relative_url_root = relative_url_root
   end
 
   def test_email_headers
@@ -198,14 +198,14 @@ class MailerTest < ActiveSupport::TestCase
     assert_not_nil mail
     assert_equal 'All', mail.header['X-Auto-Response-Suppress'].to_s
     assert_equal 'auto-generated', mail.header['Auto-Submitted'].to_s
-    assert_equal '<redmine.example.net>', mail.header['List-Id'].to_s
+    assert_equal '<janya.example.net>', mail.header['List-Id'].to_s
   end
 
   def test_email_headers_should_include_sender
     issue = Issue.find(1)
     Mailer.deliver_issue_add(issue)
     mail = last_email
-    assert_equal issue.author.login, mail.header['X-Redmine-Sender'].to_s
+    assert_equal issue.author.login, mail.header['X-Janya-Sender'].to_s
   end
 
   def test_plain_text_mail
@@ -228,20 +228,20 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   def test_from_header
-    with_settings :mail_from => 'redmine@example.net' do
+    with_settings :mail_from => 'janya@example.net' do
       Mailer.test_email(User.find(1)).deliver
     end
     mail = last_email
-    assert_equal 'redmine@example.net', mail.from_addrs.first
+    assert_equal 'janya@example.net', mail.from_addrs.first
   end
 
   def test_from_header_with_phrase
-    with_settings :mail_from => 'Redmine app <redmine@example.net>' do
+    with_settings :mail_from => 'Janya app <janya@example.net>' do
       Mailer.test_email(User.find(1)).deliver
     end
     mail = last_email
-    assert_equal 'redmine@example.net', mail.from_addrs.first
-    assert_equal 'Redmine app <redmine@example.net>', mail.header['From'].to_s
+    assert_equal 'janya@example.net', mail.from_addrs.first
+    assert_equal 'Janya app <janya@example.net>', mail.header['From'].to_s
   end
 
   def test_should_not_send_email_without_recipient
@@ -269,8 +269,8 @@ class MailerTest < ActiveSupport::TestCase
     issue = Issue.find(2)
     Mailer.deliver_issue_add(issue)
     mail = last_email
-    assert_match /^redmine\.issue-2\.20060719190421\.[a-f0-9]+@example\.net/, mail.message_id
-    assert_include "redmine.issue-2.20060719190421@example.net", mail.references
+    assert_match /^janya\.issue-2\.20060719190421\.[a-f0-9]+@example\.net/, mail.message_id
+    assert_include "janya.issue-2.20060719190421@example.net", mail.references
   end
 
   def test_issue_edit_message_id
@@ -279,8 +279,8 @@ class MailerTest < ActiveSupport::TestCase
 
     Mailer.deliver_issue_edit(journal)
     mail = last_email
-    assert_match /^redmine\.journal-3\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
-    assert_include "redmine.issue-2.20060719190421@example.net", mail.references
+    assert_match /^janya\.journal-3\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
+    assert_include "janya.issue-2.20060719190421@example.net", mail.references
     assert_select_email do
       # link to the update
       assert_select "a[href=?]",
@@ -292,8 +292,8 @@ class MailerTest < ActiveSupport::TestCase
     message = Message.find(1)
     Mailer.message_posted(message).deliver
     mail = last_email
-    assert_match /^redmine\.message-1\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
-    assert_include "redmine.message-1.20070512151532@example.net", mail.references
+    assert_match /^janya\.message-1\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
+    assert_include "janya.message-1.20070512151532@example.net", mail.references
     assert_select_email do
       # link to the message
       assert_select "a[href=?]",
@@ -306,8 +306,8 @@ class MailerTest < ActiveSupport::TestCase
     message = Message.find(3)
     Mailer.message_posted(message).deliver
     mail = last_email
-    assert_match /^redmine\.message-3\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
-    assert_include "redmine.message-1.20070512151532@example.net", mail.references
+    assert_match /^janya\.message-3\.\d+\.[a-f0-9]+@example\.net/, mail.message_id
+    assert_include "janya.message-1.20070512151532@example.net", mail.references
     assert_select_email do
       # link to the reply
       assert_select "a[href=?]",
@@ -730,8 +730,8 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   def test_token_for_should_strip_trailing_gt_from_address_with_full_name
-    with_settings :mail_from => "Redmine Mailer<no-reply@redmine.org>" do
-      assert_match /\Aredmine.issue-\d+\.\d+\.[0-9a-f]+@redmine.org\z/, Mailer.token_for(Issue.generate!)
+    with_settings :mail_from => "Janya Mailer<no-reply@janya.org>" do
+      assert_match /\Ajanya.issue-\d+\.\d+\.[0-9a-f]+@janya.org\z/, Mailer.token_for(Issue.generate!)
     end
   end
 

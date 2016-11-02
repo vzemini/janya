@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::ApiRoutingTest < Redmine::ApiTest::Routing
+class Janya::ApiTest::ApiRoutingTest < Janya::ApiTest::Routing
 
   def test_attachments
     should_route 'GET /attachments/1' => 'attachments#show', :id => '1'

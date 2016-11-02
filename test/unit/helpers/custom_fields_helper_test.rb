@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,10 +17,10 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class CustomFieldsHelperTest < Redmine::HelperTest
+class CustomFieldsHelperTest < Janya::HelperTest
   include ApplicationHelper
   include CustomFieldsHelper
-  include Redmine::I18n
+  include Janya::I18n
   include ERB::Util
 
   def test_format_boolean_value

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ class DarcsAdapterTest < ActiveSupport::TestCase
 
   if File.directory?(REPOSITORY_PATH)
     def setup
-      @adapter = Redmine::Scm::Adapters::DarcsAdapter.new(REPOSITORY_PATH)
+      @adapter = Janya::Scm::Adapters::DarcsAdapter.new(REPOSITORY_PATH)
     end
 
     def test_darcsversion

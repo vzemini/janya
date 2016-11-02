@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,12 +19,12 @@ require File.expand_path('../../../../../../test_helper', __FILE__)
 
 class CvsAdapterTest < ActiveSupport::TestCase
   REPOSITORY_PATH = Rails.root.join('tmp/test/cvs_repository').to_s
-  REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
+  REPOSITORY_PATH.gsub!(/\//, "\\") if Janya::Platform.mswin?
   MODULE_NAME = 'test'
 
   if File.directory?(REPOSITORY_PATH)
     def setup
-      @adapter = Redmine::Scm::Adapters::CvsAdapter.new(MODULE_NAME, REPOSITORY_PATH)
+      @adapter = Janya::Scm::Adapters::CvsAdapter.new(MODULE_NAME, REPOSITORY_PATH)
     end
 
     def test_scm_version
@@ -62,12 +62,12 @@ class CvsAdapterTest < ActiveSupport::TestCase
     end
 
     def test_path_encoding_default_utf8
-      adpt1 = Redmine::Scm::Adapters::CvsAdapter.new(
+      adpt1 = Janya::Scm::Adapters::CvsAdapter.new(
                                 MODULE_NAME,
                                 REPOSITORY_PATH
                               )
       assert_equal "UTF-8", adpt1.path_encoding
-      adpt2 = Redmine::Scm::Adapters::CvsAdapter.new(
+      adpt2 = Janya::Scm::Adapters::CvsAdapter.new(
                                 MODULE_NAME,
                                 REPOSITORY_PATH,
                                 nil,
@@ -89,7 +89,7 @@ class CvsAdapterTest < ActiveSupport::TestCase
       }
 
       to_test.each do |string, expected|
-        assert_equal expected, Redmine::Scm::Adapters::CvsAdapter.new('foo', string).send(:root_url_path), "#{string} failed"
+        assert_equal expected, Janya::Scm::Adapters::CvsAdapter.new('foo', string).send(:root_url_path), "#{string} failed"
       end
     end
 

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,13 +17,13 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::NotifiableTest < ActiveSupport::TestCase
+class Janya::NotifiableTest < ActiveSupport::TestCase
   def setup
   end
 
   def test_all
     %w(issue_added issue_updated issue_note_added issue_status_updated issue_assigned_to_updated issue_priority_updated news_added news_comment_added document_added file_added message_posted wiki_content_added wiki_content_updated).each do |notifiable|
-      assert Redmine::Notifiable.all.collect(&:name).include?(notifiable), "missing #{notifiable}"
+      assert Janya::Notifiable.all.collect(&:name).include?(notifiable), "missing #{notifiable}"
     end
   end
 end

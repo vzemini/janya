@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,26 +17,26 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class HookTest < Redmine::IntegrationTest
+class HookTest < Janya::IntegrationTest
   fixtures :users, :roles, :projects, :members, :member_roles
 
   # Hooks that are manually registered later
-  class ProjectBasedTemplate < Redmine::Hook::ViewListener
+  class ProjectBasedTemplate < Janya::Hook::ViewListener
     def view_layouts_base_html_head(context)
       # Adds a project stylesheet
       stylesheet_link_tag(context[:project].identifier) if context[:project]
     end
   end
 
-  class SidebarContent < Redmine::Hook::ViewListener
+  class SidebarContent < Janya::Hook::ViewListener
     def view_layouts_base_sidebar(context)
       content_tag('p', 'Sidebar hook')
     end
   end
 
-  Redmine::Hook.clear_listeners
+  Janya::Hook.clear_listeners
 
-  class ContentForInsideHook < Redmine::Hook::ViewListener
+  class ContentForInsideHook < Janya::Hook::ViewListener
     render_on :view_welcome_index_left, :inline => <<-VIEW
 <% content_for :header_tags do %>
   <%= javascript_include_tag 'test_plugin.js', :plugin => 'test_plugin' %>
@@ -47,16 +47,16 @@ class HookTest < Redmine::IntegrationTest
 VIEW
   end
 
-  class SingleRenderOn < Redmine::Hook::ViewListener
+  class SingleRenderOn < Janya::Hook::ViewListener
     render_on :view_welcome_index_left, :inline => 'SingleRenderOn 1'
   end
 
-  class MultipleRenderOn < Redmine::Hook::ViewListener
+  class MultipleRenderOn < Janya::Hook::ViewListener
     render_on :view_welcome_index_left, {:inline => 'MultipleRenderOn 1'}, {:inline => 'MultipleRenderOn 2'}
   end
 
   # Hooks that stores the call context
-  class ContextTestHook < Redmine::Hook::ViewListener
+  class ContextTestHook < Janya::Hook::ViewListener
     cattr_accessor :context
 
     def controller_account_success_authentication_after(context)
@@ -65,15 +65,15 @@ VIEW
   end
 
   def setup
-    Redmine::Hook.clear_listeners
+    Janya::Hook.clear_listeners
   end
 
   def teardown
-    Redmine::Hook.clear_listeners
+    Janya::Hook.clear_listeners
   end
 
   def test_html_head_hook_response
-    Redmine::Hook.add_listener(ProjectBasedTemplate)
+    Janya::Hook.add_listener(ProjectBasedTemplate)
 
     get '/projects/ecookbook'
     assert_select 'head link[href=?]', '/stylesheets/ecookbook.css'
@@ -85,7 +85,7 @@ VIEW
   end
 
   def test_sidebar_with_hook_content_should_not_be_hidden
-    Redmine::Hook.add_listener(SidebarContent)
+    Janya::Hook.add_listener(SidebarContent)
 
     get '/'
     assert_select 'div#sidebar p', :text => 'Sidebar hook'
@@ -94,7 +94,7 @@ VIEW
   end
 
   def test_hook_with_content_for_should_append_content
-    Redmine::Hook.add_listener(ContentForInsideHook)
+    Janya::Hook.add_listener(ContentForInsideHook)
 
     get '/'
     assert_response :success
@@ -106,7 +106,7 @@ VIEW
   end
 
   def test_controller_hook_context_should_include_request
-    Redmine::Hook.add_listener(ContextTestHook)
+    Janya::Hook.add_listener(ContextTestHook)
     post '/login', :username => 'admin', :password => 'admin'
     assert_not_nil ContextTestHook.context
     context = ContextTestHook.context
@@ -116,8 +116,8 @@ VIEW
   end
 
   def test_multiple_hooks
-    Redmine::Hook.add_listener(SingleRenderOn)
-    Redmine::Hook.add_listener(MultipleRenderOn)
+    Janya::Hook.add_listener(SingleRenderOn)
+    Janya::Hook.add_listener(MultipleRenderOn)
     get '/'
     assert_equal 1, response.body.scan("SingleRenderOn 1 MultipleRenderOn 1 MultipleRenderOn 2").size
   end

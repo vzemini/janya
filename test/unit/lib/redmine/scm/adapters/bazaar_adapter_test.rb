@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ class BazaarAdapterTest < ActiveSupport::TestCase
 
   if File.directory?(REPOSITORY_PATH)
     def setup
-      @adapter = Redmine::Scm::Adapters::BazaarAdapter.new(
+      @adapter = Janya::Scm::Adapters::BazaarAdapter.new(
                               File.join(REPOSITORY_PATH, "trunk")
                               )
     end
@@ -84,19 +84,19 @@ class BazaarAdapterTest < ActiveSupport::TestCase
 
     def test_branch_conf_path
       p = "c:\\test\\test\\"
-      bcp = Redmine::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
+      bcp = Janya::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
       assert_equal File.join("c:\\test\\test", ".bzr", "branch", "branch.conf"), bcp
       p = "c:\\test\\test\\.bzr"
-      bcp = Redmine::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
+      bcp = Janya::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
       assert_equal File.join("c:\\test\\test", ".bzr", "branch", "branch.conf"), bcp
       p = "c:\\test\\test\\.bzr\\"
-      bcp = Redmine::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
+      bcp = Janya::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
       assert_equal File.join("c:\\test\\test", ".bzr", "branch", "branch.conf"), bcp
       p = "c:\\test\\test"
-      bcp = Redmine::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
+      bcp = Janya::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
       assert_equal File.join("c:\\test\\test", ".bzr", "branch", "branch.conf"), bcp
       p = "\\\\server\\test\\test\\"
-      bcp = Redmine::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
+      bcp = Janya::Scm::Adapters::BazaarAdapter.branch_conf_path(p)
       assert_equal File.join("\\\\server\\test\\test", ".bzr", "branch", "branch.conf"), bcp
     end
 
@@ -105,14 +105,14 @@ class BazaarAdapterTest < ActiveSupport::TestCase
     end
 
     def test_append_revisions_only_false
-      adpt = Redmine::Scm::Adapters::BazaarAdapter.new(
+      adpt = Janya::Scm::Adapters::BazaarAdapter.new(
                               File.join(REPOSITORY_PATH, "empty-branch")
                               )
       assert_equal false, adpt.append_revisions_only
     end
 
     def test_append_revisions_only_shared_repo
-      adpt = Redmine::Scm::Adapters::BazaarAdapter.new(
+      adpt = Janya::Scm::Adapters::BazaarAdapter.new(
                               REPOSITORY_PATH
                               )
       assert_equal false, adpt.append_revisions_only
@@ -123,7 +123,7 @@ class BazaarAdapterTest < ActiveSupport::TestCase
     end
 
     def test_info_nil
-      adpt = Redmine::Scm::Adapters::BazaarAdapter.new(
+      adpt = Janya::Scm::Adapters::BazaarAdapter.new(
                 "/invalid/invalid/"
                 )
       assert_nil adpt.info
@@ -135,7 +135,7 @@ class BazaarAdapterTest < ActiveSupport::TestCase
     end
 
     def test_info_emtpy
-      adpt = Redmine::Scm::Adapters::BazaarAdapter.new(
+      adpt = Janya::Scm::Adapters::BazaarAdapter.new(
                               File.join(REPOSITORY_PATH, "empty-branch")
                               )
       assert_equal 0, adpt.info.lastrev.identifier.to_i

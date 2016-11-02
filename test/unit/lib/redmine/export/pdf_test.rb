@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -22,8 +22,8 @@ class PdfTest < ActiveSupport::TestCase
            :enabled_modules, :issues, :trackers, :attachments
 
   def test_fix_text_encoding_nil
-    assert_equal '', Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(nil, "UTF-8")
-    assert_equal '', Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(nil, "ISO-8859-1")
+    assert_equal '', Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(nil, "UTF-8")
+    assert_equal '', Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(nil, "ISO-8859-1")
   end
 
   def test_rdm_pdf_iconv_cannot_convert_ja_cp932
@@ -31,9 +31,9 @@ class PdfTest < ActiveSupport::TestCase
     utf8_txt_2  = "\xe7\x8b\x80\xe6\x85\x8b\xe7\x8b\x80"
     utf8_txt_3  = "\xe7\x8b\x80\xe7\x8b\x80\xe6\x85\x8b\xe7\x8b\x80"
     ["CP932", "SJIS"].each do |encoding|
-      txt_1 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_1, encoding)
-      txt_2 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_2, encoding)
-      txt_3 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_3, encoding)
+      txt_1 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_1, encoding)
+      txt_2 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_2, encoding)
+      txt_3 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_3, encoding)
       assert_equal "?\x91\xd4".force_encoding("ASCII-8BIT"), txt_1
       assert_equal "?\x91\xd4?".force_encoding("ASCII-8BIT"), txt_2
       assert_equal "??\x91\xd4?".force_encoding("ASCII-8BIT"), txt_3
@@ -46,8 +46,8 @@ class PdfTest < ActiveSupport::TestCase
   def test_rdm_pdf_iconv_invalid_utf8_should_be_replaced_en
     str1 = "Texte encod\xe9 en ISO-8859-1".force_encoding("UTF-8")
     str2 = "\xe9a\xe9b\xe9c\xe9d\xe9e test".force_encoding("ASCII-8BIT")
-    txt_1 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str1, 'UTF-8')
-    txt_2 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str2, 'UTF-8')
+    txt_1 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str1, 'UTF-8')
+    txt_2 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str2, 'UTF-8')
     assert_equal "ASCII-8BIT", txt_1.encoding.to_s
     assert_equal "ASCII-8BIT", txt_2.encoding.to_s
     assert_equal "Texte encod? en ISO-8859-1", txt_1
@@ -58,8 +58,8 @@ class PdfTest < ActiveSupport::TestCase
     str1 = "Texte encod\xe9 en ISO-8859-1".force_encoding("UTF-8")
     str2 = "\xe9a\xe9b\xe9c\xe9d\xe9e test".force_encoding("ASCII-8BIT")
     encoding = ( RUBY_PLATFORM == 'java' ? "SJIS" : "CP932" )
-    txt_1 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str1, encoding)
-    txt_2 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str2, encoding)
+    txt_1 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str1, encoding)
+    txt_2 = Janya::Export::PDF::RDMPdfEncoding::rdm_from_utf8(str2, encoding)
     assert_equal "ASCII-8BIT", txt_1.encoding.to_s
     assert_equal "ASCII-8BIT", txt_2.encoding.to_s
     assert_equal "Texte encod? en ISO-8859-1", txt_1
@@ -80,11 +80,11 @@ class PdfTest < ActiveSupport::TestCase
       assert a2.readable?
       assert a2.visible?
 
-      aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
+      aa1 = Janya::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
       assert_not_nil aa1
       assert_equal 17, aa1.id
 
-      aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
+      aa2 = Janya::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
       assert_not_nil aa2
       assert_equal 19, aa2.id
 
@@ -93,9 +93,9 @@ class PdfTest < ActiveSupport::TestCase
       assert (! a1.visible?)
       assert a2.readable?
       assert (! a2.visible?)
-      aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
+      aa1 = Janya::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
       assert_equal nil, aa1
-      aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
+      aa2 = Janya::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
       assert_equal nil, aa2
 
       set_tmp_attachments_directory

@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -173,11 +173,11 @@ class SearchTest < ActiveSupport::TestCase
 
   def test_search_should_be_case_and_accent_insensitive_with_postgresql_and_noaccent_extension
     if postgresql?
-      skip unless Redmine::Database.postgresql_version >= 90000
+      skip unless Janya::Database.postgresql_version >= 90000
       # Extension will be rollbacked with the test transaction
       ActiveRecord::Base.connection.execute("CREATE EXTENSION IF NOT EXISTS unaccent")
-      Redmine::Database.reset
-      assert Redmine::Database.postgresql_unaccent?
+      Janya::Database.reset
+      assert Janya::Database.postgresql_unaccent?
 
       issue1 = Issue.generate!(:subject => "OO")
       issue2 = Issue.generate!(:subject => "oo")
@@ -187,14 +187,14 @@ class SearchTest < ActiveSupport::TestCase
       assert_include issue2, r
     end
   ensure
-    Redmine::Database.reset
+    Janya::Database.reset
   end
 
   def test_fetcher_should_handle_accents_in_phrases
-    f = Redmine::Search::Fetcher.new('No special chars "in a phrase"', User.anonymous, %w(issues), Project.all)
+    f = Janya::Search::Fetcher.new('No special chars "in a phrase"', User.anonymous, %w(issues), Project.all)
     assert_equal ['No', 'special', 'chars', 'in a phrase'], f.tokens
 
-    f = Redmine::Search::Fetcher.new('Special chars "in a phrase Öö"', User.anonymous, %w(issues), Project.all)
+    f = Janya::Search::Fetcher.new('Special chars "in a phrase Öö"', User.anonymous, %w(issues), Project.all)
     assert_equal ['Special', 'chars', 'in a phrase Öö'], f.tokens
   end
 

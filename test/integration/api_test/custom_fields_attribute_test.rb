@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::CustomFieldsAttributeTest < Redmine::ApiTest::Base
+class Janya::ApiTest::CustomFieldsAttributeTest < Janya::ApiTest::Base
   fixtures :users
 
   def test_integer_custom_fields_should_accept_strings

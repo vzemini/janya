@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,11 +18,11 @@
 if ENV["COVERAGE"]
   require 'simplecov'
   require File.expand_path(File.dirname(__FILE__) + "/coverage/html_formatter")
-  SimpleCov.formatter = Redmine::Coverage::HtmlFormatter
+  SimpleCov.formatter = Janya::Coverage::HtmlFormatter
   SimpleCov.start 'rails'
 end
 
-$redmine_test_ldap_server = ENV['REDMINE_TEST_LDAP_SERVER'] || '127.0.0.1'
+$janya_test_ldap_server = ENV['JANYA_TEST_LDAP_SERVER'] || '127.0.0.1'
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
@@ -35,7 +35,7 @@ include ObjectHelpers
 require 'net/ldap'
 require 'mocha/setup'
 
-Redmine::SudoMode.disable!
+Janya::SudoMode.disable!
 
 class ActionView::TestCase
   helper :application
@@ -124,7 +124,7 @@ class ActiveSupport::TestCase
   end
 
   def self.ldap_configured?
-    @test_ldap = Net::LDAP.new(:host => $redmine_test_ldap_server, :port => 389)
+    @test_ldap = Net::LDAP.new(:host => $janya_test_ldap_server, :port => 389)
     return @test_ldap.bind
   rescue Exception => e
     # LDAP is not listening
@@ -132,7 +132,7 @@ class ActiveSupport::TestCase
   end
 
   def self.convert_installed?
-    Redmine::Thumbnail.convert_available?
+    Janya::Thumbnail.convert_available?
   end
 
   def convert_installed?
@@ -256,7 +256,7 @@ class ActiveSupport::TestCase
   end
 end
 
-module Redmine
+module Janya
   class RoutingTest < ActionDispatch::IntegrationTest
     def should_route(arg)
       arg = arg.dup
@@ -335,7 +335,7 @@ module Redmine
     API_FORMATS = %w(json xml).freeze
 
     # Base class for API tests
-    class Base < Redmine::IntegrationTest
+    class Base < Janya::IntegrationTest
       def setup
         Setting.rest_api_enabled = '1'
       end
@@ -384,7 +384,7 @@ module Redmine
       end
     end
 
-    class Routing < Redmine::RoutingTest
+    class Routing < Janya::RoutingTest
       def should_route(arg)
         arg = arg.dup
         request = arg.keys.detect {|key| key.is_a?(String)}

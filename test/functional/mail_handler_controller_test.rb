@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class MailHandlerControllerTest < Redmine::ControllerTest
+class MailHandlerControllerTest < Janya::ControllerTest
   fixtures :users, :email_addresses, :projects, :enabled_modules, :roles, :members, :member_roles, :issues, :issue_statuses,
            :trackers, :projects_trackers, :enumerations
 

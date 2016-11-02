@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::Acts::PositionedWithoutScopeTest < ActiveSupport::TestCase
+class Janya::Acts::PositionedWithoutScopeTest < ActiveSupport::TestCase
   fixtures :trackers, :issue_statuses
 
   def test_create_should_default_to_last_position

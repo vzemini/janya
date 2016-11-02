@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,10 +20,10 @@ require 'pp'
 class RepositoryCvsTest < ActiveSupport::TestCase
   fixtures :projects
 
-  include Redmine::I18n
+  include Janya::I18n
 
   REPOSITORY_PATH = repository_path('cvs')
-  REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
+  REPOSITORY_PATH.gsub!(/\//, "\\") if Janya::Platform.mswin?
   # CVS module
   MODULE_NAME    = 'test'
   CHANGESETS_NUM = 7
@@ -94,7 +94,7 @@ class RepositoryCvsTest < ActiveSupport::TestCase
   end
 
   def test_root_url_should_be_validated_against_regexp_set_in_configuration
-    Redmine::Configuration.with 'scm_cvs_path_regexp' => '/cvspath/[a-z]+' do
+    Janya::Configuration.with 'scm_cvs_path_regexp' => '/cvspath/[a-z]+' do
       repo = Repository::Cvs.new(
         :project       => @project,
         :identifier    => 'test',
@@ -187,7 +187,7 @@ class RepositoryCvsTest < ActiveSupport::TestCase
       assert_equal "/sources/watchers_controller.rb", filechanges[1].path
 
       entries = @repository.entries('', '3')
-      assert_kind_of Redmine::Scm::Adapters::Entries, entries
+      assert_kind_of Janya::Scm::Adapters::Entries, entries
       assert_equal 3, entries.size
       assert_equal "README", entries[2].name
       assert_equal 'UTF-8', entries[2].path.encoding.to_s

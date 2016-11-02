@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::WikiFormatting::MarkdownFormatterTest < ActionView::TestCase
+class Janya::WikiFormatting::MarkdownFormatterTest < ActionView::TestCase
   if Object.const_defined?(:Redcarpet)
 
   def setup
-    @formatter = Redmine::WikiFormatting::Markdown::Formatter
+    @formatter = Janya::WikiFormatting::Markdown::Formatter
   end
 
   def test_syntax_error_in_image_reference_should_not_raise_exception
@@ -53,8 +53,8 @@ class Redmine::WikiFormatting::MarkdownFormatterTest < ActionView::TestCase
     assert_include '[[Foo]]', @formatter.new(text).to_html
   end
 
-  def test_redmine_links_with_double_quotes_should_be_preserved
-    text = 'This is a redmine link: version:"1.0"'
+  def test_janya_links_with_double_quotes_should_be_preserved
+    text = 'This is a janya link: version:"1.0"'
     assert_include 'version:"1.0"', @formatter.new(text).to_html
   end
 

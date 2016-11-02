@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class AccountControllerTest < Redmine::ControllerTest
+class AccountControllerTest < Janya::ControllerTest
   fixtures :users, :email_addresses, :roles
 
   def setup
@@ -72,19 +72,19 @@ class AccountControllerTest < Redmine::ControllerTest
   end
 
   def test_login_with_suburi_should_redirect_to_back_url_param
-    @relative_url_root = Redmine::Utils.relative_url_root
-    Redmine::Utils.relative_url_root = '/redmine'
+    @relative_url_root = Janya::Utils.relative_url_root
+    Janya::Utils.relative_url_root = '/janya'
 
     back_urls = [
-      'http://test.host/redmine/issues/show/1',
-      '/redmine'
+      'http://test.host/janya/issues/show/1',
+      '/janya'
     ]
     back_urls.each do |back_url|
       post :login, :username => 'jsmith', :password => 'jsmith', :back_url => back_url
       assert_redirected_to back_url
     end
   ensure
-    Redmine::Utils.relative_url_root = @relative_url_root
+    Janya::Utils.relative_url_root = @relative_url_root
   end
 
   def test_login_should_not_redirect_to_another_host
@@ -99,16 +99,16 @@ class AccountControllerTest < Redmine::ControllerTest
   end
 
   def test_login_with_suburi_should_not_redirect_to_another_suburi
-    @relative_url_root = Redmine::Utils.relative_url_root
-    Redmine::Utils.relative_url_root = '/redmine'
+    @relative_url_root = Janya::Utils.relative_url_root
+    Janya::Utils.relative_url_root = '/janya'
 
     back_urls = [
       'http://test.host/',
       'http://test.host/fake',
       'http://test.host/fake/issues',
-      'http://test.host/redmine/../fake',
-      'http://test.host/redmine/../fake/issues',
-      'http://test.host/redmine/%2e%2e/fake',
+      'http://test.host/janya/../fake',
+      'http://test.host/janya/../fake/issues',
+      'http://test.host/janya/%2e%2e/fake',
       '//test.foo/fake',
       'http://test.host//fake',
       'http://test.host/\n//fake',
@@ -124,7 +124,7 @@ class AccountControllerTest < Redmine::ControllerTest
       assert_redirected_to '/my/page'
     end
   ensure
-    Redmine::Utils.relative_url_root = @relative_url_root
+    Janya::Utils.relative_url_root = @relative_url_root
   end
 
   def test_login_with_wrong_password

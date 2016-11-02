@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::ConfigurationTest < ActiveSupport::TestCase
+class Janya::ConfigurationTest < ActiveSupport::TestCase
   def setup
-    @conf = Redmine::Configuration
+    @conf = Janya::Configuration
   end
 
   def test_empty

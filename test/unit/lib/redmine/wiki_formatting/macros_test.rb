@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
+class Janya::WikiFormatting::MacrosTest < Janya::HelperTest
   include ApplicationHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
@@ -42,7 +42,7 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_registration
-    Redmine::WikiFormatting::Macros.register do
+    Janya::WikiFormatting::Macros.register do
       macro :foo do |obj, args|
         "Foo: #{args.size} (#{args.join(',')}) (#{args.class.name})"
       end
@@ -55,7 +55,7 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_registration_parse_args_set_to_false_should_disable_arguments_parsing
-    Redmine::WikiFormatting::Macros.register do
+    Janya::WikiFormatting::Macros.register do
       macro :bar, :parse_args => false do |obj, args|
         "Bar: (#{args}) (#{args.class.name})"
       end
@@ -67,7 +67,7 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_registration_with_3_args_should_receive_text_argument
-    Redmine::WikiFormatting::Macros.register do
+    Janya::WikiFormatting::Macros.register do
       macro :baz do |obj, args, text|
         "Baz: (#{args.join(',')}) (#{text.class.name}) (#{text})"
       end
@@ -80,13 +80,13 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_name_with_upper_case
-    Redmine::WikiFormatting::Macros.macro(:UpperCase) {|obj, args| "Upper"}
+    Janya::WikiFormatting::Macros.macro(:UpperCase) {|obj, args| "Upper"}
 
     assert_equal "<p>Upper</p>", textilizable("{{UpperCase}}")
   end
 
   def test_multiple_macros_on_the_same_line
-    Redmine::WikiFormatting::Macros.macro :foo do |obj, args|
+    Janya::WikiFormatting::Macros.macro :foo do |obj, args|
       args.any? ? "args: #{args.join(',')}" : "no args" 
     end
 
@@ -128,7 +128,7 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_exception_should_be_displayed
-    Redmine::WikiFormatting::Macros.macro :exception do |obj, args|
+    Janya::WikiFormatting::Macros.macro :exception do |obj, args|
       raise "My message"
     end
 
@@ -137,8 +137,8 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_macro_arguments_should_not_be_parsed_by_formatters
-    text = '{{hello_world(http://www.redmine.org, #1)}}'
-    assert_include 'Arguments: http://www.redmine.org, #1', textilizable(text)
+    text = '{{hello_world(http://www.janya.org, #1)}}'
+    assert_include 'Arguments: http://www.janya.org, #1', textilizable(text)
   end
 
   def test_exclamation_mark_should_not_run_macros
@@ -167,7 +167,7 @@ class Redmine::WikiFormatting::MacrosTest < Redmine::HelperTest
   end
 
   def test_html_safe_macro_output_should_not_be_escaped
-    Redmine::WikiFormatting::Macros.macro :safe_macro do |obj, args|
+    Janya::WikiFormatting::Macros.macro :safe_macro do |obj, args|
       "<tag>".html_safe
     end
     assert_equal '<p><tag></p>', textilizable("{{safe_macro}}")

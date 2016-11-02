@@ -1,10 +1,10 @@
 require File.expand_path('../../test_helper', __FILE__)
 
-class SudoModeTest < Redmine::IntegrationTest
+class SudoModeTest < Janya::IntegrationTest
   fixtures :projects, :members, :member_roles, :roles, :users, :email_addresses
 
   def setup
-    Redmine::SudoMode.stubs(:enabled?).returns(true)
+    Janya::SudoMode.stubs(:enabled?).returns(true)
   end
 
   def test_sudo_mode_should_be_active_after_login

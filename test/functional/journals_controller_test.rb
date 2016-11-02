@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class JournalsControllerTest < Redmine::ControllerTest
+class JournalsControllerTest < Janya::ControllerTest
   fixtures :projects, :users, :members, :member_roles, :roles, :issues, :journals, :journal_details, :enabled_modules,
     :trackers, :issue_statuses, :enumerations, :custom_fields, :custom_values, :custom_fields_projects, :projects_trackers
 

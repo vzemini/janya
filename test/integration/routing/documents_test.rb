@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingDocumentsTest < Redmine::RoutingTest
+class RoutingDocumentsTest < Janya::RoutingTest
   def test_documents_scoped_under_project
     should_route 'GET /projects/567/documents' => 'documents#index', :project_id => '567'
     should_route 'GET /projects/567/documents/new' => 'documents#new', :project_id => '567'

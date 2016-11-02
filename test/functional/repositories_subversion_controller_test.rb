@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesSubversionControllerTest < Redmine::ControllerTest
+class RepositoriesSubversionControllerTest < Janya::ControllerTest
   tests RepositoriesController
 
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles, :enabled_modules,
@@ -142,7 +142,7 @@ class RepositoriesSubversionControllerTest < Redmine::ControllerTest
       end
 
       # svn properties displayed with svn >= 1.5 only
-      if Redmine::Scm::Adapters::SubversionAdapter.client_version_above?([1, 5, 0])
+      if Janya::Scm::Adapters::SubversionAdapter.client_version_above?([1, 5, 0])
         assert_select 'ul li' do
           assert_select 'b', :text => 'svn:eol-style'
           assert_select 'span', :text => 'native'

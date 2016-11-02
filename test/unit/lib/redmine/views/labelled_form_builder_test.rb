@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::Views::LabelledFormBuilderTest < Redmine::HelperTest
+class Janya::Views::LabelledFormBuilderTest < Janya::HelperTest
   include Rails.application.routes.url_helpers
 
   def test_label_should_output_one_element

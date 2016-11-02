@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ require 'erb'
 require 'cgi'
 
 # A simple formatter for SimpleCov
-module Redmine
+module Janya
   module Coverage
     class HtmlFormatter
       def format(result)
@@ -56,8 +56,8 @@ module Redmine
       end
 
       def revision_link
-        if revision = Redmine::VERSION.revision
-          %(<a href="http://www.redmine.org/projects/redmine/repository/revisions/#{revision}">r#{revision}</a>)
+        if revision = Janya::VERSION.revision
+          %(<a href="http://www.janya.org/projects/janya/repository/revisions/#{revision}">r#{revision}</a>)
         end
       end
 

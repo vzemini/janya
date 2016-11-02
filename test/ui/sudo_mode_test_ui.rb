@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
 
 require File.expand_path('../base', __FILE__)
 
-class Redmine::UiTest::SudoModeTest < Redmine::UiTest::Base
+class Janya::UiTest::SudoModeTest < Janya::UiTest::Base
   fixtures :users, :email_addresses
 
   def setup
-    Redmine::SudoMode.stubs(:enabled?).returns(true)
+    Janya::SudoMode.stubs(:enabled?).returns(true)
   end
 
   def test_add_user

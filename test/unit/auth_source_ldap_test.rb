@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class AuthSourceLdapTest < ActiveSupport::TestCase
-  include Redmine::I18n
+  include Janya::I18n
   fixtures :auth_sources
 
   def setup
@@ -69,11 +69,11 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
     set_language_if_valid 'en'
 
     a = AuthSourceLdap.new(:name => 'My LDAP', :host => 'ldap.example.net', :port => 389, :attr_login => 'sn')
-    a.filter = "(mail=*@redmine.org"
+    a.filter = "(mail=*@janya.org"
     assert !a.valid?
     assert_include "LDAP filter is invalid", a.errors.full_messages
 
-    a.filter = "(mail=*@redmine.org)"
+    a.filter = "(mail=*@janya.org)"
     assert a.valid?
   end
 
@@ -86,7 +86,7 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
       assert attributes.is_a?(Hash), "An hash was not returned"
       assert_equal 'Example', attributes[:firstname]
       assert_equal 'One', attributes[:lastname]
-      assert_equal 'example1@redmine.org', attributes[:mail]
+      assert_equal 'example1@janya.org', attributes[:mail]
       assert_equal auth.id, attributes[:auth_source_id]
       attributes.keys.each do |attribute|
         assert User.new.respond_to?("#{attribute}="), "Unexpected :#{attribute} attribute returned"
@@ -116,7 +116,7 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
 
     test '#authenticate with filter should return user who matches the filter only' do
       auth = AuthSourceLdap.find(1)
-      auth.filter = "(mail=*@redmine.org)"
+      auth.filter = "(mail=*@janya.org)"
 
       assert auth.authenticate('example1','123456')
       assert_nil auth.authenticate('edavis', '123456')
@@ -140,7 +140,7 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
       assert_equal "example1", result[:login]
       assert_equal "Example", result[:firstname]
       assert_equal "One", result[:lastname]
-      assert_equal "example1@redmine.org", result[:mail]
+      assert_equal "example1@janya.org", result[:mail]
       assert_equal 1, result[:auth_source_id]
     end
 
@@ -186,11 +186,11 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
 
     def test_test_connection_bind_with_account_and_password
       auth_source = AuthSourceLdap.find(1)
-      auth_source.account = "cn=admin,dc=redmine,dc=org"
+      auth_source.account = "cn=admin,dc=janya,dc=org"
       auth_source.account_password = "secret"
       auth_source.save!
 
-      assert_equal "cn=admin,dc=redmine,dc=org", auth_source.account
+      assert_equal "cn=admin,dc=janya,dc=org", auth_source.account
       assert_equal "secret", auth_source.account_password
       assert_nil auth_source.test_connection
     end
@@ -205,11 +205,11 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
 
     def test_test_connection_bind_with_incorrect_account
       auth_source = AuthSourceLdap.find(1)
-      auth_source.account = "cn=baduser,dc=redmine,dc=org"
+      auth_source.account = "cn=baduser,dc=janya,dc=org"
       auth_source.account_password = "secret"
       auth_source.save!
 
-      assert_equal "cn=baduser,dc=redmine,dc=org", auth_source.account
+      assert_equal "cn=baduser,dc=janya,dc=org", auth_source.account
       assert_equal "secret", auth_source.account_password
       assert_raise AuthSourceException do
         auth_source.test_connection
@@ -218,11 +218,11 @@ class AuthSourceLdapTest < ActiveSupport::TestCase
 
     def test_test_connection_bind_with_incorrect_password
       auth_source = AuthSourceLdap.find(1)
-      auth_source.account = "cn=admin,dc=redmine,dc=org"
+      auth_source.account = "cn=admin,dc=janya,dc=org"
       auth_source.account_password = "badpassword"
       auth_source.save!
 
-      assert_equal "cn=admin,dc=redmine,dc=org", auth_source.account
+      assert_equal "cn=admin,dc=janya,dc=org", auth_source.account
       assert_equal "badpassword", auth_source.account_password
       assert_raise AuthSourceException do
         auth_source.test_connection

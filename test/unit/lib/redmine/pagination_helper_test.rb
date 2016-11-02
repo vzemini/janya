@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 require File.expand_path('../../../../test_helper', __FILE__)
 
 class PaginationHelperTest < ActionView::TestCase
-  include Redmine::Pagination::Helper
+  include Janya::Pagination::Helper
 
   def test_per_page_options_should_return_usefull_values
     with_settings :per_page_options => '10, 25, 50, 100' do

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class RepositorySubversionTest < ActiveSupport::TestCase
   fixtures :projects, :repositories, :enabled_modules, :users, :roles
 
-  include Redmine::I18n
+  include Janya::I18n
 
   NUM_REV = 11
 
@@ -58,7 +58,7 @@ class RepositorySubversionTest < ActiveSupport::TestCase
   end
 
   def test_url_should_be_validated_against_regexp_set_in_configuration
-    Redmine::Configuration.with 'scm_subversion_path_regexp' => 'file:///svnpath/[a-z]+' do
+    Janya::Configuration.with 'scm_subversion_path_regexp' => 'file:///svnpath/[a-z]+' do
       repo = Repository::Subversion.new(:project => @project, :identifier => 'test')
       repo.url = 'http://foo'
       assert !repo.valid?
@@ -74,7 +74,7 @@ class RepositorySubversionTest < ActiveSupport::TestCase
   end
 
   def test_url_should_be_validated_against_regexp_set_in_configuration_with_project_identifier
-    Redmine::Configuration.with 'scm_subversion_path_regexp' => 'file:///svnpath/%project%(\.[a-z]+)?' do
+    Janya::Configuration.with 'scm_subversion_path_regexp' => 'file:///svnpath/%project%(\.[a-z]+)?' do
       repo = Repository::Subversion.new(:project => @project, :identifier => 'test')
       repo.url = 'file:///svnpath/invalid'
       assert !repo.valid?
@@ -118,7 +118,7 @@ class RepositorySubversionTest < ActiveSupport::TestCase
 
     def test_entries
       entries = @repository.entries
-      assert_kind_of Redmine::Scm::Adapters::Entries, entries
+      assert_kind_of Janya::Scm::Adapters::Entries, entries
     end
 
     def test_entries_for_invalid_path_should_return_nil

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,45 +17,45 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::ThemesTest < ActiveSupport::TestCase
+class Janya::ThemesTest < ActiveSupport::TestCase
 
   def test_themes
-    themes = Redmine::Themes.themes
+    themes = Janya::Themes.themes
     assert_kind_of Array, themes
-    assert_kind_of Redmine::Themes::Theme, themes.first
+    assert_kind_of Janya::Themes::Theme, themes.first
   end
 
   def test_rescan
-    Redmine::Themes.themes.pop
+    Janya::Themes.themes.pop
 
-    assert_difference 'Redmine::Themes.themes.size' do
-      Redmine::Themes.rescan
+    assert_difference 'Janya::Themes.themes.size' do
+      Janya::Themes.rescan
     end
   end
 
   def test_theme_loaded
-    theme = Redmine::Themes.themes.last
+    theme = Janya::Themes.themes.last
 
-    assert_equal theme, Redmine::Themes.theme(theme.id)
+    assert_equal theme, Janya::Themes.theme(theme.id)
   end
 
   def test_theme_loaded_without_rescan
-    theme = Redmine::Themes.themes.last
+    theme = Janya::Themes.themes.last
 
-    assert_equal theme, Redmine::Themes.theme(theme.id, :rescan => false)
+    assert_equal theme, Janya::Themes.theme(theme.id, :rescan => false)
   end
 
   def test_theme_not_loaded
-    theme = Redmine::Themes.themes.pop
+    theme = Janya::Themes.themes.pop
 
-    assert_equal theme, Redmine::Themes.theme(theme.id)
+    assert_equal theme, Janya::Themes.theme(theme.id)
   end
 
   def test_theme_not_loaded_without_rescan
-    theme = Redmine::Themes.themes.pop
+    theme = Janya::Themes.themes.pop
 
-    assert_nil Redmine::Themes.theme(theme.id, :rescan => false)
+    assert_nil Janya::Themes.theme(theme.id, :rescan => false)
   ensure
-    Redmine::Themes.rescan
+    Janya::Themes.rescan
   end
 end

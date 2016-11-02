@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::SafeAttributesTest < ActiveSupport::TestCase
+class Janya::SafeAttributesTest < ActiveSupport::TestCase
   fixtures :users
 
   class Base
@@ -30,14 +30,14 @@ class Redmine::SafeAttributesTest < ActiveSupport::TestCase
 
   class Person < Base
     attr_accessor :firstname, :lastname, :login
-    include Redmine::SafeAttributes
+    include Janya::SafeAttributes
     safe_attributes :firstname, :lastname
     safe_attributes :login, :if => lambda {|person, user| user.admin?}
   end
 
   class Book < Base
     attr_accessor :title
-    include Redmine::SafeAttributes
+    include Janya::SafeAttributes
     safe_attributes :title
   end
 

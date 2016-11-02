@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class RepositoryBazaarTest < ActiveSupport::TestCase
   fixtures :projects
 
-  include Redmine::I18n
+  include Janya::I18n
 
   REPOSITORY_PATH = repository_path('bazaar')
   REPOSITORY_PATH_TRUNK = File.join(REPOSITORY_PATH, "trunk")
@@ -109,7 +109,7 @@ class RepositoryBazaarTest < ActiveSupport::TestCase
 
     def test_entries
       entries = @repository.entries
-      assert_kind_of Redmine::Scm::Adapters::Entries, entries
+      assert_kind_of Janya::Scm::Adapters::Entries, entries
       assert_equal 2, entries.size
 
       assert_equal 'dir', entries[0].kind
@@ -212,7 +212,7 @@ class RepositoryBazaarTest < ActiveSupport::TestCase
       def test_entries_latin1_path
         latin1_repo = create_latin1_repo
         entries = latin1_repo.entries("test-#{CHAR_1_UTF8_HEX}-dir", 2)
-        assert_kind_of Redmine::Scm::Adapters::Entries, entries
+        assert_kind_of Janya::Scm::Adapters::Entries, entries
         assert_equal 3, entries.size
         assert_equal 'file', entries[1].kind
         assert_equal "test-#{CHAR_1_UTF8_HEX}-1.txt", entries[0].name

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class ProjectsControllerTest < Redmine::ControllerTest
+class ProjectsControllerTest < Janya::ControllerTest
   fixtures :projects, :versions, :users, :email_addresses, :roles, :members,
            :member_roles, :issues, :journals, :journal_details,
            :trackers, :projects_trackers, :issue_statuses,
@@ -48,7 +48,7 @@ class ProjectsControllerTest < Redmine::ControllerTest
   def test_index_atom
     get :index, :format => 'atom'
     assert_response :success
-    assert_select 'feed>title', :text => 'Redmine: Latest projects'
+    assert_select 'feed>title', :text => 'Janya: Latest projects'
     assert_select 'feed>entry', :count => Project.visible(User.current).count
   end
 

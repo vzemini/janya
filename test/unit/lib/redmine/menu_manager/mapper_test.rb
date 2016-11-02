@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
+class Janya::MenuManager::MapperTest < ActiveSupport::TestCase
   test "Mapper#initialize should define a root MenuNode if menu is not present in items" do
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     node = menu_mapper.menu_items
     assert_not_nil node
     assert_equal :root, node.name
@@ -27,19 +27,19 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
 
   test "Mapper#initialize should use existing MenuNode if present" do
     node = "foo" # just an arbitrary reference
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {:test_menu => node})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {:test_menu => node})
     assert_equal node, menu_mapper.menu_items
   end
 
   def test_push_onto_root
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
 
     menu_mapper.exists?(:test_overview)
   end
 
   def test_push_onto_parent
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_child, { :controller => 'projects', :action => 'show'}, {:parent => :test_overview}
 
@@ -48,7 +48,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_push_onto_grandparent
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_child, { :controller => 'projects', :action => 'show'}, {:parent => :test_overview}
     menu_mapper.push :test_grandchild, { :controller => 'projects', :action => 'show'}, {:parent => :test_child}
@@ -60,7 +60,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_push_first
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_second, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_third, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_fourth, { :controller => 'projects', :action => 'show'}, {}
@@ -77,7 +77,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_push_before
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_first, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_second, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_fourth, { :controller => 'projects', :action => 'show'}, {}
@@ -94,7 +94,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_push_after
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_first, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_second, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_third, { :controller => 'projects', :action => 'show'}, {}
@@ -111,7 +111,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_push_last
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_first, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_second, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_third, { :controller => 'projects', :action => 'show'}, {}
@@ -128,7 +128,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_exists_for_child_node
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
     menu_mapper.push :test_child, { :controller => 'projects', :action => 'show'}, {:parent => :test_overview }
 
@@ -136,14 +136,14 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_exists_for_invalid_node
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
 
     assert !menu_mapper.exists?(:nothing)
   end
 
   def test_find
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
 
     item = menu_mapper.find(:test_overview)
@@ -152,7 +152,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_find_missing
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
 
     item = menu_mapper.find(:nothing)
@@ -160,7 +160,7 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_delete
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     menu_mapper.push :test_overview, { :controller => 'projects', :action => 'show'}, {}
     assert_not_nil menu_mapper.delete(:test_overview)
 
@@ -168,20 +168,20 @@ class Redmine::MenuManager::MapperTest < ActiveSupport::TestCase
   end
 
   def test_delete_missing
-    menu_mapper = Redmine::MenuManager::Mapper.new(:test_menu, {})
+    menu_mapper = Janya::MenuManager::Mapper.new(:test_menu, {})
     assert_nil menu_mapper.delete(:test_missing)
   end
 
   test 'deleting all items' do
     # Exposed by deleting :last items
-    Redmine::MenuManager.map :test_menu do |menu|
-      menu.push :not_last, Redmine::Info.help_url
+    Janya::MenuManager.map :test_menu do |menu|
+      menu.push :not_last, Janya::Info.help_url
       menu.push :administration, { :controller => 'projects', :action => 'show'}, {:last => true}
-      menu.push :help, Redmine::Info.help_url, :last => true
+      menu.push :help, Janya::Info.help_url, :last => true
     end
 
     assert_nothing_raised do
-      Redmine::MenuManager.map :test_menu do |menu|
+      Janya::MenuManager.map :test_menu do |menu|
         menu.delete(:administration)
         menu.delete(:help)
         menu.push :test_overview, { :controller => 'projects', :action => 'show'}, {}

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,18 +17,18 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::MenuManagerTest < ActiveSupport::TestCase
+class Janya::MenuManagerTest < ActiveSupport::TestCase
   def test_map_should_yield_a_mapper
-    assert_difference 'Redmine::MenuManager.items(:project_menu).size' do
-      Redmine::MenuManager.map :project_menu do |mapper|
-        assert_kind_of  Redmine::MenuManager::Mapper, mapper
+    assert_difference 'Janya::MenuManager.items(:project_menu).size' do
+      Janya::MenuManager.map :project_menu do |mapper|
+        assert_kind_of  Janya::MenuManager::Mapper, mapper
         mapper.push :new_item, '/'
       end
     end
   end
 
   def test_items_should_return_menu_items
-    items = Redmine::MenuManager.items(:project_menu)
-    assert_kind_of Redmine::MenuManager::MenuNode, items.first
+    items = Janya::MenuManager.items(:project_menu)
+    assert_kind_of Janya::MenuManager::MenuNode, items.first
   end
 end

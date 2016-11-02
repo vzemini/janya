@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -28,7 +28,7 @@ class UserTest < ActiveSupport::TestCase
             :enabled_modules,
             :tokens
 
-  include Redmine::I18n
+  include Janya::I18n
 
   def setup
     @admin = User.find(1)
@@ -654,11 +654,11 @@ class UserTest < ActiveSupport::TestCase
 
     test "#try_to_login using LDAP binding with user's account" do
       auth_source = AuthSourceLdap.find(1)
-      auth_source.account = "uid=$login,ou=Person,dc=redmine,dc=org"
+      auth_source.account = "uid=$login,ou=Person,dc=janya,dc=org"
       auth_source.account_password = ''
       auth_source.save!
 
-      ldap_user = User.new(:mail => 'example1@redmine.org', :firstname => 'LDAP', :lastname => 'user', :auth_source_id => 1)
+      ldap_user = User.new(:mail => 'example1@janya.org', :firstname => 'LDAP', :lastname => 'user', :auth_source_id => 1)
       ldap_user.login = 'example1'
       ldap_user.save!
 
@@ -684,7 +684,7 @@ class UserTest < ActiveSupport::TestCase
       auth_source = AuthSourceLdap.find(1)
       auth_source.update_attribute :onthefly_register, true
       auth_source = AuthSourceLdap.find(1)
-      auth_source.account = "uid=$login,ou=Person,dc=redmine,dc=org"
+      auth_source.account = "uid=$login,ou=Person,dc=janya,dc=org"
       auth_source.account_password = ''
       auth_source.save!
 

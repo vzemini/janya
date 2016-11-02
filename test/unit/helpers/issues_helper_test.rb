@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,8 +17,8 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class IssuesHelperTest < Redmine::HelperTest
-  include Redmine::I18n
+class IssuesHelperTest < Janya::HelperTest
+  include Janya::I18n
   include IssuesHelper
   include CustomFieldsHelper
   include ERB::Util
@@ -171,7 +171,7 @@ class IssuesHelperTest < Redmine::HelperTest
   test 'show_detail should show old and new values with a assigned to attribute' do
     detail = JournalDetail.new(:property => 'attr', :prop_key => 'assigned_to_id',
                                :old_value => 1, :value => 2)
-    assert_match 'Redmine Admin', show_detail(detail, true)
+    assert_match 'Janya Admin', show_detail(detail, true)
     assert_match 'John Smith', show_detail(detail, true)
   end
 
@@ -302,8 +302,8 @@ class IssuesHelperTest < Redmine::HelperTest
     details << JournalDetail.new(:property => 'cf', :prop_key => field.id.to_s, :old_value => '1', :value => nil)
     details << JournalDetail.new(:property => 'cf', :prop_key => field.id.to_s, :old_value => '3', :value => nil)
 
-    assert_equal ["User deleted (Dave Lopper, Redmine Admin)"], details_to_strings(details, true)
-    assert_equal ["<strong>User</strong> deleted (<del><i>Dave Lopper, Redmine Admin</i></del>)"], details_to_strings(details, false)
+    assert_equal ["User deleted (Dave Lopper, Janya Admin)"], details_to_strings(details, true)
+    assert_equal ["<strong>User</strong> deleted (<del><i>Dave Lopper, Janya Admin</i></del>)"], details_to_strings(details, false)
   end
 
   def test_details_to_strings_with_multiple_values_added_to_custom_field
@@ -312,8 +312,8 @@ class IssuesHelperTest < Redmine::HelperTest
     details << JournalDetail.new(:property => 'cf', :prop_key => field.id.to_s, :old_value => nil, :value => '1')
     details << JournalDetail.new(:property => 'cf', :prop_key => field.id.to_s, :old_value => nil, :value => '3')
 
-    assert_equal ["User Dave Lopper, Redmine Admin added"], details_to_strings(details, true)
-    assert_equal ["<strong>User</strong> <i>Dave Lopper, Redmine Admin</i> added"], details_to_strings(details, false)
+    assert_equal ["User Dave Lopper, Janya Admin added"], details_to_strings(details, true)
+    assert_equal ["<strong>User</strong> <i>Dave Lopper, Janya Admin</i> added"], details_to_strings(details, false)
   end
 
   def test_details_to_strings_with_multiple_values_added_and_removed_from_custom_field
@@ -324,11 +324,11 @@ class IssuesHelperTest < Redmine::HelperTest
     details << JournalDetail.new(:property => 'cf', :prop_key => field.id.to_s, :old_value => '3', :value => nil)
 
     assert_equal [
-      "User Redmine Admin added",
+      "User Janya Admin added",
       "User deleted (Dave Lopper, John Smith)"
       ], details_to_strings(details, true)
     assert_equal [
-      "<strong>User</strong> <i>Redmine Admin</i> added",
+      "<strong>User</strong> <i>Janya Admin</i> added",
       "<strong>User</strong> deleted (<del><i>Dave Lopper, John Smith</i></del>)"
       ], details_to_strings(details, false)
   end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,17 +17,17 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-module RedmineMenuTestHelper
+module JanyaMenuTestHelper
   # Helpers
   def get_menu_item(menu_name, item_name)
-    Redmine::MenuManager.items(menu_name).find {|item| item.name == item_name.to_sym}
+    Janya::MenuManager.items(menu_name).find {|item| item.name == item_name.to_sym}
   end
 end
 
-class Redmine::MenuManager::MenuItemTest < ActiveSupport::TestCase
-  include RedmineMenuTestHelper
+class Janya::MenuManager::MenuItemTest < ActiveSupport::TestCase
+  include JanyaMenuTestHelper
 
-  Redmine::MenuManager.map :test_menu do |menu|
+  Janya::MenuManager.map :test_menu do |menu|
     menu.push(:parent, '/test', { })
     menu.push(:child_menu, '/test', { :parent => :parent})
     menu.push(:child2_menu, '/test', { :parent => :parent})
@@ -36,29 +36,29 @@ class Redmine::MenuManager::MenuItemTest < ActiveSupport::TestCase
   # context new menu item
   def test_new_menu_item_should_require_a_name
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new
+      Janya::MenuManager::MenuItem.new
     end
   end
 
   def test_new_menu_item_should_require_an_url
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new(:test_missing_url)
+      Janya::MenuManager::MenuItem.new(:test_missing_url)
     end
   end
 
   def test_new_menu_item_with_all_required_parameters
-    assert Redmine::MenuManager::MenuItem.new(:test_good_menu, '/test', {})
+    assert Janya::MenuManager::MenuItem.new(:test_good_menu, '/test', {})
   end
 
   def test_new_menu_item_should_require_a_proc_to_use_for_the_if_condition
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new(:test_error, '/test',
+      Janya::MenuManager::MenuItem.new(:test_error, '/test',
                                          {
                                            :if => ['not_a_proc']
                                          })
     end
 
-    assert Redmine::MenuManager::MenuItem.new(:test_good_if, '/test',
+    assert Janya::MenuManager::MenuItem.new(:test_good_if, '/test',
                                               {
                                                 :if => Proc.new{}
                                               })
@@ -66,13 +66,13 @@ class Redmine::MenuManager::MenuItemTest < ActiveSupport::TestCase
 
   def test_new_menu_item_should_allow_a_hash_for_extra_html_options
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new(:test_error, '/test',
+      Janya::MenuManager::MenuItem.new(:test_error, '/test',
                                          {
                                            :html => ['not_a_hash']
                                          })
     end
 
-    assert Redmine::MenuManager::MenuItem.new(:test_good_html, '/test',
+    assert Janya::MenuManager::MenuItem.new(:test_good_html, '/test',
                                               {
                                                 :html => { :onclick => 'doSomething'}
                                               })
@@ -80,13 +80,13 @@ class Redmine::MenuManager::MenuItemTest < ActiveSupport::TestCase
 
   def test_new_menu_item_should_require_a_proc_to_use_the_children_option
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new(:test_error, '/test',
+      Janya::MenuManager::MenuItem.new(:test_error, '/test',
                                          {
                                            :children => ['not_a_proc']
                                          })
     end
 
-    assert Redmine::MenuManager::MenuItem.new(:test_good_children, '/test',
+    assert Janya::MenuManager::MenuItem.new(:test_good_children, '/test',
                                               {
                                                 :children => Proc.new{}
                                               })
@@ -94,7 +94,7 @@ class Redmine::MenuManager::MenuItemTest < ActiveSupport::TestCase
 
   def test_new_should_not_allow_setting_the_parent_item_to_the_current_item
     assert_raises ArgumentError do
-      Redmine::MenuManager::MenuItem.new(:test_error, '/test', { :parent => :test_error })
+      Janya::MenuManager::MenuItem.new(:test_error, '/test', { :parent => :test_error })
     end
   end
 

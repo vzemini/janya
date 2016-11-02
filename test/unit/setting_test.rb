@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@ class SettingTest < ActiveSupport::TestCase
     Setting.delete_all
     Setting.clear_cache
 
-    assert_equal "Redmine", Setting.app_title
+    assert_equal "Janya", Setting.app_title
     assert Setting.self_registration?
     assert !Setting.login_required?
   end

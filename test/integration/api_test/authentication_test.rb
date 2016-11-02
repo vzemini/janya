@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
+class Janya::ApiTest::AuthenticationTest < Janya::ApiTest::Base
   fixtures :users
 
   def test_api_should_deny_without_credentials
@@ -80,7 +80,7 @@ class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
   def test_api_should_accept_auth_using_api_key_as_request_header
     user = User.generate!
     token = Token.create!(:user => user, :action => 'api')
-    get "/users/current.xml", {}, {'X-Redmine-API-Key' => token.value.to_s}
+    get "/users/current.xml", {}, {'X-Janya-API-Key' => token.value.to_s}
     assert_response 200
     assert_equal user, User.current
   end
@@ -88,7 +88,7 @@ class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
   def test_api_should_deny_auth_using_wrong_api_key_as_request_header
     user = User.generate!
     token = Token.create!(:user => user, :action => 'feeds') # not the API key
-    get "/users/current.xml", {}, {'X-Redmine-API-Key' => token.value.to_s}
+    get "/users/current.xml", {}, {'X-Janya-API-Key' => token.value.to_s}
     assert_response 401
     assert_equal User.anonymous, User.current
   end
@@ -127,14 +127,14 @@ class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
     user = User.find(1)
     su = User.find(4)
 
-    get '/users/current', {}, {'X-Redmine-API-Key' => user.api_key, 'X-Redmine-Switch-User' => su.login}
+    get '/users/current', {}, {'X-Janya-API-Key' => user.api_key, 'X-Janya-Switch-User' => su.login}
     assert_response :success
     assert_select 'h2', :text => su.name
     assert_equal su, User.current
   end
 
   def test_api_should_respond_with_412_when_trying_to_switch_to_a_invalid_user
-    get '/users/current', {}, {'X-Redmine-API-Key' => User.find(1).api_key, 'X-Redmine-Switch-User' => 'foobar'}
+    get '/users/current', {}, {'X-Janya-API-Key' => User.find(1).api_key, 'X-Janya-Switch-User' => 'foobar'}
     assert_response 412
   end
 
@@ -142,7 +142,7 @@ class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
     user = User.find(5)
     assert user.locked?
 
-    get '/users/current', {}, {'X-Redmine-API-Key' => User.find(1).api_key, 'X-Redmine-Switch-User' => user.login}
+    get '/users/current', {}, {'X-Janya-API-Key' => User.find(1).api_key, 'X-Janya-Switch-User' => user.login}
     assert_response 412
   end
 
@@ -150,7 +150,7 @@ class Redmine::ApiTest::AuthenticationTest < Redmine::ApiTest::Base
     user = User.find(2)
     su = User.find(4)
 
-    get '/users/current', {}, {'X-Redmine-API-Key' => user.api_key, 'X-Redmine-Switch-User' => su.login}
+    get '/users/current', {}, {'X-Janya-API-Key' => user.api_key, 'X-Janya-Switch-User' => su.login}
     assert_response :success
     assert_select 'h2', :text => user.name
     assert_equal user, User.current

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@ class MemberTest < ActiveSupport::TestCase
            :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions,
            :boards
 
-  include Redmine::I18n
+  include Janya::I18n
 
   def setup
     @jsmith = Member.find(1)

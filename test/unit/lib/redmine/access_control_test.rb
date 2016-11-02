@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,21 +17,21 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::AccessControlTest < ActiveSupport::TestCase
+class Janya::AccessControlTest < ActiveSupport::TestCase
 
   def setup
-    @access_module = Redmine::AccessControl
+    @access_module = Janya::AccessControl
   end
 
   def test_permissions
     perms = @access_module.permissions
     assert perms.is_a?(Array)
-    assert perms.first.is_a?(Redmine::AccessControl::Permission)
+    assert perms.first.is_a?(Janya::AccessControl::Permission)
   end
 
   def test_module_permission
     perm = @access_module.permission(:view_issues)
-    assert perm.is_a?(Redmine::AccessControl::Permission)
+    assert perm.is_a?(Janya::AccessControl::Permission)
     assert_equal :view_issues, perm.name
     assert_equal :issue_tracking, perm.project_module
     assert perm.actions.is_a?(Array)
@@ -40,7 +40,7 @@ class Redmine::AccessControlTest < ActiveSupport::TestCase
 
   def test_no_module_permission
     perm = @access_module.permission(:edit_project)
-    assert perm.is_a?(Redmine::AccessControl::Permission)
+    assert perm.is_a?(Janya::AccessControl::Permission)
     assert_equal :edit_project, perm.name
     assert_nil perm.project_module
     assert perm.actions.is_a?(Array)

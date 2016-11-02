@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../base', __FILE__)
 
-class Redmine::UiTest::CustomFieldsTest < Redmine::UiTest::Base
+class Janya::UiTest::CustomFieldsTest < Janya::UiTest::Base
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
            :trackers, :projects_trackers, :enabled_modules, 
            :custom_fields, :custom_values, :custom_fields_trackers

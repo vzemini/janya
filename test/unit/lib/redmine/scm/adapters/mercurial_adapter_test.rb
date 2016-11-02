@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,22 +18,22 @@
 require File.expand_path('../../../../../../test_helper', __FILE__)
 
 class MercurialAdapterTest < ActiveSupport::TestCase
-  HELPERS_DIR        = Redmine::Scm::Adapters::MercurialAdapter::HELPERS_DIR
-  TEMPLATE_NAME      = Redmine::Scm::Adapters::MercurialAdapter::TEMPLATE_NAME
-  TEMPLATE_EXTENSION = Redmine::Scm::Adapters::MercurialAdapter::TEMPLATE_EXTENSION
+  HELPERS_DIR        = Janya::Scm::Adapters::MercurialAdapter::HELPERS_DIR
+  TEMPLATE_NAME      = Janya::Scm::Adapters::MercurialAdapter::TEMPLATE_NAME
+  TEMPLATE_EXTENSION = Janya::Scm::Adapters::MercurialAdapter::TEMPLATE_EXTENSION
 
   REPOSITORY_PATH = repository_path('mercurial')
   CHAR_1_HEX = "\xc3\x9c"
 
   if File.directory?(REPOSITORY_PATH)
     def setup
-      adapter_class = Redmine::Scm::Adapters::MercurialAdapter
+      adapter_class = Janya::Scm::Adapters::MercurialAdapter
       assert adapter_class
       assert adapter_class.client_command
       assert_equal true, adapter_class.client_available
       assert_equal true, adapter_class.client_version_above?([0, 9, 5])
 
-      @adapter = Redmine::Scm::Adapters::MercurialAdapter.new(
+      @adapter = Janya::Scm::Adapters::MercurialAdapter.new(
                             REPOSITORY_PATH,
                             nil,
                             nil,
@@ -78,7 +78,7 @@ class MercurialAdapterTest < ActiveSupport::TestCase
     def test_info
       [REPOSITORY_PATH, REPOSITORY_PATH + "/",
            REPOSITORY_PATH + "//"].each do |repo|
-        adp = Redmine::Scm::Adapters::MercurialAdapter.new(repo)
+        adp = Janya::Scm::Adapters::MercurialAdapter.new(repo)
         repo_path =  adp.info.root_url.gsub(/\\/, "/")
         assert_equal REPOSITORY_PATH, repo_path
         assert_equal '33', adp.info.lastrev.revision
@@ -429,11 +429,11 @@ class MercurialAdapterTest < ActiveSupport::TestCase
     end
 
     def test_path_encoding_default_utf8
-      adpt1 = Redmine::Scm::Adapters::MercurialAdapter.new(
+      adpt1 = Janya::Scm::Adapters::MercurialAdapter.new(
                                 REPOSITORY_PATH
                               )
       assert_equal "UTF-8", adpt1.path_encoding
-      adpt2 = Redmine::Scm::Adapters::MercurialAdapter.new(
+      adpt2 = Janya::Scm::Adapters::MercurialAdapter.new(
                                 REPOSITORY_PATH,
                                 nil,
                                 nil,

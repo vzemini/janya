@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class RepositoryMercurialTest < ActiveSupport::TestCase
   fixtures :projects
 
-  include Redmine::I18n
+  include Janya::I18n
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/mercurial_repository').to_s
   NUM_REV = 34
@@ -73,7 +73,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
 
     def test_entries_on_tip
       entries = @repository.entries
-      assert_kind_of Redmine::Scm::Adapters::Entries, entries
+      assert_kind_of Janya::Scm::Adapters::Entries, entries
     end
 
     def assert_entries(is_short_scmid=true)
@@ -82,7 +82,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       [2, '400bb8672109', '400', 400].each do |r|
         entries1 = @repository.entries(nil, r)
         assert entries1
-        assert_kind_of Redmine::Scm::Adapters::Entries, entries1
+        assert_kind_of Janya::Scm::Adapters::Entries, entries1
         assert_equal 3, entries1.size
         readme = entries1[2]
         assert_equal '1',   readme.lastrev.revision
@@ -113,7 +113,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
 
     def test_entry_on_tip
       entry = @repository.entry
-      assert_kind_of Redmine::Scm::Adapters::Entry, entry
+      assert_kind_of Janya::Scm::Adapters::Entry, entry
       assert_equal "", entry.path
       assert_equal 'dir', entry.kind
     end
@@ -124,7 +124,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       ["README", "/README"].each do |path|
         ["0", "0885933ad4f6", "0885933ad4f68d77c2649cd11f8311276e7ef7ce"].each do |rev|
           entry = @repository.entry(path, rev)
-          assert_kind_of Redmine::Scm::Adapters::Entry, entry
+          assert_kind_of Janya::Scm::Adapters::Entry, entry
           assert_equal "README", entry.path
           assert_equal "file", entry.kind
           assert_equal '0', entry.lastrev.revision
@@ -134,7 +134,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       ["sources", "/sources", "/sources/"].each do |path|
         ["0", "0885933ad4f6", "0885933ad4f68d77c2649cd11f8311276e7ef7ce"].each do |rev|
           entry = @repository.entry(path, rev)
-          assert_kind_of Redmine::Scm::Adapters::Entry, entry
+          assert_kind_of Janya::Scm::Adapters::Entry, entry
           assert_equal "sources", entry.path
           assert_equal "dir", entry.kind
         end
@@ -142,7 +142,7 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       ["sources/watchers_controller.rb", "/sources/watchers_controller.rb"].each do |path|
         ["0", "0885933ad4f6", "0885933ad4f68d77c2649cd11f8311276e7ef7ce"].each do |rev|
           entry = @repository.entry(path, rev)
-          assert_kind_of Redmine::Scm::Adapters::Entry, entry
+          assert_kind_of Janya::Scm::Adapters::Entry, entry
           assert_equal "sources/watchers_controller.rb", entry.path
           assert_equal "file", entry.kind
           assert_equal '0', entry.lastrev.revision

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::IssueStatusesTest < Redmine::ApiTest::Base
+class Janya::ApiTest::IssueStatusesTest < Janya::ApiTest::Base
   fixtures :issue_statuses
 
   test "GET /issue_statuses.xml should return issue statuses" do

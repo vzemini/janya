@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@ class TimeEntryActivityTest < ActiveSupport::TestCase
            :groups_users,
            :enabled_modules
 
-  include Redmine::I18n
+  include Janya::I18n
 
   def test_should_be_an_enumeration
     assert TimeEntryActivity.ancestors.include?(Enumeration)

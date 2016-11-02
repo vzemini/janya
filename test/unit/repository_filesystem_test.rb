@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class RepositoryFilesystemTest < ActiveSupport::TestCase
   fixtures :projects
 
-  include Redmine::I18n
+  include Janya::I18n
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/filesystem_repository').to_s
 
@@ -70,7 +70,7 @@ class RepositoryFilesystemTest < ActiveSupport::TestCase
 
     def test_entries
       entries = @repository.entries("", 2)
-      assert_kind_of Redmine::Scm::Adapters::Entries, entries
+      assert_kind_of Janya::Scm::Adapters::Entries, entries
       assert_equal 3, entries.size
     end
 

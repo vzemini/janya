@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -16,9 +16,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require File.expand_path('../../../../../test_helper', __FILE__)
-require 'redmine/field_format'
+require 'janya/field_format'
 
-class Redmine::UserFieldFormatTest < ActionView::TestCase
+class Janya::UserFieldFormatTest < ActionView::TestCase
   fixtures :projects, :roles, :users, :members, :member_roles,
            :trackers,
            :issue_statuses, :issue_categories, :issue_relations, :workflows,

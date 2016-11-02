@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingCommentsTest < Redmine::RoutingTest
+class RoutingCommentsTest < Janya::RoutingTest
   def test_comments
     should_route 'POST /news/567/comments' => 'comments#create', :id => '567'
     should_route 'DELETE /news/567/comments/15' => 'comments#destroy', :id => '567', :comment_id => '15'

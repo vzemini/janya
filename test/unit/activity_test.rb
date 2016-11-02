@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -69,7 +69,7 @@ class ActivityTest < ActiveSupport::TestCase
 
   def test_user_activity
     user = User.find(2)
-    events = Redmine::Activity::Fetcher.new(User.anonymous, :author => user).events(nil, nil, :limit => 10)
+    events = Janya::Activity::Fetcher.new(User.anonymous, :author => user).events(nil, nil, :limit => 10)
 
     assert(events.size > 0)
     assert(events.size <= 10)
@@ -77,7 +77,7 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   def test_journal_with_notes_and_changes_should_be_returned_once
-    f = Redmine::Activity::Fetcher.new(User.anonymous, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(User.anonymous, :project => Project.find(1))
     f.scope = ['issues']
     events = f.events
 
@@ -85,7 +85,7 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   def test_files_activity
-    f = Redmine::Activity::Fetcher.new(User.anonymous, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(User.anonymous, :project => Project.find(1))
     f.scope = ['files']
     events = f.events
 
@@ -158,40 +158,40 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   def test_event_types_should_consider_activity_provider_permission
-    Redmine::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithPermission'
+    Janya::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithPermission'
     user = MockUser.new(:custom_permission)
-    f = Redmine::Activity::Fetcher.new(user, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(user, :project => Project.find(1))
     assert_include 'test', f.event_types
   ensure
-    Redmine::Activity.delete 'test'
+    Janya::Activity.delete 'test'
   end
 
   def test_event_types_should_include_activity_provider_with_nil_permission
-    Redmine::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithNilPermission'
+    Janya::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithNilPermission'
     user = MockUser.new()
-    f = Redmine::Activity::Fetcher.new(user, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(user, :project => Project.find(1))
     assert_include 'test', f.event_types
   ensure
-    Redmine::Activity.delete 'test'
+    Janya::Activity.delete 'test'
   end
 
   def test_event_types_should_use_default_permission_for_activity_provider_without_permission
-    Redmine::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithoutPermission'
+    Janya::Activity.register 'test', :class_name => 'ActivityTest::TestActivityProviderWithoutPermission'
 
     user = MockUser.new()
-    f = Redmine::Activity::Fetcher.new(user, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(user, :project => Project.find(1))
     assert_not_include 'test', f.event_types
 
     user = MockUser.new(:view_test)
-    f = Redmine::Activity::Fetcher.new(user, :project => Project.find(1))
+    f = Janya::Activity::Fetcher.new(user, :project => Project.find(1))
     assert_include 'test', f.event_types
   ensure
-    Redmine::Activity.delete 'test'
+    Janya::Activity.delete 'test'
   end
 
   private
 
   def find_events(user, options={})
-    Redmine::Activity::Fetcher.new(user, options).events(Date.today - 30, Date.today + 1)
+    Janya::Activity::Fetcher.new(user, options).events(Date.today - 30, Date.today + 1)
   end
 end

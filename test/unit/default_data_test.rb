@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,16 +18,16 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class DefaultDataTest < ActiveSupport::TestCase
-  include Redmine::I18n
+  include Janya::I18n
   fixtures :roles
 
   def test_no_data
-    assert !Redmine::DefaultData::Loader::no_data?
+    assert !Janya::DefaultData::Loader::no_data?
     Role.where("builtin = 0").delete_all
     Tracker.delete_all
     IssueStatus.delete_all
     Enumeration.delete_all
-    assert Redmine::DefaultData::Loader::no_data?
+    assert Janya::DefaultData::Loader::no_data?
   end
 
   def test_load
@@ -37,7 +37,7 @@ class DefaultDataTest < ActiveSupport::TestCase
         Tracker.delete_all
         IssueStatus.delete_all
         Enumeration.delete_all
-        assert Redmine::DefaultData::Loader::load(lang)
+        assert Janya::DefaultData::Loader::load(lang)
         assert_not_nil DocumentCategory.first
         assert_not_nil IssuePriority.first
         assert_not_nil TimeEntryActivity.first

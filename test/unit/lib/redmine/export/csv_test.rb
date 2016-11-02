@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ class CsvTest < ActiveSupport::TestCase
 
   def test_should_include_bom_when_utf8_encoded
     with_locale 'sk' do
-      string = Redmine::Export::CSV.generate {|csv| csv << %w(Foo Bar)}
+      string = Janya::Export::CSV.generate {|csv| csv << %w(Foo Bar)}
       assert_equal 'UTF-8', string.encoding.name
       assert string.starts_with?(BOM)
     end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,14 +17,14 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesGitControllerTest < Redmine::ControllerTest
+class RepositoriesGitControllerTest < Janya::ControllerTest
   tests RepositoriesController
 
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
            :repositories, :enabled_modules
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/git_repository').to_s
-  REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
+  REPOSITORY_PATH.gsub!(/\//, "\\") if Janya::Platform.mswin?
   PRJ_ID     = 3
   CHAR_1_HEX = "\xc3\x9c".force_encoding('UTF-8')
   FELIX_HEX  = "Felix Sch\xC3\xA4fer".force_encoding('UTF-8')
@@ -32,7 +32,7 @@ class RepositoriesGitControllerTest < Redmine::ControllerTest
 
   ## Git, Mercurial and CVS path encodings are binary.
   ## Subversion supports URL encoding for path.
-  ## Redmine Mercurial adapter and extension use URL encoding.
+  ## Janya Mercurial adapter and extension use URL encoding.
   ## Git accepts only binary path in command line parameter.
   ## So, there is no way to use binary command line parameter in JRuby.
   JRUBY_SKIP     = (RUBY_PLATFORM == 'java')
@@ -85,8 +85,8 @@ class RepositoriesGitControllerTest < Redmine::ControllerTest
     ## Git for Windows (msysGit) changed internal API from ANSI to Unicode in 1.7.10
     ## http://code.google.com/p/msysgit/issues/detail?id=80
     ## So, Latin-1 path tests fail on Japanese Windows
-    WINDOWS_PASS = (Redmine::Platform.mswin? &&
-                         Redmine::Scm::Adapters::GitAdapter.client_version_above?([1, 7, 10]))
+    WINDOWS_PASS = (Janya::Platform.mswin? &&
+                         Janya::Scm::Adapters::GitAdapter.client_version_above?([1, 7, 10]))
     WINDOWS_SKIP_STR = "TODO: This test fails in Git for Windows above 1.7.10"
 
     def test_get_new

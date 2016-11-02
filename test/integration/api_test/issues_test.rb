@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::IssuesTest < Redmine::ApiTest::Base
+class Janya::ApiTest::IssuesTest < Janya::ApiTest::Base
   fixtures :projects,
     :users,
     :roles,
@@ -55,7 +55,7 @@ class Redmine::ApiTest::IssuesTest < Redmine::ApiTest::Base
   end
 
   test "GET /issues.xml with nometa header should not contain metadata" do
-    get '/issues.xml', {}, {'X-Redmine-Nometa' => '1'}
+    get '/issues.xml', {}, {'X-Janya-Nometa' => '1'}
     assert_select 'issues[type=array]:not([total_count]):not([limit]):not([offset])'
   end
 

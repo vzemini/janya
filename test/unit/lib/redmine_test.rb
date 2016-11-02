@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,24 +17,24 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-module RedmineMenuTestHelper
+module JanyaMenuTestHelper
   # Assertions
   def assert_number_of_items_in_menu(menu_name, count)
-    assert Redmine::MenuManager.items(menu_name).size >= count, "Menu has less than #{count} items"
+    assert Janya::MenuManager.items(menu_name).size >= count, "Menu has less than #{count} items"
   end
 
   def assert_menu_contains_item_named(menu_name, item_name)
-    assert Redmine::MenuManager.items(menu_name).collect(&:name).include?(item_name.to_sym), "Menu did not have an item named #{item_name}"
+    assert Janya::MenuManager.items(menu_name).collect(&:name).include?(item_name.to_sym), "Menu did not have an item named #{item_name}"
   end
 
   # Helpers
   def get_menu_item(menu_name, item_name)
-    Redmine::MenuManager.items(menu_name).find {|item| item.name == item_name.to_sym}
+    Janya::MenuManager.items(menu_name).find {|item| item.name == item_name.to_sym}
   end
 end
 
-class RedmineTest < ActiveSupport::TestCase
-  include RedmineMenuTestHelper
+class JanyaTest < ActiveSupport::TestCase
+  include JanyaMenuTestHelper
 
   def test_top_menu
     assert_number_of_items_in_menu :top_menu, 5

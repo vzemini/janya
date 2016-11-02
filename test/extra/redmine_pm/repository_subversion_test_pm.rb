@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,10 +18,10 @@
 require File.expand_path('../test_case', __FILE__)
 require 'tmpdir'
 
-class RedminePmTest::RepositorySubversionTest < RedminePmTest::TestCase
+class JanyaPmTest::RepositorySubversionTest < JanyaPmTest::TestCase
   fixtures :projects, :users, :members, :roles, :member_roles, :auth_sources
 
-  SVN_BIN = Redmine::Configuration['scm_subversion_command'] || "svn"
+  SVN_BIN = Janya::Configuration['scm_subversion_command'] || "svn"
 
   def test_anonymous_read_on_public_repo_with_permission_should_succeed
     assert_success "ls", svn_url
@@ -228,7 +228,7 @@ class RedminePmTest::RepositorySubversionTest < RedminePmTest::TestCase
 
   if ldap_configured?
     def test_user_with_ldap_auth_source_should_authenticate_with_ldap_credentials
-      ldap_user = User.new(:mail => 'example1@redmine.org', :firstname => 'LDAP', :lastname => 'user', :auth_source_id => 1)
+      ldap_user = User.new(:mail => 'example1@janya.org', :firstname => 'LDAP', :lastname => 'user', :auth_source_id => 1)
       ldap_user.login = 'example1'
       ldap_user.save!
   
@@ -301,7 +301,7 @@ class RedminePmTest::RepositorySubversionTest < RedminePmTest::TestCase
   end
 
   def svn_url(path=nil)
-    host = ENV['REDMINE_TEST_DAV_SERVER'] || '127.0.0.1'
+    host = ENV['JANYA_TEST_DAV_SERVER'] || '127.0.0.1'
     url = "http://#{host}/svn/ecookbook"
     url << "/#{path}" if path
     url

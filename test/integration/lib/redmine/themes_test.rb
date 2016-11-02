@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class ThemesTest < Redmine::IntegrationTest
+class ThemesTest < Janya::IntegrationTest
 
   def setup
-    Redmine::Themes.rescan
-    @theme = Redmine::Themes.themes.last
+    Janya::Themes.rescan
+    @theme = Janya::Themes.themes.last
     Setting.ui_theme = @theme.id
   end
 
@@ -85,7 +85,7 @@ class ThemesTest < Redmine::IntegrationTest
   end
 
   def test_with_sub_uri
-    Redmine::Utils.relative_url_root = '/foo'
+    Janya::Utils.relative_url_root = '/foo'
     @theme.javascripts << 'theme'
     @theme.favicons << 'a.ico'
     get '/'
@@ -95,6 +95,6 @@ class ThemesTest < Redmine::IntegrationTest
     assert_select "script[src^=?]", "/foo/themes/#{@theme.dir}/javascripts/theme.js"
     assert_select 'link[rel="shortcut icon"][href^=?]', "/foo/themes/#{@theme.dir}/favicon/a.ico"
   ensure
-    Redmine::Utils.relative_url_root = ''
+    Janya::Utils.relative_url_root = ''
   end
 end

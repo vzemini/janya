@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class ActivitiesControllerTest < Redmine::ControllerTest
+class ActivitiesControllerTest < Janya::ControllerTest
   fixtures :projects, :trackers, :issue_statuses, :issues,
            :enumerations, :users, :issue_categories,
            :projects_trackers,
@@ -129,7 +129,7 @@ class ActivitiesControllerTest < Redmine::ControllerTest
     get :index, :user_id => 2, :format => 'atom'
 
     assert_response :success
-    assert_select 'title', :text => "Redmine: #{User.find(2).name}"
+    assert_select 'title', :text => "Janya: #{User.find(2).name}"
   end
 
   def test_index_should_show_private_notes_with_permission_only

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,10 +17,10 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::PaginationTest < ActiveSupport::TestCase
+class Janya::PaginationTest < ActiveSupport::TestCase
 
   def setup
-    @klass = Redmine::Pagination::Paginator
+    @klass = Janya::Pagination::Paginator
   end
 
   def test_count_is_zero

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingTimelogsTest < Redmine::RoutingTest
+class RoutingTimelogsTest < Janya::RoutingTest
   def test_timelogs_global
     should_route 'GET /time_entries' => 'timelog#index'
     should_route 'GET /time_entries.csv' => 'timelog#index', :format => 'csv'

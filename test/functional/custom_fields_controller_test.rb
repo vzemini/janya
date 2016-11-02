@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class CustomFieldsControllerTest < Redmine::ControllerTest
+class CustomFieldsControllerTest < Janya::ControllerTest
   fixtures :custom_fields, :custom_values,
            :custom_fields_projects, :custom_fields_trackers,
            :roles, :users,
@@ -52,7 +52,7 @@ class CustomFieldsControllerTest < Redmine::ControllerTest
 
   def test_new_should_work_for_each_customized_class_and_format
     custom_field_classes.each do |klass|
-      Redmine::FieldFormat.formats_for_custom_field_class(klass).each do |format|
+      Janya::FieldFormat.formats_for_custom_field_class(klass).each do |format|
         get :new, :type => klass.name, :custom_field => {:field_format => format.name}
         assert_response :success
 

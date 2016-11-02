@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class AdminControllerTest < Redmine::ControllerTest
+class AdminControllerTest < Janya::ControllerTest
   fixtures :projects, :users, :email_addresses, :roles
 
   def setup
@@ -66,7 +66,7 @@ class AdminControllerTest < Redmine::ControllerTest
 
   def test_load_default_configuration_data_should_rescue_error
     delete_configuration_data
-    Redmine::DefaultData::Loader.stubs(:load).raises(Exception.new("Something went wrong"))
+    Janya::DefaultData::Loader.stubs(:load).raises(Exception.new("Something went wrong"))
     post :default_configuration, :lang => 'fr'
     assert_response :redirect
     assert_not_nil flash[:error]
@@ -95,7 +95,7 @@ class AdminControllerTest < Redmine::ControllerTest
   end
 
   def test_no_plugins
-    Redmine::Plugin.stubs(:registered_plugins).returns({})
+    Janya::Plugin.stubs(:registered_plugins).returns({})
 
     get :plugins
     assert_response :success
@@ -104,14 +104,14 @@ class AdminControllerTest < Redmine::ControllerTest
 
   def test_plugins
     # Register a few plugins
-    Redmine::Plugin.register :foo do
+    Janya::Plugin.register :foo do
       name 'Foo plugin'
       author 'John Smith'
       description 'This is a test plugin'
       version '0.0.1'
       settings :default => {'sample_setting' => 'value', 'foo'=>'bar'}, :partial => 'foo/settings'
     end
-    Redmine::Plugin.register :bar do
+    Janya::Plugin.register :bar do
     end
 
     get :plugins
@@ -133,7 +133,7 @@ class AdminControllerTest < Redmine::ControllerTest
   end
 
   def test_admin_menu_plugin_extension
-    Redmine::MenuManager.map :admin_menu do |menu|
+    Janya::MenuManager.map :admin_menu do |menu|
       menu.push :test_admin_menu_plugin_extension, '/foo/bar', :caption => 'Test'
     end
 
@@ -141,7 +141,7 @@ class AdminControllerTest < Redmine::ControllerTest
     assert_response :success
     assert_select 'div#admin-menu a[href="/foo/bar"]', :text => 'Test'
 
-    Redmine::MenuManager.map :admin_menu do |menu|
+    Janya::MenuManager.map :admin_menu do |menu|
       menu.delete :test_admin_menu_plugin_extension
     end
   end

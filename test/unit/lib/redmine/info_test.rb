@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::InfoTest < ActiveSupport::TestCase
+class Janya::InfoTest < ActiveSupport::TestCase
   def test_environment
-    env = Redmine::Info.environment
+    env = Janya::Info.environment
 
     assert_kind_of String, env
-    assert_match 'Redmine version', env
+    assert_match 'Janya version', env
   end
 end

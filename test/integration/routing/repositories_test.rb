@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingRepositoriesTest < Redmine::RoutingTest
+class RoutingRepositoriesTest < Janya::RoutingTest
   def setup
     @path_hash  = repository_path_hash(%w[path to file.c])
     assert_equal "path/to/file.c", @path_hash[:path]

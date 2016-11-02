@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class MyControllerTest < Redmine::ControllerTest
+class MyControllerTest < Janya::ControllerTest
   fixtures :users, :email_addresses, :user_preferences, :roles, :projects, :members, :member_roles,
   :issues, :issue_statuses, :trackers, :enumerations, :custom_fields, :auth_sources
 
@@ -52,7 +52,7 @@ class MyControllerTest < Redmine::ControllerTest
   end
 
   def test_page_with_all_blocks
-    blocks = Redmine::MyPage.blocks.keys
+    blocks = Janya::MyPage.blocks.keys
     preferences = User.find(2).pref
     preferences[:my_page_layout] = {'top' => blocks}
     preferences.save!

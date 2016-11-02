@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class QueryTest < ActiveSupport::TestCase
-  include Redmine::I18n
+  include Janya::I18n
 
   fixtures :projects, :enabled_modules, :users, :members,
            :member_roles, :roles, :trackers, :issue_statuses,
@@ -1801,7 +1801,7 @@ class QueryTest < ActiveSupport::TestCase
     t = Time.new(2016, 3, 23, 9, 59, 59, 0).end_of_hour
     assert_equal "table.field > '#{Query.connection.quoted_date f}' AND table.field <= '#{Query.connection.quoted_date t}'", c
   ensure
-    ActiveRecord::Base.default_timezone = :local # restore Redmine default
+    ActiveRecord::Base.default_timezone = :local # restore Janya default
   end
 
 end

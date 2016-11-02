@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingSettingsTest < Redmine::RoutingTest
+class RoutingSettingsTest < Janya::RoutingTest
   def test_settings
     should_route 'GET /settings' => 'settings#index'
     should_route 'GET /settings/edit' => 'settings#edit'

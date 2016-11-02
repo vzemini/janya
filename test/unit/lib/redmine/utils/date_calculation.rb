@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,8 +17,8 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::Utils::DateCalculationTest < ActiveSupport::TestCase
-  include Redmine::Utils::DateCalculation
+class Janya::Utils::DateCalculationTest < ActiveSupport::TestCase
+  include Janya::Utils::DateCalculation
 
   def test_working_days_without_non_working_week_days
     with_settings :non_working_week_days => [] do

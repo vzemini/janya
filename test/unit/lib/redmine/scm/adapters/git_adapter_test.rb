@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ class GitAdapterTest < ActiveSupport::TestCase
 
   ## Git, Mercurial and CVS path encodings are binary.
   ## Subversion supports URL encoding for path.
-  ## Redmine Mercurial adapter and extension use URL encoding.
+  ## Janya Mercurial adapter and extension use URL encoding.
   ## Git accepts only binary path in command line parameter.
   ## So, there is no way to use binary command line parameter in JRuby.
   JRUBY_SKIP     = (RUBY_PLATFORM == 'java')
@@ -38,19 +38,19 @@ class GitAdapterTest < ActiveSupport::TestCase
     ## Git for Windows (msysGit) changed internal API from ANSI to Unicode in 1.7.10
     ## http://code.google.com/p/msysgit/issues/detail?id=80
     ## So, Latin-1 path tests fail on Japanese Windows
-    WINDOWS_PASS = (Redmine::Platform.mswin? &&
-                    Redmine::Scm::Adapters::GitAdapter.client_version_above?([1, 7, 10]))
+    WINDOWS_PASS = (Janya::Platform.mswin? &&
+                    Janya::Scm::Adapters::GitAdapter.client_version_above?([1, 7, 10]))
     WINDOWS_SKIP_STR = "TODO: This test fails in Git for Windows above 1.7.10"
 
     def setup
-      adapter_class = Redmine::Scm::Adapters::GitAdapter
+      adapter_class = Janya::Scm::Adapters::GitAdapter
       assert adapter_class
       assert adapter_class.client_command
       assert_equal true, adapter_class.client_available
       assert_equal true, adapter_class.client_version_above?([1])
       assert_equal true, adapter_class.client_version_above?([1, 0])
 
-      @adapter = Redmine::Scm::Adapters::GitAdapter.new(
+      @adapter = Janya::Scm::Adapters::GitAdapter.new(
                     REPOSITORY_PATH,
                     nil,
                     nil,
@@ -217,7 +217,7 @@ class GitAdapterTest < ActiveSupport::TestCase
 
     def test_revisions_invalid_rev
       assert_equal [], @adapter.revisions('', '1234abcd', "master")
-      assert_raise Redmine::Scm::Adapters::CommandFailed do
+      assert_raise Janya::Scm::Adapters::CommandFailed do
         revs1 = []
         @adapter.revisions('',
                          '1234abcd',
@@ -309,7 +309,7 @@ class GitAdapterTest < ActiveSupport::TestCase
                                       {:reverse => true,
                                        :includes => ['83ca5fd546063a3c7dc2e568ba3355661a9e2b2c'],
                                        :excludes => ['0123abcd4567']})
-      assert_raise Redmine::Scm::Adapters::CommandFailed do
+      assert_raise Janya::Scm::Adapters::CommandFailed do
         revs1 = []
         @adapter.revisions('', nil, nil,
                            {:reverse => true,
@@ -365,7 +365,7 @@ class GitAdapterTest < ActiveSupport::TestCase
 
     def test_annotate
       annotate = @adapter.annotate('sources/watchers_controller.rb')
-      assert_kind_of Redmine::Scm::Adapters::Annotate, annotate
+      assert_kind_of Janya::Scm::Adapters::Annotate, annotate
       assert_equal 41, annotate.lines.size
       assert_equal "# This program is free software; you can redistribute it and/or",
                    annotate.lines[4].strip
@@ -376,7 +376,7 @@ class GitAdapterTest < ActiveSupport::TestCase
 
     def test_annotate_moved_file
       annotate = @adapter.annotate('renamed_test.txt')
-      assert_kind_of Redmine::Scm::Adapters::Annotate, annotate
+      assert_kind_of Janya::Scm::Adapters::Annotate, annotate
       assert_equal 2, annotate.lines.size
     end
 
@@ -421,7 +421,7 @@ class GitAdapterTest < ActiveSupport::TestCase
     def test_latin_1_user_annotate
       ['83ca5fd546063a3c7dc2e568ba3355661a9e2b2c', '83ca5fd546063a'].each do |r1|
         annotate = @adapter.annotate(" filename with a leading space.txt ", r1)
-        assert_kind_of Redmine::Scm::Adapters::Annotate, annotate
+        assert_kind_of Janya::Scm::Adapters::Annotate, annotate
         assert_equal 1, annotate.lines.size
         assert_equal "And this is a file with a leading and trailing space...",
                      annotate.lines[0].strip
@@ -466,7 +466,7 @@ class GitAdapterTest < ActiveSupport::TestCase
     end
 
     def test_entries_wrong_path_encoding
-      adpt = Redmine::Scm::Adapters::GitAdapter.new(
+      adpt = Janya::Scm::Adapters::GitAdapter.new(
                     REPOSITORY_PATH,
                     nil,
                     nil,
@@ -541,11 +541,11 @@ class GitAdapterTest < ActiveSupport::TestCase
     end
 
     def test_path_encoding_default_utf8
-      adpt1 = Redmine::Scm::Adapters::GitAdapter.new(
+      adpt1 = Janya::Scm::Adapters::GitAdapter.new(
                                 REPOSITORY_PATH
                               )
       assert_equal "UTF-8", adpt1.path_encoding
-      adpt2 = Redmine::Scm::Adapters::GitAdapter.new(
+      adpt2 = Janya::Scm::Adapters::GitAdapter.new(
                                 REPOSITORY_PATH,
                                 nil,
                                 nil,

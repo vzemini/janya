@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,18 +17,18 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class SessionsControllerTest < Redmine::ControllerTest
-  include Redmine::I18n
+class SessionsControllerTest < Janya::ControllerTest
+  include Janya::I18n
   tests WelcomeController
 
   fixtures :users, :email_addresses
 
   def setup
-    Rails.application.config.redmine_verify_sessions = true
+    Rails.application.config.janya_verify_sessions = true
   end
 
   def teardown
-    Rails.application.config.redmine_verify_sessions = false
+    Rails.application.config.janya_verify_sessions = false
   end
 
   def test_session_token_should_be_updated

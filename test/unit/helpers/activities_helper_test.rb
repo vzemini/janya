@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class ActivitiesHelperTest < Redmine::HelperTest
+class ActivitiesHelperTest < Janya::HelperTest
   include ActivitiesHelper
-  include Redmine::I18n
+  include Janya::I18n
 
   class MockEvent
     attr_reader :event_datetime, :event_group, :name

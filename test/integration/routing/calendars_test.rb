@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class RoutingCalendarsTest < Redmine::RoutingTest
+class RoutingCalendarsTest < Janya::RoutingTest
   def test_calendars
     should_route 'GET /issues/calendar' => 'calendars#show'
     should_route 'GET /projects/foo/issues/calendar' => 'calendars#show', :project_id => 'foo'

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ class FilesystemAdapterTest < ActiveSupport::TestCase
 
   if File.directory?(REPOSITORY_PATH)
     def setup
-      @adapter = Redmine::Scm::Adapters::FilesystemAdapter.new(REPOSITORY_PATH)
+      @adapter = Janya::Scm::Adapters::FilesystemAdapter.new(REPOSITORY_PATH)
     end
 
     def test_entries
@@ -48,11 +48,11 @@ class FilesystemAdapterTest < ActiveSupport::TestCase
     end
 
     def test_path_encoding_default_utf8
-      adpt1 = Redmine::Scm::Adapters::FilesystemAdapter.new(
+      adpt1 = Janya::Scm::Adapters::FilesystemAdapter.new(
                                   REPOSITORY_PATH
                                 )
       assert_equal "UTF-8", adpt1.path_encoding
-      adpt2 = Redmine::Scm::Adapters::FilesystemAdapter.new(
+      adpt2 = Janya::Scm::Adapters::FilesystemAdapter.new(
                                   REPOSITORY_PATH,
                                   nil,
                                   nil,

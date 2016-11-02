@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 require 'issues_controller'
 
-class IssuesControllerTransactionTest < Redmine::ControllerTest
+class IssuesControllerTransactionTest < Janya::ControllerTest
   tests IssuesController
   fixtures :projects,
            :users,
@@ -137,7 +137,7 @@ class IssuesControllerTransactionTest < Redmine::ControllerTest
     assert_response :success
 
     assert_select '.conflict-journal', 1
-    assert_select 'div.conflict', :text => /Some notes with Redmine links/
+    assert_select 'div.conflict', :text => /Some notes with Janya links/
   end
 
   def test_update_stale_issue_without_previous_journal_should_show_all_journals
@@ -153,7 +153,7 @@ class IssuesControllerTransactionTest < Redmine::ControllerTest
     assert_response :success
 
     assert_select '.conflict-journal', 2
-    assert_select 'div.conflict', :text => /Some notes with Redmine links/
+    assert_select 'div.conflict', :text => /Some notes with Janya links/
     assert_select 'div.conflict', :text => /Journal notes/
   end
 

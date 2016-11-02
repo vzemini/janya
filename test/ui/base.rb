@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -36,7 +36,7 @@ end
 # default: 2
 Capybara.default_wait_time = 2
 
-module Redmine
+module Janya
   module UiTest
     # Base class for UI tests
     class Base < ActionDispatch::IntegrationTest
@@ -47,7 +47,7 @@ module Redmine
       # uses a separate server thread, which the transactions would be hidden
       self.use_transactional_fixtures = false
 
-      # Should not depend on locale since Redmine displays login page
+      # Should not depend on locale since Janya displays login page
       # using default browser locale which depend on system locale for "real" browsers drivers
       def log_user(login, password)
         visit '/my/page'

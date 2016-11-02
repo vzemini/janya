@@ -1,6 +1,6 @@
 #encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -20,10 +20,10 @@
 require File.expand_path('../../../../../test_helper', __FILE__)
 require 'digest/md5'
 
-class Redmine::WikiFormatting::TextileFormatterTest < ActionView::TestCase
+class Janya::WikiFormatting::TextileFormatterTest < ActionView::TestCase
 
   def setup
-    @formatter = Redmine::WikiFormatting::Textile::Formatter
+    @formatter = Janya::WikiFormatting::Textile::Formatter
   end
 
   MODIFIERS = {
@@ -112,7 +112,7 @@ class Redmine::WikiFormatting::TextileFormatterTest < ActionView::TestCase
   def test_inline_code
     assert_html_output(
       'this is @some code@'      => 'this is <code>some code</code>',
-      '@<Location /redmine>@'    => '<code>&lt;Location /redmine&gt;</code>'
+      '@<Location /janya>@'    => '<code>&lt;Location /janya&gt;</code>'
     )
   end
 
@@ -436,7 +436,7 @@ Ut rhoncus elementum adipiscing."]
   end
   
   def test_update_section_with_wrong_hash_should_raise_an_error
-    assert_raise Redmine::WikiFormatting::StaleSectionError do
+    assert_raise Janya::WikiFormatting::StaleSectionError do
       @formatter.new(TEXT_WITHOUT_PRE).update_section(2, "New text", Digest::MD5.hexdigest("Old text"))
     end
   end

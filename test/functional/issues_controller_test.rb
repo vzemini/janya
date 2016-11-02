@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class IssuesControllerTest < Redmine::ControllerTest
+class IssuesControllerTest < Janya::ControllerTest
   fixtures :projects,
            :users, :email_addresses, :user_preferences,
            :roles,
@@ -45,7 +45,7 @@ class IssuesControllerTest < Redmine::ControllerTest
            :repositories,
            :changesets
 
-  include Redmine::I18n
+  include Janya::I18n
 
   def setup
     User.current = nil
@@ -1124,7 +1124,7 @@ class IssuesControllerTest < Redmine::ControllerTest
         assert_select 'textarea[name=?]', 'issue[notes]'
       end
     end
-    assert_select 'title', :text => "Bug #1: Cannot print recipes - eCookbook - Redmine"
+    assert_select 'title', :text => "Bug #1: Cannot print recipes - eCookbook - Janya"
   end
 
   def test_show_by_manager

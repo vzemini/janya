@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class WikiControllerTest < Redmine::ControllerTest
+class WikiControllerTest < Janya::ControllerTest
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
            :enabled_modules, :wikis, :wiki_pages, :wiki_contents,
            :wiki_content_versions, :attachments,
@@ -311,7 +311,7 @@ class WikiControllerTest < Redmine::ControllerTest
     assert_response :success
     
     page = WikiPage.find_by_title('Page_with_sections')
-    section, hash = Redmine::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
+    section, hash = Janya::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
 
     assert_select 'textarea[name=?]', 'content[text]', :text => section
     assert_select 'input[name=section][type=hidden][value="2"]'
@@ -502,7 +502,7 @@ class WikiControllerTest < Redmine::ControllerTest
   def test_update_section
     @request.session[:user_id] = 2
     page = WikiPage.find_by_title('Page_with_sections')
-    section, hash = Redmine::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
+    section, hash = Janya::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
     text = page.content.text
 
     assert_no_difference 'WikiPage.count' do
@@ -522,13 +522,13 @@ class WikiControllerTest < Redmine::ControllerTest
       end
     end
     assert_redirected_to '/projects/ecookbook/wiki/Page_with_sections#section-2'
-    assert_equal Redmine::WikiFormatting::Textile::Formatter.new(text).update_section(2, "New section content"), page.reload.content.text
+    assert_equal Janya::WikiFormatting::Textile::Formatter.new(text).update_section(2, "New section content"), page.reload.content.text
   end
 
   def test_update_section_should_allow_stale_page_update
     @request.session[:user_id] = 2
     page = WikiPage.find_by_title('Page_with_sections')
-    section, hash = Redmine::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
+    section, hash = Janya::WikiFormatting::Textile::Formatter.new(page.content.text).get_section(2)
     text = page.content.text
 
     assert_no_difference 'WikiPage.count' do
@@ -549,7 +549,7 @@ class WikiControllerTest < Redmine::ControllerTest
     end
     assert_redirected_to '/projects/ecookbook/wiki/Page_with_sections#section-2'
     page.reload
-    assert_equal Redmine::WikiFormatting::Textile::Formatter.new(text).update_section(2, "New section content"), page.content.text
+    assert_equal Janya::WikiFormatting::Textile::Formatter.new(text).update_section(2, "New section content"), page.content.text
     assert_equal 4, page.content.version
   end
 
@@ -689,7 +689,7 @@ class WikiControllerTest < Redmine::ControllerTest
     # Line 1
     assert_select 'table.annotate tr:nth-child(1)' do
       assert_select 'th.line-num', :text => '1'
-      assert_select 'td.author', :text => /Redmine Admin/
+      assert_select 'td.author', :text => /Janya Admin/
       assert_select 'td', :text => /h1\. CookBook documentation v2/
     end
 
@@ -703,7 +703,7 @@ class WikiControllerTest < Redmine::ControllerTest
     # Line 5
     assert_select 'table.annotate tr:nth-child(5)' do
       assert_select 'th.line-num', :text => '5'
-      assert_select 'td.author', :text => /Redmine Admin/
+      assert_select 'td.author', :text => /Janya Admin/
       assert_select 'td', :text => /Some updated \[\[documentation\]\] here/
     end
   end

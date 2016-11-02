@@ -1,6 +1,6 @@
 # encoding: utf-8
 #
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -410,7 +410,7 @@ class AttachmentTest < ActiveSupport::TestCase
     end
 
     def test_thumbnail_should_return_nil_if_generation_fails
-      Redmine::Thumbnail.expects(:generate).raises(SystemCallError, 'Something went wrong')
+      Janya::Thumbnail.expects(:generate).raises(SystemCallError, 'Something went wrong')
       set_fixtures_attachments_directory
       attachment = Attachment.find(16)
       assert_nil attachment.thumbnail

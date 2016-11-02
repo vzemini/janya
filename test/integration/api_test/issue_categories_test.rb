@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class Redmine::ApiTest::IssueCategoriesTest < Redmine::ApiTest::Base
+class Janya::ApiTest::IssueCategoriesTest < Janya::ApiTest::Base
   fixtures :projects, :users, :issue_categories, :issues,
            :roles,
            :member_roles,

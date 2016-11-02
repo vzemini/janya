@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
+class Janya::Helpers::GanttHelperTest < Janya::HelperTest
   fixtures :projects, :trackers, :issue_statuses,
            :enumerations, :users, :issue_categories
 
@@ -43,7 +43,7 @@ class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
   # Creates a Gantt chart for a 4 week span
   def create_gantt(project=Project.generate!, options={})
     @project = project
-    @gantt = Redmine::Helpers::Gantt.new(options)
+    @gantt = Janya::Helpers::Gantt.new(options)
     @gantt.project = @project
     @gantt.query = IssueQuery.new(:project => @project, :name => 'Gantt')
     @gantt.view = self
@@ -433,7 +433,7 @@ class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
     assert child1.lft < child2.lft
     assert child3.lft < child2.lft
     issues = [child3, child2, child1, issue2, issue1]
-    Redmine::Helpers::Gantt.sort_issues!(issues)
+    Janya::Helpers::Gantt.sort_issues!(issues)
     assert_equal [issue1.id, child1.id, child3.id, child2.id, issue2.id],
                   issues.map{|v| v.id}
   end
@@ -447,7 +447,7 @@ class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
     issue4 = Issue.generate!(:subject => "test", :project => project,
                              :start_date => (today - 2))
     issues = [issue4, issue3, issue2, issue1]
-    Redmine::Helpers::Gantt.sort_issues!(issues)
+    Janya::Helpers::Gantt.sort_issues!(issues)
     assert_equal [issue1.id, issue2.id, issue4.id, issue3.id],
                   issues.map{|v| v.id}
   end
@@ -469,17 +469,17 @@ class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
     issue1_child1_child2 =
              Issue.generate!(:parent_issue_id => issue1_child1.id, :subject => 'child',
                              :project => project, :start_date => (today - 9))
-    issue1_child1_child1_logic = Redmine::Helpers::Gantt.sort_issue_logic(issue1_child1_child1)
+    issue1_child1_child1_logic = Janya::Helpers::Gantt.sort_issue_logic(issue1_child1_child1)
     assert_equal [[today - 10, issue1.id], [today - 9, issue1_child1.id],
                   [today - 8, issue1_child1_child1.id]],
                  issue1_child1_child1_logic
-    issue1_child1_child2_logic = Redmine::Helpers::Gantt.sort_issue_logic(issue1_child1_child2)
+    issue1_child1_child2_logic = Janya::Helpers::Gantt.sort_issue_logic(issue1_child1_child2)
     assert_equal [[today - 10, issue1.id], [today - 9, issue1_child1.id],
                   [today - 9, issue1_child1_child2.id]],
                  issue1_child1_child2_logic
     issues = [issue1_child1_child2, issue1_child1_child1, issue1_child2,
               issue1_child1, issue2, issue1]
-    Redmine::Helpers::Gantt.sort_issues!(issues)
+    Janya::Helpers::Gantt.sort_issues!(issues)
     assert_equal [issue1.id, issue1_child1.id, issue1_child2.id,
                   issue1_child1_child2.id, issue1_child1_child1.id, issue2.id],
                  issues.map{|v| v.id}
@@ -493,6 +493,6 @@ class Redmine::Helpers::GanttHelperTest < Redmine::HelperTest
     versions << Version.create!(:project => project, :name => 'test3')
     versions << Version.create!(:project => project, :name => 'test4', :effective_date => '2013-10-02')
 
-    assert_equal versions.sort, Redmine::Helpers::Gantt.sort_versions!(versions.dup)
+    assert_equal versions.sort, Janya::Helpers::Gantt.sort_versions!(versions.dup)
   end
 end

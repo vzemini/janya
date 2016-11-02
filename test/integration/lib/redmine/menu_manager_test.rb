@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,8 +17,8 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class MenuManagerTest < Redmine::IntegrationTest
-  include Redmine::I18n
+class MenuManagerTest < Janya::IntegrationTest
+  include Janya::I18n
 
   fixtures :projects, :trackers, :issue_statuses, :issues,
            :enumerations, :users, :issue_categories,
@@ -39,8 +39,8 @@ class MenuManagerTest < Redmine::IntegrationTest
 
   def test_project_menu_with_additional_menu_items
     Setting.default_language = 'en'
-    assert_no_difference 'Redmine::MenuManager.items(:project_menu).size' do
-      Redmine::MenuManager.map :project_menu do |menu|
+    assert_no_difference 'Janya::MenuManager.items(:project_menu).size' do
+      Janya::MenuManager.map :project_menu do |menu|
         menu.push :foo, { :controller => 'projects', :action => 'show' }, :caption => 'Foo'
         menu.push :bar, { :controller => 'projects', :action => 'show' }, :before => :activity
         menu.push :hello, { :controller => 'projects', :action => 'show' }, :caption => Proc.new {|p| p.name.upcase }, :after => :bar
@@ -56,7 +56,7 @@ class MenuManagerTest < Redmine::IntegrationTest
       end
 
       # Remove the menu items
-      Redmine::MenuManager.map :project_menu do |menu|
+      Janya::MenuManager.map :project_menu do |menu|
         menu.delete :foo
         menu.delete :bar
         menu.delete :hello

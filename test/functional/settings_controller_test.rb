@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class SettingsControllerTest < Redmine::ControllerTest
+class SettingsControllerTest < Janya::ControllerTest
   fixtures :projects, :trackers, :issue_statuses, :issues,
            :users
 
@@ -197,7 +197,7 @@ class SettingsControllerTest < Redmine::ControllerTest
 
   def test_get_plugin_settings
     ActionController::Base.append_view_path(File.join(Rails.root, "test/fixtures/plugins"))
-    Redmine::Plugin.register :foo do
+    Janya::Plugin.register :foo do
       settings :partial => "foo_plugin/foo_plugin_settings"
     end
     Setting.plugin_foo = {'sample_setting' => 'Plugin setting value'}
@@ -209,7 +209,7 @@ class SettingsControllerTest < Redmine::ControllerTest
       assert_select 'input[name=?][value=?]', 'settings[sample_setting]', 'Plugin setting value'
     end
   ensure
-    Redmine::Plugin.unregister(:foo)
+    Janya::Plugin.unregister(:foo)
   end
 
   def test_get_invalid_plugin_settings
@@ -218,17 +218,17 @@ class SettingsControllerTest < Redmine::ControllerTest
   end
 
   def test_get_non_configurable_plugin_settings
-    Redmine::Plugin.register(:foo) {}
+    Janya::Plugin.register(:foo) {}
 
     get :plugin, :params => {:id => 'foo'}
     assert_response 404
 
   ensure
-    Redmine::Plugin.unregister(:foo)
+    Janya::Plugin.unregister(:foo)
   end
 
   def test_post_plugin_settings
-    Redmine::Plugin.register(:foo) do
+    Janya::Plugin.register(:foo) do
       settings :partial => 'not blank', # so that configurable? is true
         :default => {'sample_setting' => 'Plugin setting value'}
     end
@@ -243,7 +243,7 @@ class SettingsControllerTest < Redmine::ControllerTest
   end
 
   def test_post_non_configurable_plugin_settings
-    Redmine::Plugin.register(:foo) {}
+    Janya::Plugin.register(:foo) {}
 
     post :plugin, :params => {
       :id => 'foo',
@@ -252,6 +252,6 @@ class SettingsControllerTest < Redmine::ControllerTest
     assert_response 404
 
   ensure
-    Redmine::Plugin.unregister(:foo)
+    Janya::Plugin.unregister(:foo)
   end
 end

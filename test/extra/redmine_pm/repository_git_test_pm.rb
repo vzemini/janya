@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -18,10 +18,10 @@
 require File.expand_path('../test_case', __FILE__)
 require 'tmpdir'
 
-class RedminePmTest::RepositoryGitTest < RedminePmTest::TestCase
+class JanyaPmTest::RepositoryGitTest < JanyaPmTest::TestCase
   fixtures :projects, :users, :members, :roles, :member_roles
 
-  GIT_BIN = Redmine::Configuration['scm_git_command'] || "git"
+  GIT_BIN = Janya::Configuration['scm_git_command'] || "git"
 
   def test_anonymous_read_on_public_repo_with_permission_should_succeed
     assert_success "ls-remote", git_url
@@ -85,7 +85,7 @@ class RedminePmTest::RepositoryGitTest < RedminePmTest::TestCase
   end
 
   def git_url(path=nil)
-    host = ENV['REDMINE_TEST_DAV_SERVER'] || '127.0.0.1'
+    host = ENV['JANYA_TEST_DAV_SERVER'] || '127.0.0.1'
     credentials = nil
     if username && password
       credentials = "#{username}:#{password}"

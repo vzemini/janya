@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../../test_helper', __FILE__)
 
-class Redmine::Views::Builders::JsonTest < ActiveSupport::TestCase
+class Janya::Views::Builders::JsonTest < ActiveSupport::TestCase
 
   def test_hash
     assert_json_output({'person' => {'name' => 'Ryan', 'age' => 32}}) do |b|
@@ -87,7 +87,7 @@ class Redmine::Views::Builders::JsonTest < ActiveSupport::TestCase
   end
 
   def assert_json_output(expected, &block)
-    builder = Redmine::Views::Builders::Json.new(ActionDispatch::TestRequest.new, ActionDispatch::TestResponse.new)
+    builder = Janya::Views::Builders::Json.new(ActionDispatch::TestRequest.new, ActionDispatch::TestResponse.new)
     block.call(builder)
     assert_equal(expected, ActiveSupport::JSON.decode(builder.output))
   end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::MimeTypeTest < ActiveSupport::TestCase
+class Janya::MimeTypeTest < ActiveSupport::TestCase
 
   def test_of
     to_test = {'test.unk' => nil,
@@ -25,7 +25,7 @@ class Redmine::MimeTypeTest < ActiveSupport::TestCase
                'test.c' => 'text/x-c',
                }
     to_test.each do |name, expected|
-      assert_equal expected, Redmine::MimeType.of(name)
+      assert_equal expected, Janya::MimeType.of(name)
     end
   end
 
@@ -35,7 +35,7 @@ class Redmine::MimeTypeTest < ActiveSupport::TestCase
                'test.c' => 'text-x-c',
                }
     to_test.each do |name, expected|
-      assert_equal expected, Redmine::MimeType.css_class_of(name)
+      assert_equal expected, Janya::MimeType.css_class_of(name)
     end
   end
 
@@ -45,7 +45,7 @@ class Redmine::MimeTypeTest < ActiveSupport::TestCase
                'test.c' => 'text',
                }
     to_test.each do |name, expected|
-      assert_equal expected, Redmine::MimeType.main_mimetype_of(name)
+      assert_equal expected, Janya::MimeType.main_mimetype_of(name)
     end
   end
 
@@ -55,12 +55,12 @@ class Redmine::MimeTypeTest < ActiveSupport::TestCase
                ['text', 'test.c'] => true,
                }
     to_test.each do |args, expected|
-      assert_equal expected, Redmine::MimeType.is_type?(*args)
+      assert_equal expected, Janya::MimeType.is_type?(*args)
     end
   end
 
   def test_should_default_to_mime_type_gem
-    assert !Redmine::MimeType::EXTENSIONS.keys.include?("zip")
-    assert_equal "application/zip", Redmine::MimeType.of("file.zip")
+    assert !Janya::MimeType::EXTENSIONS.keys.include?("zip")
+    assert_equal "application/zip", Janya::MimeType.of("file.zip")
   end
 end

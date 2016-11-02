@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::Hook::ManagerTest < ActionView::TestCase
+class Janya::Hook::ManagerTest < ActionView::TestCase
   fixtures :projects, :users, :members, :member_roles, :roles,
            :groups_users,
            :email_addresses,
@@ -29,7 +29,7 @@ class Redmine::Hook::ManagerTest < ActionView::TestCase
            :issues
 
   # Some hooks that are manually registered in these tests
-  class TestHook < Redmine::Hook::ViewListener; end
+  class TestHook < Janya::Hook::ViewListener; end
 
   class TestHook1 < TestHook
     def view_layouts_base_html_head(context)
@@ -56,17 +56,17 @@ class Redmine::Hook::ManagerTest < ActionView::TestCase
   end
 
   class TestHookHelperController < ActionController::Base
-    include Redmine::Hook::Helper
+    include Janya::Hook::Helper
   end
 
   class TestHookHelperView < ActionView::Base
-    include Redmine::Hook::Helper
+    include Janya::Hook::Helper
   end
 
-  Redmine::Hook.clear_listeners
+  Janya::Hook.clear_listeners
 
   def setup
-    @hook_module = Redmine::Hook
+    @hook_module = Janya::Hook
     @hook_module.clear_listeners
   end
 
@@ -107,7 +107,7 @@ class Redmine::Hook::ManagerTest < ActionView::TestCase
     assert_equal ['Test hook 1 listener.', 'Test hook 2 listener.'], hook_helper.call_hook(:view_layouts_base_html_head)
   end
 
-  # Context: Redmine::Hook::Helper.call_hook default_url
+  # Context: Janya::Hook::Helper.call_hook default_url
   def test_call_hook_default_url_options
     @hook_module.add_listener(TestLinkToHook)
 
@@ -115,15 +115,15 @@ class Redmine::Hook::ManagerTest < ActionView::TestCase
   end
 
   def test_view_hook_should_generate_links_with_relative_url_root
-    Redmine::Utils.relative_url_root = '/foo'
+    Janya::Utils.relative_url_root = '/foo'
     @hook_module.add_listener(TestLinkToHook)
 
     assert_equal ['<a href="/foo/issues">Issues</a>'], hook_helper.call_hook(:view_layouts_base_html_head)
   ensure
-    Redmine::Utils.relative_url_root = ''
+    Janya::Utils.relative_url_root = ''
   end
 
-  # Context: Redmine::Hook::Helper.call_hook
+  # Context: Janya::Hook::Helper.call_hook
   def test_call_hook_with_project_added_to_context
     @hook_module.add_listener(TestHook3)
     assert_match /project/i, hook_helper.call_hook(:view_layouts_base_html_head)[0]

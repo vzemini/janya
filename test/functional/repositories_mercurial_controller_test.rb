@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesMercurialControllerTest < Redmine::ControllerTest
+class RepositoriesMercurialControllerTest < Janya::ControllerTest
   tests RepositoriesController
 
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
@@ -430,7 +430,7 @@ class RepositoriesMercurialControllerTest < Redmine::ControllerTest
           get :revision, :id => PRJ_ID, :rev => r
           assert_response :success
           assert_select 'title',
-                        :text => 'Revision 1:9d5b5b004199 - Added 2 files and modified one. - eCookbook Subproject 1 - Redmine'
+                        :text => 'Revision 1:9d5b5b004199 - Added 2 files and modified one. - eCookbook Subproject 1 - Janya'
           end
       end
     end

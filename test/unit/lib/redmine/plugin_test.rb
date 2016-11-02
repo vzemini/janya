@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@
 
 require File.expand_path('../../../../test_helper', __FILE__)
 
-class Redmine::PluginTest < ActiveSupport::TestCase
+class Janya::PluginTest < ActiveSupport::TestCase
   def setup
-    @klass = Redmine::Plugin
+    @klass = Janya::Plugin
     # In case some real plugins are installed
     @klass.clear
   end
@@ -42,7 +42,7 @@ class Redmine::PluginTest < ActiveSupport::TestCase
     assert_equal 1, @klass.all.size
 
     plugin = @klass.find('foo')
-    assert plugin.is_a?(Redmine::Plugin)
+    assert plugin.is_a?(Janya::Plugin)
     assert_equal :foo, plugin.id
     assert_equal 'Foo plugin', plugin.name
     assert_equal 'http://example.net/plugins/foo', plugin.url
@@ -59,29 +59,29 @@ class Redmine::PluginTest < ActiveSupport::TestCase
   end
 
   def test_menu
-    assert_difference 'Redmine::MenuManager.items(:project_menu).size' do
+    assert_difference 'Janya::MenuManager.items(:project_menu).size' do
       @klass.register :foo do
         menu :project_menu, :foo_menu_item, '/foo', :caption => 'Foo'
       end
     end
-    menu_item = Redmine::MenuManager.items(:project_menu).detect {|i| i.name == :foo_menu_item}
+    menu_item = Janya::MenuManager.items(:project_menu).detect {|i| i.name == :foo_menu_item}
     assert_not_nil menu_item
     assert_equal 'Foo', menu_item.caption
     assert_equal '/foo', menu_item.url
   ensure
-    Redmine::MenuManager.map(:project_menu).delete(:foo_menu_item)
+    Janya::MenuManager.map(:project_menu).delete(:foo_menu_item)
   end
 
   def test_delete_menu_item
-    Redmine::MenuManager.map(:project_menu).push(:foo_menu_item, '/foo', :caption => 'Foo')
-    assert_difference 'Redmine::MenuManager.items(:project_menu).size', -1 do
+    Janya::MenuManager.map(:project_menu).push(:foo_menu_item, '/foo', :caption => 'Foo')
+    assert_difference 'Janya::MenuManager.items(:project_menu).size', -1 do
       @klass.register :foo do
         delete_menu_item :project_menu, :foo_menu_item
       end
     end
-    assert_nil Redmine::MenuManager.items(:project_menu).detect {|i| i.name == :foo_menu_item}
+    assert_nil Janya::MenuManager.items(:project_menu).detect {|i| i.name == :foo_menu_item}
   ensure
-    Redmine::MenuManager.map(:project_menu).delete(:foo_menu_item)
+    Janya::MenuManager.map(:project_menu).delete(:foo_menu_item)
   end
 
   def test_directory_with_override
@@ -96,54 +96,54 @@ class Redmine::PluginTest < ActiveSupport::TestCase
     assert_equal File.join(@klass.directory, 'foo'), @klass.find('foo').directory
   end
 
-  def test_requires_redmine
-    plugin = Redmine::Plugin.register(:foo) {}
-    Redmine::VERSION.stubs(:to_a).returns([2, 1, 3, "stable", 10817])
+  def test_requires_janya
+    plugin = Janya::Plugin.register(:foo) {}
+    Janya::VERSION.stubs(:to_a).returns([2, 1, 3, "stable", 10817])
     # Specific version without hash
-    assert plugin.requires_redmine('2.1.3')
-    assert plugin.requires_redmine('2.1')
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine('2.1.4')
+    assert plugin.requires_janya('2.1.3')
+    assert plugin.requires_janya('2.1')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya('2.1.4')
     end
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine('2.2')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya('2.2')
     end
     # Specific version
-    assert plugin.requires_redmine(:version => '2.1.3')
-    assert plugin.requires_redmine(:version => ['2.1.3', '2.2.0'])
-    assert plugin.requires_redmine(:version => '2.1')
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version => '2.2.0')
+    assert plugin.requires_janya(:version => '2.1.3')
+    assert plugin.requires_janya(:version => ['2.1.3', '2.2.0'])
+    assert plugin.requires_janya(:version => '2.1')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version => '2.2.0')
     end
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version => ['2.1.4', '2.2.0'])
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version => ['2.1.4', '2.2.0'])
     end
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version => '2.2')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version => '2.2')
     end
     # Version range
-    assert plugin.requires_redmine(:version => '2.0.0'..'2.2.4')
-    assert plugin.requires_redmine(:version => '2.1.3'..'2.2.4')
-    assert plugin.requires_redmine(:version => '2.0.0'..'2.1.3')
-    assert plugin.requires_redmine(:version => '2.0'..'2.2')
-    assert plugin.requires_redmine(:version => '2.1'..'2.2')
-    assert plugin.requires_redmine(:version => '2.0'..'2.1')
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version => '2.1.4'..'2.2.4')
+    assert plugin.requires_janya(:version => '2.0.0'..'2.2.4')
+    assert plugin.requires_janya(:version => '2.1.3'..'2.2.4')
+    assert plugin.requires_janya(:version => '2.0.0'..'2.1.3')
+    assert plugin.requires_janya(:version => '2.0'..'2.2')
+    assert plugin.requires_janya(:version => '2.1'..'2.2')
+    assert plugin.requires_janya(:version => '2.0'..'2.1')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version => '2.1.4'..'2.2.4')
     end
     # Version or higher
-    assert plugin.requires_redmine(:version_or_higher => '0.1.0')
-    assert plugin.requires_redmine(:version_or_higher => '2.1.3')
-    assert plugin.requires_redmine(:version_or_higher => '2.1')
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version_or_higher => '2.2.0')
+    assert plugin.requires_janya(:version_or_higher => '0.1.0')
+    assert plugin.requires_janya(:version_or_higher => '2.1.3')
+    assert plugin.requires_janya(:version_or_higher => '2.1')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version_or_higher => '2.2.0')
     end
-    assert_raise Redmine::PluginRequirementError do
-      plugin.requires_redmine(:version_or_higher => '2.2')
+    assert_raise Janya::PluginRequirementError do
+      plugin.requires_janya(:version_or_higher => '2.2')
     end
   end
 
-  def test_requires_redmine_plugin
+  def test_requires_janya_plugin
     test = self
     other_version = '0.5.0'
     @klass.register :other do
@@ -151,29 +151,29 @@ class Redmine::PluginTest < ActiveSupport::TestCase
       version other_version
     end
     @klass.register :foo do
-      test.assert requires_redmine_plugin(:other, :version_or_higher => '0.1.0')
-      test.assert requires_redmine_plugin(:other, :version_or_higher => other_version)
-      test.assert requires_redmine_plugin(:other, other_version)
-      test.assert_raise Redmine::PluginRequirementError do
-        requires_redmine_plugin(:other, :version_or_higher => '99.0.0')
+      test.assert requires_janya_plugin(:other, :version_or_higher => '0.1.0')
+      test.assert requires_janya_plugin(:other, :version_or_higher => other_version)
+      test.assert requires_janya_plugin(:other, other_version)
+      test.assert_raise Janya::PluginRequirementError do
+        requires_janya_plugin(:other, :version_or_higher => '99.0.0')
       end
-      test.assert requires_redmine_plugin(:other, :version => other_version)
-      test.assert requires_redmine_plugin(:other, :version => [other_version, '99.0.0'])
-      test.assert_raise Redmine::PluginRequirementError do
-        requires_redmine_plugin(:other, :version => '99.0.0')
+      test.assert requires_janya_plugin(:other, :version => other_version)
+      test.assert requires_janya_plugin(:other, :version => [other_version, '99.0.0'])
+      test.assert_raise Janya::PluginRequirementError do
+        requires_janya_plugin(:other, :version => '99.0.0')
       end
-      test.assert_raise Redmine::PluginRequirementError do
-        requires_redmine_plugin(:other, :version => ['98.0.0', '99.0.0'])
+      test.assert_raise Janya::PluginRequirementError do
+        requires_janya_plugin(:other, :version => ['98.0.0', '99.0.0'])
       end
       # Missing plugin
-      test.assert_raise Redmine::PluginNotFound do
-        requires_redmine_plugin(:missing, :version_or_higher => '0.1.0')
+      test.assert_raise Janya::PluginNotFound do
+        requires_janya_plugin(:missing, :version_or_higher => '0.1.0')
       end
-      test.assert_raise Redmine::PluginNotFound do
-        requires_redmine_plugin(:missing, '0.1.0')
+      test.assert_raise Janya::PluginNotFound do
+        requires_janya_plugin(:missing, '0.1.0')
       end
-      test.assert_raise Redmine::PluginNotFound do
-        requires_redmine_plugin(:missing, :version => '0.1.0')
+      test.assert_raise Janya::PluginNotFound do
+        requires_janya_plugin(:missing, :version => '0.1.0')
       end
     end
   end

@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -21,11 +21,11 @@ class SubversionAdapterTest < ActiveSupport::TestCase
 
   if repository_configured?('subversion')
     def setup
-      @adapter = Redmine::Scm::Adapters::SubversionAdapter.new(self.class.subversion_repository_url)
+      @adapter = Janya::Scm::Adapters::SubversionAdapter.new(self.class.subversion_repository_url)
     end
 
     def test_client_version
-      v = Redmine::Scm::Adapters::SubversionAdapter.client_version
+      v = Janya::Scm::Adapters::SubversionAdapter.client_version
       assert v.is_a?(Array)
     end
 
@@ -44,7 +44,7 @@ class SubversionAdapterTest < ActiveSupport::TestCase
     end
 
     def test_info_nil
-      adpt = Redmine::Scm::Adapters::SubversionAdapter.new(
+      adpt = Janya::Scm::Adapters::SubversionAdapter.new(
                 "file:///invalid/invalid/"
                 )
       assert_nil adpt.info

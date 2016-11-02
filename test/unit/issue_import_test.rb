@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@ class IssueImportTest < ActiveSupport::TestCase
            :custom_fields_projects,
            :custom_fields_trackers
 
-  include Redmine::I18n
+  include Janya::I18n
 
   def setup
     set_language_if_valid 'en'

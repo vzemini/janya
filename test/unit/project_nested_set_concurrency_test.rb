@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -65,7 +65,7 @@ class ProjectNestedSetConcurrencyTest < ActiveSupport::TestCase
   # Generates a bare project with random name
   # and identifier
   def generate_project!(attributes={})
-    identifier = "a"+Redmine::Utils.random_hex(6)
+    identifier = "a"+Janya::Utils.random_hex(6)
     Project.generate!({
         :identifier => identifier,
         :name => identifier,

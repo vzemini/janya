@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class AccountTest < Redmine::IntegrationTest
+class AccountTest < Janya::IntegrationTest
   fixtures :users, :email_addresses, :roles
 
   def test_login
@@ -73,10 +73,10 @@ class AccountTest < Redmine::IntegrationTest
 
   def test_autologin_should_use_autologin_cookie_name
     Token.delete_all
-    Redmine::Configuration.stubs(:[]).with('autologin_cookie_name').returns('custom_autologin')
-    Redmine::Configuration.stubs(:[]).with('autologin_cookie_path').returns('/')
-    Redmine::Configuration.stubs(:[]).with('autologin_cookie_secure').returns(false)
-    Redmine::Configuration.stubs(:[]).with('sudo_mode_timeout').returns(15)
+    Janya::Configuration.stubs(:[]).with('autologin_cookie_name').returns('custom_autologin')
+    Janya::Configuration.stubs(:[]).with('autologin_cookie_path').returns('/')
+    Janya::Configuration.stubs(:[]).with('autologin_cookie_secure').returns(false)
+    Janya::Configuration.stubs(:[]).with('sudo_mode_timeout').returns(15)
 
     with_settings :autologin => '7' do
       assert_difference 'Token.count', 2 do

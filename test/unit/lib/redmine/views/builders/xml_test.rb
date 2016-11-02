@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
 
 require File.expand_path('../../../../../../test_helper', __FILE__)
 
-class Redmine::Views::Builders::XmlTest < ActiveSupport::TestCase
+class Janya::Views::Builders::XmlTest < ActiveSupport::TestCase
 
   def test_hash
     assert_xml_output('<person><name>Ryan</name><age>32</age></person>') do |b|
@@ -60,7 +60,7 @@ class Redmine::Views::Builders::XmlTest < ActiveSupport::TestCase
   end
 
   def assert_xml_output(expected, &block)
-    builder = Redmine::Views::Builders::Xml.new(ActionDispatch::TestRequest.new, ActionDispatch::TestResponse.new)
+    builder = Janya::Views::Builders::Xml.new(ActionDispatch::TestRequest.new, ActionDispatch::TestResponse.new)
     block.call(builder)
     assert_equal('<?xml version="1.0" encoding="UTF-8"?>' + expected, builder.output)
   end

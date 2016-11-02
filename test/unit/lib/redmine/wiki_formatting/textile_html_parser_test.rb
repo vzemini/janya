@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,10 +17,10 @@
 
 require File.expand_path('../../../../../test_helper', __FILE__)
 
-class Redmine::WikiFormatting::TextileHtmlParserTest < ActiveSupport::TestCase
+class Janya::WikiFormatting::TextileHtmlParserTest < ActiveSupport::TestCase
 
   def setup
-    @parser = Redmine::WikiFormatting::Textile::HtmlParser
+    @parser = Janya::WikiFormatting::Textile::HtmlParser
   end
 
   def test_should_convert_tags

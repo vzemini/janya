@@ -1,4 +1,4 @@
-# Redmine - project management software
+# Janya - project management software
 # Copyright (C) 2006-2016  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
@@ -17,14 +17,14 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesCvsControllerTest < Redmine::ControllerTest
+class RepositoriesCvsControllerTest < Janya::ControllerTest
   tests RepositoriesController
 
   fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
            :repositories, :enabled_modules
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/cvs_repository').to_s
-  REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
+  REPOSITORY_PATH.gsub!(/\//, "\\") if Janya::Platform.mswin?
   # CVS module
   MODULE_NAME = 'test'
   PRJ_ID = 3
