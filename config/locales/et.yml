@@ -1,4 +1,4 @@
-# Estonian localization for Redmine
+# Estonian localization for Janya
 # Copyright (C) 2012 Kaitseministeerium
 #
 # This program is free software; you can redistribute it and/or
@@ -964,8 +964,8 @@ et:
   text_user_wrote: "%{value} kirjutas:"
   text_enumeration_destroy_question: "Selle väärtusega on seotud %{count} objekt(i)."
   text_enumeration_category_reassign_to: "Seo nad teise väärtuse külge:"
-  text_email_delivery_not_configured: "E-kirjade saatmine ei ole seadistatud ja teavitusi ei saadeta.\nKonfigureeri oma SMTP server failis config/configuration.yml ja taaskäivita Redmine."
-  text_repository_usernames_mapping: "Seosta Redmine kasutaja hoidlasse sissekannete tegijaga.\nSama nime või e-postiga kasutajad seostatakse automaatselt."
+  text_email_delivery_not_configured: "E-kirjade saatmine ei ole seadistatud ja teavitusi ei saadeta.\nKonfigureeri oma SMTP server failis config/configuration.yml ja taaskäivita Janya."
+  text_repository_usernames_mapping: "Seosta Janya kasutaja hoidlasse sissekannete tegijaga.\nSama nime või e-postiga kasutajad seostatakse automaatselt."
   text_diff_truncated: "... Osa erinevusi jäi välja, sest neid on näitamiseks liiga palju."
   text_custom_field_possible_values_info: "Üks rida iga väärtuse jaoks"
   text_wiki_page_destroy_question: "Sel lehel on %{descendants} järglasleht(e) ja järeltulija(t). Mis Sa soovid ette võtta?"
@@ -981,7 +981,7 @@ et:
   text_mercurial_repository_note: "Hoidla peab olema kohalik (nt. /hgrepo, c:\\hgrepo)"
   text_scm_command: "Hoidla poole pöördumise käsk"
   text_scm_command_version: "Versioon"
-  text_scm_config: "Hoidlate poole pöördumist saab konfigureerida failis config/configuration.yml. Peale selle muutmist taaskäivita Redmine."
+  text_scm_config: "Hoidlate poole pöördumist saab konfigureerida failis config/configuration.yml. Peale selle muutmist taaskäivita Janya."
   text_scm_command_not_available: "Hoidla poole pöördumine ebaõnnestus. Palun kontrolli seadistusi."
   text_issue_conflict_resolution_overwrite: "Kehtesta oma muudatused (kõik märkused jäävad, ent muu võidakse üle kirjutada)"
   text_issue_conflict_resolution_add_notes: "Lisa oma märkused, aga loobu teistest muudatustest"

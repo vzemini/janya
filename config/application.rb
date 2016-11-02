@@ -4,7 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 
-module RedmineApp
+module JanyaApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -58,7 +58,7 @@ module RedmineApp
     config.middleware.use Rack::ContentLength
 
     # Verify validity of user sessions
-    config.redmine_verify_sessions = true
+    config.janya_verify_sessions = true
 
     # Specific cache for search results, the default file store cache is not
     # a good option as it could grow fast. A memory store (32MB max) is used
@@ -66,14 +66,14 @@ module RedmineApp
     # recommended to switch to a shared cache store (eg. mem_cache_store).
     # See http://guides.rubyonrails.org/caching_with_rails.html#cache-stores
     # for more options (same options as config.cache_store).
-    config.redmine_search_cache_store = :memory_store
+    config.janya_search_cache_store = :memory_store
 
     # Configure log level here so that additional environment file
     # can change it (environments/ENV.rb would take precedence over it)
     config.log_level = Rails.env.production? ? :info : :debug
 
     config.session_store :cookie_store,
-      :key => '_redmine_session',
+      :key => '_janya_session',
       :path => config.relative_url_root || '/'
 
     if File.exists?(File.join(File.dirname(__FILE__), 'additional_environment.rb'))

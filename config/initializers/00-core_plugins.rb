@@ -8,7 +8,7 @@ Dir.glob(File.join(Rails.root, "lib/plugins/*")).sort.each do |directory|
     end
     initializer = File.join(directory, "init.rb")
     if File.file?(initializer)
-      config = RedmineApp::Application.config
+      config = JanyaApp::Application.config
       eval(File.read(initializer), binding, initializer)
     end
   end

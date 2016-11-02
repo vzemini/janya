@@ -1,6 +1,6 @@
 # German translations for Ruby on Rails
 # by Clemens Kofler (clemens@railway.at)
-# additions for Redmine 1.2 by Jens Martsch (jmartsch@gmail.com)
+# additions for Janya 1.2 by Jens Martsch (jmartsch@gmail.com)
 
 de:
   direction: ltr
@@ -1103,12 +1103,12 @@ de:
   text_reassign_time_entries: 'Gebuchte Aufwände diesem Ticket zuweisen:'
   text_regexp_info: z. B. ^[A-Z0-9]+$
   text_repository_identifier_info: 'Kleinbuchstaben (a-z), Ziffern, Binde- und Unterstriche erlaubt.<br />Einmal gespeichert, kann die Kennung nicht mehr geändert werden.'
-  text_repository_usernames_mapping: "Bitte legen Sie die Zuordnung der Redmine-Benutzer zu den Benutzernamen der Commit-Nachrichten des Projektarchivs fest.\nBenutzer mit identischen Redmine- und Projektarchiv-Benutzernamen oder -E-Mail-Adressen werden automatisch zugeordnet."
+  text_repository_usernames_mapping: "Bitte legen Sie die Zuordnung der Janya-Benutzer zu den Benutzernamen der Commit-Nachrichten des Projektarchivs fest.\nBenutzer mit identischen Janya- und Projektarchiv-Benutzernamen oder -E-Mail-Adressen werden automatisch zugeordnet."
   text_rmagick_available: RMagick verfügbar (optional)
   text_scm_command: Kommando
   text_scm_command_not_available: SCM-Kommando ist nicht verfügbar. Bitte prüfen Sie die Einstellungen im Administrationspanel.
   text_scm_command_version: Version
-  text_scm_config: Die SCM-Kommandos können in der in config/configuration.yml konfiguriert werden. Redmine muss anschließend neu gestartet werden.
+  text_scm_config: Die SCM-Kommandos können in der in config/configuration.yml konfiguriert werden. Janya muss anschließend neu gestartet werden.
   text_scm_path_encoding_note: "Standard: UTF-8"
   text_select_mail_notifications: Bitte wählen Sie die Aktionen aus, für die eine Mailbenachrichtigung gesendet werden soll.
   text_select_project_modules: 'Bitte wählen Sie die Module aus, die in diesem Projekt aktiviert sein sollen:'

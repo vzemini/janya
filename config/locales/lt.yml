@@ -1112,7 +1112,7 @@ lt:
   text_enumeration_destroy_question: "%{count} objektai(ų) priskirti šiai reikšmei “%{name}”."
   text_enumeration_category_reassign_to: 'Priskirti juos šiai reikšmei:'
   text_email_delivery_not_configured: "El.pašto siuntimas nesukonfigūruotas ir perspėjimai neaktyvus.\nSukonfigūruokite savo SMTP serverį byloje config/configuration.yml ir perleiskite programą norėdami pritaikyti pakeitimus."
-  text_repository_usernames_mapping: "Parinkite ar atnaujinkite Redmine vartotoją, kuris paminėtas saugyklos žurnale.\nVartotojai, turintys tą patį Redmine ir saugyklos vardą ar el. paštą yra automatiškai surišti."
+  text_repository_usernames_mapping: "Parinkite ar atnaujinkite Janya vartotoją, kuris paminėtas saugyklos žurnale.\nVartotojai, turintys tą patį Janya ir saugyklos vardą ar el. paštą yra automatiškai surišti."
   text_diff_truncated: "... Šis diff'as sutrauktas, nes viršija maksimalų rodomų eilučių skaičių."
   text_custom_field_possible_values_info: 'Po vieną eilutę kiekvienai reikšmei'
   text_wiki_page_destroy_question: "Šis puslapis turi %{descendants} susijusių arba išvestinių puslapių. Ką norite daryti?"

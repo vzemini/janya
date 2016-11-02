@@ -1,5 +1,5 @@
 # Slovak translation by Stanislav Pach | stano.pach@seznam.cz
-# additions for Redmine 2.3.2 and proofreading by Katarína Nosková | noskova.katarina@gmail.com
+# additions for Janya 2.3.2 and proofreading by Katarína Nosková | noskova.katarina@gmail.com
 
 sk:
   direction: ltr
@@ -774,7 +774,7 @@ sk:
   setting_gravatar_enabled: Používať používateľské Gravatar ikonky
   permission_edit_own_messages: Úprava vlastných správ
   permission_delete_own_messages: Mazanie vlastných správ
-  text_repository_usernames_mapping: "Vyberte alebo aktualizujte priradenie používateľov systému Redmine k menám používateľov nájdených v logu repozitára.\nPoužívatelia s rovnakým prihlasovacím menom alebo emailom v systéme Redmine a repozitári sú priradení automaticky."
+  text_repository_usernames_mapping: "Vyberte alebo aktualizujte priradenie používateľov systému Janya k menám používateľov nájdených v logu repozitára.\nPoužívatelia s rovnakým prihlasovacím menom alebo emailom v systéme Janya a repozitári sú priradení automaticky."
   label_example: Príklad
   label_user_activity: "Aktivita používateľa %{value}"
   label_updated_time_by: "Aktualizované používateľom %{author} pred %{age}"

@@ -783,7 +783,7 @@ pt:
   permission_edit_own_issue_notes: Editar as prórpias notas
   setting_gravatar_enabled: Utilizar ícones Gravatar
   label_example: Exemplo
-  text_repository_usernames_mapping: "Selecionar ou atualizar o utilizador de Redmine mapeado a cada nome de utilizador encontrado no repositório.\nUtilizadores com o mesmo nome de utilizador ou e-mail no Redmine e no repositório são mapeados automaticamente."
+  text_repository_usernames_mapping: "Selecionar ou atualizar o utilizador de Janya mapeado a cada nome de utilizador encontrado no repositório.\nUtilizadores com o mesmo nome de utilizador ou e-mail no Janya e no repositório são mapeados automaticamente."
   permission_edit_own_messages: Editar as próprias mensagens
   permission_delete_own_messages: Apagar as próprias mensagens
   label_user_activity: "Atividade de %{value}"

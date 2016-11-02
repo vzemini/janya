@@ -773,7 +773,7 @@ pl:
   text_issue_category_reassign_to: Przydziel zagadnienie do tej kategorii
   text_issue_updated: "Zagadnienie %{id} zostało zaktualizowane (przez %{author})."
   text_issues_destroy_confirmation: 'Czy jesteś pewien, że chcesz usunąć wskazane zagadnienia?'
-  text_issues_ref_in_commit_messages: Odwołania do zagadnień Redmine w komentarzach w repozytorium
+  text_issues_ref_in_commit_messages: Odwołania do zagadnień Janya w komentarzach w repozytorium
   text_length_between: "Długość pomiędzy %{min} i %{max} znaków."
   text_load_default_configuration: Załaduj domyślną konfigurację
   text_min_max_length_info: 0 oznacza brak restrykcji
@@ -781,7 +781,7 @@ pl:
   text_project_destroy_confirmation: Jesteś pewien, że chcesz usunąć ten projekt i wszystkie powiązane dane?
   text_reassign_time_entries: 'Przepnij przepracowany czas do tego zagadnienia:'
   text_regexp_info: np. ^[A-Z0-9]+$
-  text_repository_usernames_mapping: "Wybierz lub uaktualnij przyporządkowanie użytkowników Redmine do użytkowników repozytorium.\nUżytkownicy z taką samą nazwą lub adresem e-mail są przyporządkowani automatycznie."
+  text_repository_usernames_mapping: "Wybierz lub uaktualnij przyporządkowanie użytkowników Janya do użytkowników repozytorium.\nUżytkownicy z taką samą nazwą lub adresem e-mail są przyporządkowani automatycznie."
   text_rmagick_available: RMagick dostępne (opcjonalnie)
   text_select_mail_notifications: Zaznacz czynności przy których użytkownik powinien być powiadomiony e-mailem.
   text_select_project_modules: 'Wybierz moduły do aktywacji w tym projekcie:'

@@ -789,7 +789,7 @@ tr:
   permission_edit_own_issue_notes: Kendi notlarını düzenleme
   setting_gravatar_enabled: Kullanıcı resimleri için Gravatar kullan
   label_example: Örnek
-  text_repository_usernames_mapping: "Redmine kullanıcı adlarını depo değişiklik kayıtlarındaki kullanıcı adlarıyla eşleştirin veya eşleştirmeleri güncelleyin.\nRedmine kullanıcı adları ile depo kullanıcı adları aynı olan kullanıcılar otomatik olarak eşlendirilecektir."
+  text_repository_usernames_mapping: "Janya kullanıcı adlarını depo değişiklik kayıtlarındaki kullanıcı adlarıyla eşleştirin veya eşleştirmeleri güncelleyin.\nJanya kullanıcı adları ile depo kullanıcı adları aynı olan kullanıcılar otomatik olarak eşlendirilecektir."
   permission_edit_own_messages: Kendi mesajlarını düzenleme
   permission_delete_own_messages: Kendi mesajlarını silme
   label_user_activity: "%{value} kullanıcısının faaliyetleri"

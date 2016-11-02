@@ -27,7 +27,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Disable sessions verifications in test environment.
-  config.redmine_verify_sessions = false
+  config.janya_verify_sessions = false
 
   # Print deprecation notices to stderr and the Rails logger.
   config.active_support.deprecation = [:stderr, :log]
